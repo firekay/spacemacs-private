@@ -34,7 +34,9 @@
   ;; For org-ref
   "ori" 'org-ref-insert-cite-link
   "orc" 'org-ref-helm-insert-cite-link
-)
+  )
+
+(spacemacs/set-leader-keys "tI" 'highlight-indentation-mode)
 
 ;; for emacs toggle latex
 (spacemacs/set-leader-keys
@@ -43,7 +45,7 @@
   "otc" 'org-cdlatex-mode
   "oi" 'google-translate-at-point
   "od" 'osx-dictionary-search-pointer
-)
+  )
 
 (define-key global-map (kbd "s-i") 'yas/insert-snippet)
 ;; (define-key evil-insert-state-map "M-i" 'yas/insert-snippet)
