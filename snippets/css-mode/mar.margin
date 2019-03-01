@@ -1,0 +1,4 @@
+#name : margin top right bottom left
+#key : mar.margin->
+# --
+margin: ${top} ${right} ${bottom} ${left};

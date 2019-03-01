@@ -1,5 +1,5 @@
-snippets/
 !/snippets/README.md
 .DS_Store
-/layers/zilongshanren-misc/.DS_Store
+/layers/I-misc/.DS_Store
 /.spacemacs.env
+custom.el

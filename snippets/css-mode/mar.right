@@ -1,0 +1,4 @@
+#name : margin-right: ...
+#key : mar.right->
+# --
+margin-right: $1;

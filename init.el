@@ -31,6 +31,21 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     ;; add layers
+     themes-megapack
+     better-defaults
+     version-control
+     bibtex
+     go
+     (go :variables gofmt-command "goimports")
+     (go :variables go-tab-width 2)
+     sql
+     csv
+     semantic
+     spacemacs-org
+     java
+     scala
+
      (ivy :variables ivy-enable-advanced-buffer-information nil)
      better-defaults
      ranger
@@ -42,6 +57,10 @@ This function should only modify configuration layer settings."
               haskell-completion-backend 'intero)
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
+     spell-checking
+     (spell-checking :variables spell-checking-enable-by-default nil)
+     (spell-checking :variables enable-flyspell-auto-completion nil)
+     syntax-checking
      (spell-checking :variables spell-checking-enable-by-default nil)
      ;; (vinegar :variables vinegar-reuse-dired-buffer t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
@@ -54,6 +73,7 @@ This function should only modify configuration layer settings."
           magit-refs-show-commit-count 'all
           magit-revision-show-gravatars nil)
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     (auto-completion)
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       :disabled-for org markdown)
@@ -61,14 +81,19 @@ This function should only modify configuration layer settings."
           osx-command-as 'super)
      restclient
      (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
-     (shell :variables shell-default-shell 'ansi-term
-            shell-default-term-shell "/bin/zsh")
+     ;; (shell :variables shell-default-shell 'eshell)
+    (shell :variables
+           shell-default-height 50
+           shell-default-shell 'ansi-term
+           shell-default-term-shell "/bin/zsh"
+           shell-default-position 'bottom
+           )
      ;; docker
      latex
      deft
      markdown
      (org :variables org-want-todo-bindings t)
-     gpu
+     ;; gpu
      yaml
      react
      (python :variables
@@ -86,7 +111,7 @@ This function should only modify configuration layer settings."
      racket
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
-     zilongshanren
+     I
      (chinese :packages youdao-dictionary fcitx
               :variables chinese-enable-fcitx nil
               chinese-enable-youdao-dict t)
@@ -98,27 +123,33 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(sicp)
+   dotspacemacs-additional-packages '(
+				      sicp
+				      cdlatex
+				      auctex
+				      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
-   dotspacemacs-excluded-packages
-   '(magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
-                    evil-args evil-ediff evil-exchange evil-unimpaired
-                    evil-indent-plus volatile-highlights smartparens
-                    spaceline holy-mode skewer-mode rainbow-delimiters
-                    highlight-indentation vi-tilde-fringe eyebrowse ws-butler
-                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
-                    livid-mode git-gutter git-gutter-fringe  evil-escape
-                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
-                    ac-ispell ace-jump-mode auto-complete auto-dictionary
-                    clang-format define-word google-translate disaster epic
-                    fancy-battery org-present orgit orglue spacemacs-theme
-                    helm-flyspell flyspell-correct-helm clean-aindent-mode
-                    helm-c-yasnippet ace-jump-helm-line helm-make magithub
-                    helm-themes helm-swoop helm-spacemacs-help smeargle
-                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
-                    )
+
+   dotspacemacs-excluded-packages '()
+;;   dotspacemacs-excluded-packages
+;;   '(magit-gh-pulls magit-gitflow  evil-mc realgud tern company-tern
+;;                    evil-args evil-ediff evil-exchange evil-unimpaired
+;;                    evil-indent-plus volatile-highlights smartparens
+;;                    spaceline holy-mode skewer-mode rainbow-delimiters
+;;                    highlight-indentation vi-tilde-fringe eyebrowse ws-butler
+;;                    org-bullets smooth-scrolling org-repo-todo org-download org-timer
+;;                    livid-mode git-gutter git-gutter-fringe  evil-escape
+;;                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum symon
+;;                    ac-ispell ace-jump-mode auto-complete auto-dictionary
+;;                    clang-format define-word google-translate disaster epic
+;;                    fancy-battery org-present orgit orglue spacemacs-theme
+;;                    helm-flyspell flyspell-correct-helm clean-aindent-mode
+;;                    helm-c-yasnippet ace-jump-helm-line helm-make magithub
+;;                    helm-themes helm-swoop helm-spacemacs-help smeargle
+;;                    ido-vertical-mode flx-ido company-quickhelp ivy-rich helm-purpose
+;;                    )
    dotspacemacs-install-packages 'used-only
    dotspacemacs-delete-orphan-packages t))
 
@@ -229,7 +260,16 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(solarized-light
-                         solarized-dark)
+                         solarized-dark
+			 spacemacs-dark
+                         spacemacs-light
+			 monokai
+			 leuven
+			 sanityinc-solarized-light
+			 sanityinc-solarized-dark
+			 moe-light
+                         zenburn
+			 )
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -246,7 +286,8 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-default-font '("Source Code Pro"
                                :size 14
                                :weight normal
-                               :width normal)
+                               :width normal
+			       :powerline-scale 1.1)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -345,7 +386,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -386,7 +427,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -454,7 +495,7 @@ It should only modify the values of Spacemacs settings."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'changed
 
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
@@ -481,11 +522,6 @@ dump."
   )
 
 (defun dotspacemacs/user-init ()
-	(setq-default configuration-layer-elpa-archives
-      '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-        ("org-cn"   . "http://elpa.emacs-china.org/org/")
-        ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
-
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
   ;; (setq tramp-mode nil)
   (setq tramp-ssh-controlmaster-options
@@ -498,9 +534,16 @@ dump."
   (setq warning-minimum-level :error)
   ;; hack for remove purpose mode
   ;; (setq purpose-mode nil)
+  ;; (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
+  ;; (push '("ensime" . "melpa-stable") package-pinned-packages)
+
   )
 
 (defun dotspacemacs/user-config ()
+  ;; For latex preview larger.
+  (require 'org)
+  (plist-put org-format-latex-options :scale 1.5)
+
   ;;解决org表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
@@ -522,7 +565,7 @@ dump."
   (setq split-width-threshold 120)
   ;; (linum-relative-on)
 
-  (spacemacs|add-company-backends :modes text-mode)
+;;  (spacemacs|add-company-backends :modes text-mode)
 
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
@@ -565,12 +608,12 @@ dump."
         (when (looking-at (concat "^" (make-string tab-width ?\ )))
           (replace-match "")))))
 
-  (defun zilongshanren/toggle-major-mode ()
+  (defun I/toggle-major-mode ()
     (interactive)
     (if (eq major-mode 'fundamental-mode)
         (set-auto-mode)
       (fundamental-mode)))
-  (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
+  (spacemacs/set-leader-keys "otm" 'I/toggle-major-mode)
 
   (setq inhibit-compacting-font-caches t)
   (global-display-line-numbers-mode -1)
@@ -581,6 +624,7 @@ dump."
       (kill-region (region-beginning) (region-end))))
 
   (advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
+
   (setq ivy-more-chars-alist '((counsel-ag . 2)
                                (counsel-grep .2)
                                (t . 3)))
@@ -616,6 +660,7 @@ dump."
                (setenv "PATH" (concat emax-mingw64 ";" (getenv "PATH")))))
 
            (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))))
+
 
   (defun counsel-locate-cmd-es (input)
     "Return a shell command based on INPUT."

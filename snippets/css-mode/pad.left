@@ -1,0 +1,4 @@
+#name : padding-left: ...
+#key : pad.left->
+# --
+padding-left: $1;

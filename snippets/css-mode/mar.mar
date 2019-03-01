@@ -1,0 +1,4 @@
+#name : margin: ...
+#key : mar.mar->
+# --
+margin: $1;

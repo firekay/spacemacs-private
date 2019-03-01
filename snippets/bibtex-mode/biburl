@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: biburl
+# key: biburl->
+# --
+@misc{$1,
+  author = \{${2:Wikipedia contributors}\},
+  title = \{$3\},
+  url = \{$4\}
+}
+$0

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: biburl
+# key: biburl->
+# --
+@misc{ $1,
+author = "${2:Wikipedia contributors}",
+title = "$3",
+howpublished = "\url{$4}",
+note = "$5"
+}
+$0

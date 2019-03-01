@@ -1,0 +1,4 @@
+#name : margin-top: ...
+#key : mar.top->
+# --
+margin-top: $1;
