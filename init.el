@@ -97,7 +97,8 @@ This function should only modify configuration layer settings."
      yaml
      react
      (python :variables
-             python-test-runner '(nose pytest))
+             python-test-runner '(nose pytest)
+             python-enable-yapf-format-on-save t)
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      lua
@@ -532,6 +533,7 @@ dump."
   (setq evil-shift-round nil)
   (setq byte-compile-warnings '(not obsolete))
   (setq warning-minimum-level :error)
+  (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
   ;; hack for remove purpose mode
   ;; (setq purpose-mode nil)
   ;; (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)

@@ -35,6 +35,8 @@
 (add-hook 'java-mode-hook 'highlight-indentation-mode)
 (add-hook 'go-mode-hook 'highlight-indentation-mode)
 (add-hook 'scala-mode-hook 'highlight-indentation-mode)
+(add-hook 'emacs-lisp-mode-hook 'highlight-indentation-mode)
+(add-hook 'sh-mode-hook 'highlight-indentation-mode)
 
 ;;load sensitive data
 ;; or (like spacemacs init.el)put the above variable into it ,then the own value separated from public config

@@ -37,6 +37,16 @@
   )
 
 (spacemacs/set-leader-keys "tI" 'highlight-indentation-mode)
+(spacemacs/set-leader-keys "tY" 'yapf-mode)
+
+;; For python
+(spacemacs/declare-prefix-for-mode 'python-mode "mi" "skeleton(import)")
+(spacemacs/declare-prefix-for-mode 'python-mode "mo" "self_define")
+(spacemacs/set-leader-keys-for-major-mode 'python-mode
+  "ii" 'python-skeleton-import
+  "ic" 'python-skeleton-class
+  "of" 'flycheck-mode
+)
 
 ;; for emacs toggle latex
 (spacemacs/set-leader-keys

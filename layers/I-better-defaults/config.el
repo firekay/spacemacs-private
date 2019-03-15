@@ -249,6 +249,17 @@ with options to run in the shell.")
 ;; (defun zilong-after-ag-edit (function)
 ;;   (ivy-occur-grep-mode))
 
+;; (defun ssbb-pyenv-hook ()
+;;   "Automatically activates pyenv version if.
+;;   python-version file exists."
+;;   (f-traverse-upwards (lambda (path) (let
+;;   ((pyenv-version-path (f-expand ".python-version" path))) (if (f-exists?
+;;     pyenv-version-path) (pyenv-mode-set (s-trim (f-read-text pyenv-version-path
+;;     'utf-8))))))))
+
+;; (add-hook 'python-mode-hook 'ssbb-pyenv-hook)
+(add-hook 'python-mode-hook 'yapf-mode)
+
 (advice-add 'helm-ag--edit :before #'zilong-ag-edit)
 ;; (advice-add 'helm-ag--edit :after #'zilong-after-ag-edit)
 

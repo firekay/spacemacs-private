@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# contributor: kay <kayfire[dot]matrix[at]gmail[dot]com>
+# name: class_doc_gg
+# key: cdg->
+# group: docs
+# --
+"""${}
+
+Args:
+    ${}
+
+Attributes:
+    ${}
+
+"""
+$0
