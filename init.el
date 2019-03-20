@@ -31,17 +31,38 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     rust
+     (rust :variables
+           rust-format-on-save t)
+     dap
+     lsp
+
+     neotree
+     treemacs
+     (treemacs :variables
+               treemacs-use-filewatch-mode t
+               treemacs-use-collapsed-directories 3
+               treemacs-use-follow-mode t)
      ;; add layers
      themes-megapack
      better-defaults
      version-control
      bibtex
      go
-     (go :variables gofmt-command "goimports")
-     (go :variables go-tab-width 2)
+     (go :variables
+         gofmt-command "goimports"
+         go-tab-width 2
+         go-use-golangci-lint t
+         go-format-before-save t
+         godoc-at-point-function 'godoc-gogetdoc)
      sql
      csv
      semantic
+     org
+     (org :variables
+          org-want-todo-bindings t
+          org-enable-github-support t
+          org-enable-org-journal-support t)
      spacemacs-org
      java
      scala
@@ -58,8 +79,9 @@ This function should only modify configuration layer settings."
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
      spell-checking
-     (spell-checking :variables spell-checking-enable-by-default nil)
-     (spell-checking :variables enable-flyspell-auto-completion nil)
+     (spell-checking :variables
+                     spell-checking-enable-by-default nil
+                     enable-flyspell-auto-completion nil)
      syntax-checking
      (spell-checking :variables spell-checking-enable-by-default nil)
      ;; (vinegar :variables vinegar-reuse-dired-buffer t)
@@ -75,7 +97,8 @@ This function should only modify configuration layer settings."
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
      (auto-completion)
      (auto-completion :variables auto-completion-enable-sort-by-usage t
-                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-snippets-in-popup nil
+                      auto-completion-enable-help-tooltip 'manual
                       :disabled-for org markdown)
      (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
           osx-command-as 'super)
@@ -92,13 +115,17 @@ This function should only modify configuration layer settings."
      latex
      deft
      markdown
-     (org :variables org-want-todo-bindings t)
      ;; gpu
      yaml
      react
+     python
      (python :variables
+             python-backend 'lsp
+             ;; python-pipenv-activate t
              python-test-runner '(nose pytest)
-             python-enable-yapf-format-on-save t)
+             python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t
+             python-fill-column 99)
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
      lua
@@ -542,6 +569,8 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
+  (require 'dap-python)
+  (global-company-mode)
   ;; For latex preview larger.
   (require 'org)
   (plist-put org-format-latex-options :scale 1.5)
