@@ -32,7 +32,7 @@ brew install emacs-mac --with-spacemacs-icon --HEAD --with-gnutls
   git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d -b develop
 
   #clone zilongshanren layer and checkout develop branch
-  git clone https://github.com/zilongshanren/spacemacs-private.git ~/.spacemacs.d/
+  git clone https://github.com/firekay/spacemacs-private.git ~/.spacemacs.d/
 #+END_SRC
 
 现在可以打开 Emacs 24.5+ 开始使用我的配置了。
