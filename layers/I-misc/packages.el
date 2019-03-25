@@ -41,7 +41,7 @@
         golden-ratio
         (highlight-global :location (recipe :fetcher github :repo "glen-dai/highlight-global"))
         symbol-overlay
-        browse-at-remote
+        ;; browse-at-remote
         ))
 
 (defun I-misc/post-init-expand-region ()
@@ -78,10 +78,10 @@
            new-bindings)
           (setq ad-return-value (cons new-msg new-bindings)))))))
 
-(defun I-misc/init-browse-at-remote ()
-  (use-package browse-at-remote
-    :defer t
-    :init (spacemacs/set-leader-keys "gho" 'browse-at-remote)))
+;; (defun I-misc/init-browse-at-remote ()
+;;   (use-package browse-at-remote
+;;     :defer t
+;;     :init (spacemacs/set-leader-keys "gho" 'browse-at-remote)))
 
 (defun I-misc/init-highlight-global ()
   (use-package highlight-global
@@ -719,7 +719,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       (evilified-state-evilify-map elfeed-search-mode-map
         :mode elfeed-search-mode
         :bindings
-        "G" 'elfeed-update
+        ;; "G" 'elfeed-update
         "g" 'elfeed-search-update--force)
 
       (defun zilong/elfeed-mark-all-as-read ()
