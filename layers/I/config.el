@@ -17,6 +17,7 @@
    deft-dir "~/Dropbox/Emacs/Notes/"
    ))
 
+(setq org-journal-dir "~/Dropbox/Emacs/Journal")
 ;; for ranger options
 (setq ranger-parent-depth 1)
 (setq ranger-ignored-extensions '("mkv" "iso" "mp4"))
@@ -37,6 +38,9 @@
 (add-hook 'scala-mode-hook 'highlight-indentation-mode)
 (add-hook 'emacs-lisp-mode-hook 'highlight-indentation-mode)
 (add-hook 'sh-mode-hook 'highlight-indentation-mode)
+
+(add-hook 'python-mode-hook 'tooltip-mode)
+(add-hook 'go-mode-hook 'tooltip-mode)
 
 ;;load sensitive data
 ;; or (like spacemacs init.el)put the above variable into it ,then the own value separated from public config

@@ -14,7 +14,7 @@
                     (interactive)
                     (insert ", ")))
 
-(spacemacs/set-leader-keys "pn" 'neotree-find-project-root)
+(spacemacs/set-leader-keys "pn" 'treemacs-projectile)
 (define-key global-map (kbd "C-c c") 'I/capture-screenshot)
 
 (define-key evil-normal-state-map (kbd "go") 'evil-jump-backward)
@@ -178,6 +178,7 @@
       (kbd "s-w") 'company-show-location)))
 
 (spacemacs/declare-prefix "ot" "Toggle")
+(spacemacs/set-leader-keys "tt" 'tooltip-mode)
 
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
@@ -226,7 +227,7 @@
 (spacemacs/set-leader-keys "fl" 'find-file-literally-at-point)
 (spacemacs/set-leader-keys "ri" 'ivy-resume)
 (spacemacs/set-leader-keys "fh" 'ffap-hexl-mode)
-(spacemacs/set-leader-keys "fd" 'projectile-find-file-dwim-other-window)
+;; (spacemacs/set-leader-keys "fd" 'projectile-find-file-dwim-other-window)
 (spacemacs/set-leader-keys "nl" 'spacemacs/evil-search-clear-highlight)
 (spacemacs/set-leader-keys "oll" 'I/load-my-layout)
 (spacemacs/set-leader-keys "ols" 'I/save-my-layout)
@@ -263,3 +264,63 @@
   (global-set-key (kbd "s-n") 'make-frame)
   (global-set-key (kbd "s-z") 'undo-tree-undo)
   (global-set-key (kbd "s-Z") 'undo-tree-redo))
+
+(spacemacs/set-leader-keys-for-major-mode 'python-mode
+  "hd" 'anaconda-mode-show-doc
+)
+
+(spacemacs/set-leader-keys-for-major-mode 'python-mode "db" nil)
+(spacemacs/declare-prefix-for-mode 'python-mode "md" "debug")
+(spacemacs/declare-prefix-for-mode 'python-mode "mdd" "debuging")
+(spacemacs/declare-prefix-for-mode 'python-mode "mdb" "breakpoints")
+(spacemacs/declare-prefix-for-mode 'python-mode "mdw" "debug windows")
+(spacemacs/declare-prefix-for-mode 'python-mode "mdS" "switch")
+(spacemacs/declare-prefix-for-mode 'python-mode "mdI" "inspect")
+(spacemacs/declare-prefix-for-mode 'python-mode "mde" "eval")
+
+(spacemacs/set-leader-keys-for-major-mode 'python-mode
+  ;; debuging/running
+  "fb" 'yapfify-buffer
+  "fr" 'yapfify-region
+  "ddd" 'dap-debug
+  "ddl" 'dap-debug-last
+  "ddr" 'dap-debug-recent
+  ;; stepping
+  "dc" 'dap-continue
+  "di" 'dap-step-in
+  "do" 'dap-step-out
+  "ds" 'dap-next
+  "dv" 'dap-ui-inspect-thing-at-point
+  "dr" 'dap-restart-frame
+  ;; transient state
+  "d." 'dap-hydra
+  ;; abandon
+  "da" 'dap-disconnect
+  "dA" 'dap-delete-all-sessions
+  ;; eval
+  "dee" 'dap-eval
+  "der" 'dap-eval-region
+  "det" 'dap-eval-thing-at-point
+  ;; switching
+  "dSs" 'dap-switch-session
+  "dSt" 'dap-switch-thread
+  "dSf" 'dap-switch-frame
+  ;; inspect
+  "dIi" 'dap-ui-inspect
+  "dIr" 'dap-ui-inspect-region
+  "dIt" 'dap-ui-inspect-thing-at-point
+  ;; breakpoints
+  "dbb" 'dap-breakpoint-toggle
+  "dbc" 'dap-breakpoint-condition
+  "dbl" 'dap-breakpoint-log-message
+  "dbh" 'dap-breakpoint-hit-condition
+  "dba" 'dap-breakpoint-add
+  "dbd" 'dap-breakpoint-delete
+  "dbD"  'dap-breakpoint-delete-all
+  ;; repl
+  "d'"  'dap-ui-repl
+  ;; windows
+  "dwo" 'dap-go-to-output-buffer
+  "dwl" 'dap-ui-locals
+  "dws" 'dap-ui-sessions
+  "dwb" 'dap-ui-breakpoints)
