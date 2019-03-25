@@ -44,7 +44,6 @@ This function should only modify configuration layer settings."
                treemacs-use-collapsed-directories 3
                treemacs-use-follow-mode t)
      ;; add layers
-     themes-megapack
      better-defaults
      version-control
      bibtex
@@ -120,8 +119,8 @@ This function should only modify configuration layer settings."
      react
      python
      (python :variables
-             python-backend 'lsp
-             ;; python-pipenv-activate t
+             python-backend 'anaconda
+             python-pipenv-activate t
              python-test-runner '(nose pytest)
              python-enable-yapf-format-on-save t
              python-sort-imports-on-save t
@@ -569,6 +568,9 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
+  (add-to-list 'load-path "~/.spacemacs.d/tmp/lsp-python")
+  (require 'lsp-mode)
+  (require 'lsp-python)
   (require 'dap-python)
   (global-company-mode)
   ;; For latex preview larger.
