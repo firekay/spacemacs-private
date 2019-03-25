@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: method
+# key: method
+# --
+func (${1:t} ${2:type}) ${3:name}($4) $5 {
+  $6
+}
+$0
