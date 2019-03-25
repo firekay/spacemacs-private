@@ -61,7 +61,8 @@ This function should only modify configuration layer settings."
      (org :variables
           org-want-todo-bindings t
           org-enable-github-support t
-          org-enable-org-journal-support t)
+          org-enable-org-journal-support t
+          go-use-golangci-lint t)
      spacemacs-org
      java
      scala
@@ -286,17 +287,17 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
-                         solarized-dark
-			 spacemacs-dark
+   dotspacemacs-themes '(
+			                   spacemacs-dark
                          spacemacs-light
-			 monokai
-			 leuven
-			 sanityinc-solarized-light
-			 sanityinc-solarized-dark
-			 moe-light
-                         zenburn
-			 )
+                         solarized-dark
+                         solarized-light
+			                   monokai
+			                   leuven
+			                   sanityinc-solarized-light
+			                   sanityinc-solarized-dark
+			                   moe-light
+                         zenburn)
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -592,27 +593,27 @@ dump."
                         charset
                         (font-spec :family "Microsoft Yahei" :size 14))))
 
-  (fset 'evil-visual-update-x-selection 'ignore)
+  ;; (fset 'evil-visual-update-x-selection 'ignore)
 
   ;; force horizontal split window
-  (setq split-width-threshold 120)
+  ;; (setq split-width-threshold 120)
   ;; (linum-relative-on)
 
 ;;  (spacemacs|add-company-backends :modes text-mode)
 
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
   ;; temp fix for ivy-switch-buffer
   ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
 
   (global-hungry-delete-mode t)
-  (spacemacs|diminish helm-gtags-mode)
-  (spacemacs|diminish ggtags-mode)
-  (spacemacs|diminish which-key-mode)
-  (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
-  (spacemacs|diminish counsel-mode)
+  ;; (spacemacs|diminish helm-gtags-mode)
+  ;; (spacemacs|diminish ggtags-mode)
+  ;; (spacemacs|diminish which-key-mode)
+  ;; (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
+  ;; (spacemacs|diminish counsel-mode)
 
-  (evilified-state-evilify-map special-mode-map :mode special-mode)
+  ;; (evilified-state-evilify-map special-mode-map :mode special-mode)
 
   (add-to-list 'auto-mode-alist
                '("Capstanfile\\'" . yaml-mode))
@@ -656,52 +657,19 @@ dump."
     (when (and evil-mode (eq 'visual evil-state))
       (kill-region (region-beginning) (region-end))))
 
-  (advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
+  ;; (advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
 
   (setq ivy-more-chars-alist '((counsel-ag . 2)
                                (counsel-grep .2)
                                (t . 3)))
 
-  ;; boost find file and load saved persp layout  performance
-  ;; which will break some function on windows platform
-  ;; eg. known issues: magit related buffer color, reopen will fix it
-  (when (spacemacs/system-is-mswindows)
-    (progn (setq find-file-hook nil)
-           (setq vc-handled-backends nil)
-           (setq magit-refresh-status-buffer nil)
-           (add-hook 'find-file-hook 'spacemacs/check-large-file)
-
-           ;; emax.7z in not under pdumper release
-           ;; https://github.com/m-parashar/emax64/releases/tag/pdumper-20180619
-           (defvar emax-root (concat (expand-file-name "~") "/emax"))
-
-           (when (file-exists-p emax-root)
-             (progn
-               (defvar emax-root (concat (expand-file-name "~") "/emax"))
-               (defvar emax-bin (concat emax-root "/bin"))
-               (defvar emax-bin64 (concat emax-root "/bin64"))
-               (defvar emax-mingw64 (concat emax-root "/mingw64/bin"))
-               (defvar emax-lisp (concat emax-root "/lisp"))
-
-               (setq exec-path (cons emax-bin exec-path))
-               (setenv "PATH" (concat emax-bin ";" (getenv "PATH")))
-
-               (setq exec-path (cons emax-bin64 exec-path))
-               (setenv "PATH" (concat emax-bin64 ";" (getenv "PATH")))
-
-               (setq exec-path (cons emax-mingw64 exec-path))
-               (setenv "PATH" (concat emax-mingw64 ";" (getenv "PATH")))))
-
-           (add-hook 'projectile-mode-hook '(lambda () (remove-hook 'find-file-hook #'projectile-find-file-hook-function)))))
-
-
-  (defun counsel-locate-cmd-es (input)
-    "Return a shell command based on INPUT."
-    (counsel-require-program "es.exe")
-    (encode-coding-string (format "es.exe -i -r -p %s"
-                                  (counsel-unquote-regex-parens
-                                   (ivy--regex input t)))
-                          'gbk))
+  ;; (defun counsel-locate-cmd-es (input)
+  ;;   "Return a shell command based on INPUT."
+  ;;   (counsel-require-program "es.exe")
+  ;;   (encode-coding-string (format "es.exe -i -r -p %s"
+  ;;                                 (counsel-unquote-regex-parens
+  ;;                                  (ivy--regex input t)))
+  ;;                         'gbk))
   ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
   )
 
