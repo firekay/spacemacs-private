@@ -103,8 +103,10 @@ This function should only modify configuration layer settings."
      (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
           osx-command-as 'super)
      restclient
-     (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
+     gtags
+     ;; (gtags :disabled-for clojure emacs-lisp javascript latex python shell-scripts)
      ;; (shell :variables shell-default-shell 'eshell)
+     shell-scripts
     (shell :variables
            shell-default-height 50
            shell-default-shell 'ansi-term
@@ -115,15 +117,16 @@ This function should only modify configuration layer settings."
      latex
      deft
      markdown
+     themes-megapack
      ;; gpu
      yaml
      react
      python
      (python :variables
-             python-backend 'anaconda
+             python-backend 'lsp
              python-pipenv-activate t
              python-test-runner '(nose pytest)
-             python-enable-yapf-format-on-save t
+             python-enable-yapf-format-on-save nil
              python-sort-imports-on-save t
              python-fill-column 99)
      ;; (ruby :variables ruby-version-manager 'chruby)
@@ -288,15 +291,16 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+			                   monokai
+                         solarized-light
 			                   spacemacs-dark
                          spacemacs-light
                          solarized-dark
-                         solarized-light
-			                   monokai
 			                   leuven
 			                   sanityinc-solarized-light
 			                   sanityinc-solarized-dark
 			                   moe-light
+                         dracula
                          zenburn)
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -573,6 +577,7 @@ dump."
   (require 'lsp-mode)
   (require 'lsp-python)
   (require 'dap-python)
+  (require 'dap-lldb)
   (global-company-mode)
   ;; For latex preview larger.
   (require 'org)
@@ -662,6 +667,65 @@ dump."
   (setq ivy-more-chars-alist '((counsel-ag . 2)
                                (counsel-grep .2)
                                (t . 3)))
+
+  (spacemacs/set-leader-keys-for-major-mode 'python-mode "db" nil)
+  (spacemacs/declare-prefix-for-mode 'python-mode "md" "debug")
+  (spacemacs/declare-prefix-for-mode 'python-mode "mdd" "debuging")
+  (spacemacs/declare-prefix-for-mode 'python-mode "mdb" "breakpoints")
+  (spacemacs/declare-prefix-for-mode 'python-mode "mdw" "debug windows")
+  (spacemacs/declare-prefix-for-mode 'python-mode "mdS" "switch")
+  (spacemacs/declare-prefix-for-mode 'python-mode "mdI" "inspect")
+  (spacemacs/declare-prefix-for-mode 'python-mode "mde" "eval")
+  (spacemacs/set-leader-keys-for-minor-mode 'lsp-mode
+    ;;format
+    "gg" 'lsp-ui-peek-find-definitions
+    )
+  (spacemacs/set-leader-keys-for-major-mode 'python-mode
+    ;; debuging/running
+    "fb" 'yapfify-buffer
+    "fr" 'yapfify-region
+    "ddd" 'dap-debug
+    "ddl" 'dap-debug-last
+    "ddr" 'dap-debug-recent
+    ;; stepping
+    "dc" 'dap-continue
+    "di" 'dap-step-in
+    "do" 'dap-step-out
+    "ds" 'dap-next
+    "dv" 'dap-ui-inspect-thing-at-point
+    "dr" 'dap-restart-frame
+    ;; transient state
+    "d." 'dap-hydra
+    ;; abandon
+    "da" 'dap-disconnect
+    "dA" 'dap-delete-all-sessions
+    ;; eval
+    "dee" 'dap-eval
+    "der" 'dap-eval-region
+    "det" 'dap-eval-thing-at-point
+    ;; switching
+    "dSs" 'dap-switch-session
+    "dSt" 'dap-switch-thread
+    "dSf" 'dap-switch-frame
+    ;; inspect
+    "dIi" 'dap-ui-inspect
+    "dIr" 'dap-ui-inspect-region
+    "dIt" 'dap-ui-inspect-thing-at-point
+    ;; breakpoints
+    "dbb" 'dap-breakpoint-toggle
+    "dbc" 'dap-breakpoint-condition
+    "dbl" 'dap-breakpoint-log-message
+    "dbh" 'dap-breakpoint-hit-condition
+    "dba" 'dap-breakpoint-add
+    "dbd" 'dap-breakpoint-delete
+    "dbD"  'dap-breakpoint-delete-all
+    ;; repl
+    "d'"  'dap-ui-repl
+    ;; windows
+    "dwo" 'dap-go-to-output-buffer
+    "dwl" 'dap-ui-locals
+    "dws" 'dap-ui-sessions
+    "dwb" 'dap-ui-breakpoints)
 
   ;; (defun counsel-locate-cmd-es (input)
   ;;   "Return a shell command based on INPUT."

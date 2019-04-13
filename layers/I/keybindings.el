@@ -22,6 +22,7 @@
 (spacemacs/declare-prefix-for-mode 'org-mode "mo" "self-define(org-mode)")
 (spacemacs/declare-prefix-for-mode 'org-mode "mor" "org-ref")
 (spacemacs/declare-prefix "o" "self-define")
+
 ;; For org-mode
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
   "id" 'I/org-insert-src-block
@@ -56,6 +57,18 @@
   "oi" 'google-translate-at-point
   "od" 'osx-dictionary-search-pointer
   )
+
+(spacemacs/declare-prefix "oj" "journal")
+(spacemacs/set-leader-keys
+  "ojj" 'org-journal-new-entry
+  "oja" 'org-journal-new-scheduled-entry
+  "ojs" 'org-journal-search-forever
+)
+
+(spacemacs/set-leader-keys
+  "ca" 'comment-dwim
+  "cA" 'comment-kill
+)
 
 (define-key global-map (kbd "s-i") 'yas/insert-snippet)
 ;; (define-key evil-insert-state-map "M-i" 'yas/insert-snippet)
@@ -269,58 +282,3 @@
   "hd" 'anaconda-mode-show-doc
 )
 
-(spacemacs/set-leader-keys-for-major-mode 'python-mode "db" nil)
-(spacemacs/declare-prefix-for-mode 'python-mode "md" "debug")
-(spacemacs/declare-prefix-for-mode 'python-mode "mdd" "debuging")
-(spacemacs/declare-prefix-for-mode 'python-mode "mdb" "breakpoints")
-(spacemacs/declare-prefix-for-mode 'python-mode "mdw" "debug windows")
-(spacemacs/declare-prefix-for-mode 'python-mode "mdS" "switch")
-(spacemacs/declare-prefix-for-mode 'python-mode "mdI" "inspect")
-(spacemacs/declare-prefix-for-mode 'python-mode "mde" "eval")
-
-(spacemacs/set-leader-keys-for-major-mode 'python-mode
-  ;; debuging/running
-  "fb" 'yapfify-buffer
-  "fr" 'yapfify-region
-  "ddd" 'dap-debug
-  "ddl" 'dap-debug-last
-  "ddr" 'dap-debug-recent
-  ;; stepping
-  "dc" 'dap-continue
-  "di" 'dap-step-in
-  "do" 'dap-step-out
-  "ds" 'dap-next
-  "dv" 'dap-ui-inspect-thing-at-point
-  "dr" 'dap-restart-frame
-  ;; transient state
-  "d." 'dap-hydra
-  ;; abandon
-  "da" 'dap-disconnect
-  "dA" 'dap-delete-all-sessions
-  ;; eval
-  "dee" 'dap-eval
-  "der" 'dap-eval-region
-  "det" 'dap-eval-thing-at-point
-  ;; switching
-  "dSs" 'dap-switch-session
-  "dSt" 'dap-switch-thread
-  "dSf" 'dap-switch-frame
-  ;; inspect
-  "dIi" 'dap-ui-inspect
-  "dIr" 'dap-ui-inspect-region
-  "dIt" 'dap-ui-inspect-thing-at-point
-  ;; breakpoints
-  "dbb" 'dap-breakpoint-toggle
-  "dbc" 'dap-breakpoint-condition
-  "dbl" 'dap-breakpoint-log-message
-  "dbh" 'dap-breakpoint-hit-condition
-  "dba" 'dap-breakpoint-add
-  "dbd" 'dap-breakpoint-delete
-  "dbD"  'dap-breakpoint-delete-all
-  ;; repl
-  "d'"  'dap-ui-repl
-  ;; windows
-  "dwo" 'dap-go-to-output-buffer
-  "dwl" 'dap-ui-locals
-  "dws" 'dap-ui-sessions
-  "dwb" 'dap-ui-breakpoints)

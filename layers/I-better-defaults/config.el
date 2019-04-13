@@ -259,9 +259,9 @@ with options to run in the shell.")
 
 ;; (add-hook 'python-mode-hook 'ssbb-pyenv-hook)
 (add-hook 'python-mode-hook 'yapf-mode)
-(add-hook 'python-mode-hook 'lsp-mode)
-(add-hook 'python-mode-hook 'lsp-ui-mode)
-(add-hook 'python-mode-hook 'dap-mode)
+;; (add-hook 'python-mode-hook 'lsp-mode)
+;; (add-hook 'python-mode-hook 'lsp-ui-mode)
+;; (add-hook 'python-mode-hook 'dap-mode)
 
 (advice-add 'helm-ag--edit :before #'zilong-ag-edit)
 ;; (advice-add 'helm-ag--edit :after #'zilong-after-ag-edit)

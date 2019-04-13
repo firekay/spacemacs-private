@@ -3,7 +3,7 @@
 # key: funcd
 # --
 // $1 ${4:...}
-funcd ${1:name}(${2:args}) $3 {
+func ${1:name}(${2:args}) $3 {
   $5
 }
 $0

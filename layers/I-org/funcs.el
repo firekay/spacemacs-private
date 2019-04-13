@@ -101,7 +101,7 @@
   "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
   (interactive
    (let ((src-code-types
-          '("python" "go" "sh" "scala" "java" "js" "emacs-lisp" "clojure" "C++" "css"
+          '("python" "go" "rust" "sh" "scala" "java" "js" "emacs-lisp" "clojure" "C++" "css"
             "calc" "asymptote" "dot" "gnuplot" "ledger" "lilypond" "mscgen"
             "octave" "oz" "plantuml" "R" "sass" "screen" "sql" "awk" "ditaa"
             "haskell" "latex" "lisp" "matlab" "ocaml" "org" "perl" "ruby"
