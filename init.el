@@ -37,13 +37,11 @@ This function should only modify configuration layer settings."
      dap
      lsp
 
-     neotree
      treemacs
      (treemacs :variables
                treemacs-use-filewatch-mode t
                treemacs-use-collapsed-directories 3
                treemacs-use-follow-mode t)
-     ;; add layers
      better-defaults
      version-control
      bibtex
@@ -56,7 +54,7 @@ This function should only modify configuration layer settings."
          godoc-at-point-function 'godoc-gogetdoc)
      sql
      csv
-     semantic
+     ;; semantic
      org
      (org :variables
           org-want-todo-bindings t
@@ -64,27 +62,24 @@ This function should only modify configuration layer settings."
           org-enable-org-journal-support t
           go-use-golangci-lint t)
      spacemacs-org
-     java
-     scala
+     ;; java
+     ;; scala
 
      (ivy :variables ivy-enable-advanced-buffer-information nil)
-     better-defaults
      ranger
      colors
      prodigy
      search-engine
-     graphviz
-     (haskell :variables haskell-enable-hindent t
-              haskell-completion-backend 'intero)
+     ;; graphviz
+     ;; (haskell :variables haskell-enable-hindent t
+     ;;          haskell-completion-backend 'intero)
+     syntax-checking
      (syntax-checking :variables syntax-checking-enable-by-default nil
                       syntax-checking-enable-tooltips nil)
      spell-checking
      (spell-checking :variables
                      spell-checking-enable-by-default nil
                      enable-flyspell-auto-completion nil)
-     syntax-checking
-     (spell-checking :variables spell-checking-enable-by-default nil)
-     ;; (vinegar :variables vinegar-reuse-dired-buffer t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
      (git :variables
@@ -113,14 +108,12 @@ This function should only modify configuration layer settings."
            shell-default-term-shell "/bin/zsh"
            shell-default-position 'bottom
            )
-     ;; docker
      latex
      deft
      markdown
      themes-megapack
-     ;; gpu
      yaml
-     react
+     ;; react
      python
      (python :variables
              python-backend 'lsp
@@ -131,22 +124,24 @@ This function should only modify configuration layer settings."
              python-fill-column 99)
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
-     lua
-     html
-     (javascript :variables javascript-backend 'nil)
-     (typescript :variables
-                typescript-fmt-on-save nil
-                typescript-fmt-tool 'typescript-formatter)
+     ;; lua
+     ;; html
+     ;; (javascript :variables javascript-backend 'nil)
+     ;; (typescript :variables
+     ;;            typescript-fmt-on-save nil
+     ;;            typescript-fmt-tool 'typescript-formatter)
      emacs-lisp
-     (clojure :variables clojure-enable-fancify-symbols t)
-     racket
-     (c-c++ :variables
-            c-c++-default-mode-for-headers 'c++-mode)
+     ;; (clojure :variables clojure-enable-fancify-symbols t)
+     ;; racket
+     ;; (c-c++ :variables
+     ;;        c-c++-default-mode-for-headers 'c++-mode)
      I
-     (chinese :packages youdao-dictionary fcitx
-              :variables chinese-enable-fcitx nil
-              chinese-enable-youdao-dict t)
-     )
+     (chinese :variables chinese-enable-youdao-dict t)
+
+     ;; (chinese :packages youdao-dictionary fcitx
+     ;;          :variables chinese-enable-fcitx nil
+     ;;          chinese-enable-youdao-dict t)
+    )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the

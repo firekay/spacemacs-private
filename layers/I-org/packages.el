@@ -16,7 +16,7 @@
     ;; org-mac-link
     ;; org-pomodoro
     deft
-    sound-wav
+    ;; sound-wav
     ;; (blog-admin :location (recipe
     ;;                        :fetcher github
     ;;                        :repo "codefalling/blog-admin"))
@@ -514,8 +514,8 @@ holding contextual information."
     (setq deft-extension "org")
     (setq deft-directory deft-dir)))
 
-(defun I-org/init-sound-wav ()
-  (use-package sound-wav
-    :defer t
-    :init))
+;; (defun I-org/init-sound-wav ()
+;;   (use-package sound-wav
+;;     :defer t
+;;     :init))
 ;;; packages.el ends here

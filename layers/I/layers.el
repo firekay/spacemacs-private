@@ -10,7 +10,7 @@
 ;;; License: GPLv3
 
 (configuration-layer/declare-layers '(
-                                      I-misc
+                                      ;; I-misc
                                       I-org
                                       I-better-defaults
                                       ))

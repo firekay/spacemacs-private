@@ -19,11 +19,11 @@
         visual-regexp-steroids
         command-log
         evil
-        fcitx
+        ;; fcitx
         discover-my-major
         ace-window
         avy
-        4clojure
+        ;; 4clojure
         persp-mode
         tiny
         expand-region
@@ -654,16 +654,16 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       )))
 
 
-(defun I-misc/init-4clojure ()
-  (use-package 4clojure
-    :init
-    (progn
-      (spacemacs/declare-prefix "o4" "4clojure")
-      (spacemacs/set-leader-keys "o4q" '4clojure-open-question)
-      (spacemacs/set-leader-keys "o4n" '4clojure-next-question)
-      (spacemacs/set-leader-keys "o4p" '4clojure-previous-question)
-      (spacemacs/set-leader-keys "o4c" '4clojure-check-answers)
-      )))
+;; (defun I-misc/init-4clojure ()
+;;   (use-package 4clojure
+;;     :init
+;;     (progn
+;;       (spacemacs/declare-prefix "o4" "4clojure")
+;;       (spacemacs/set-leader-keys "o4q" '4clojure-open-question)
+;;       (spacemacs/set-leader-keys "o4n" '4clojure-next-question)
+;;       (spacemacs/set-leader-keys "o4p" '4clojure-previous-question)
+;;       (spacemacs/set-leader-keys "o4c" '4clojure-check-answers)
+;;       )))
 
 
 
