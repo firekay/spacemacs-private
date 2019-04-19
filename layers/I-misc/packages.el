@@ -27,7 +27,7 @@
         persp-mode
         tiny
         expand-region
-        ;; smartparens
+        smartparens
         flyspell-correct
         peep-dired
         markdown-mode
@@ -722,12 +722,12 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
         ;; "G" 'elfeed-update
         "g" 'elfeed-search-update--force)
 
-      (defun zilong/elfeed-mark-all-as-read ()
+      (defun I/elfeed-mark-all-as-read ()
         (interactive)
         (mark-whole-buffer)
         (elfeed-search-untag-all-unread))
 
-      (define-key elfeed-search-mode-map (kbd "R") 'zilong/elfeed-mark-all-as-read)
+      (define-key elfeed-search-mode-map (kbd "R") 'I/elfeed-mark-all-as-read)
 
       (defadvice elfeed-show-yank (after elfeed-show-yank-to-kill-ring activate compile)
         "Insert the yanked text from x-selection to kill ring"
@@ -1113,7 +1113,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     :defer t
     :config
     (progn
-      (define-key git-messenger-map (kbd "f") 'zilong/github-browse-commit))))
+      (define-key git-messenger-map (kbd "f") 'I/github-browse-commit))))
 
 (defun I-misc/post-init-markdown-mode ()
   (progn

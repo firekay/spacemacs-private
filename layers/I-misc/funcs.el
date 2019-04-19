@@ -96,11 +96,11 @@
 
 (defun I/load-my-layout ()
   (interactive)
-  (persp-load-state-from-file (concat persp-save-dir "zilong")))
+  (persp-load-state-from-file (concat persp-save-dir "I")))
 
 (defun I/save-my-layout ()
   (interactive)
-  (persp-save-state-to-file (concat persp-save-dir "zilong")))
+  (persp-save-state-to-file (concat persp-save-dir "I")))
 
 ;; http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html
 ;; ;FIXME: make it work with zsh
@@ -263,15 +263,12 @@ e.g. Sunday, September 17, 2000."
         (projectile-find-file)
       (counsel-file-jump))))
 
-;; (defun I/pomodoro-notification ()
-;;   "show notifications when pomodoro end"
-;;   (if (spacemacs/system-is-mswindows)
-;;       (progn (add-hook 'org-pomodoro-finished-hook '(lambda () (sound-wav-play (expand-file-name "~/.spacemacs.d/game_win.wav"))))
-;;              (add-hook 'org-pomodoro-short-break-finished-hook '(lambda () (sound-wav-play (expand-file-name "~/.spacemacs.d/game_win.wav"))))
-;;              (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (sound-wav-play (expand-file-name "~/.spacemacs.d/game_win.wav")))))
-;;     (progn (add-hook 'org-pomodoro-finished-hook '(lambda () (I/growl-notification "Pomodoro Finished" "☕️ Have a break!" t)))
-;;              (add-hook 'org-pomodoro-short-break-finished-hook '(lambda () (I/growl-notification "Short Break" "🐝 Ready to Go?" t)))
-;;              (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (I/growl-notification "Long Break" " 💪 Ready to Go?" t))))))
+(defun I/pomodoro-notification ()
+  "show notifications when pomodoro end"
+  (if (spacemacs/system-is-mswindows)
+    (progn (add-hook 'org-pomodoro-finished-hook '(lambda () (I/growl-notification "Pomodoro Finished" "☕️ Have a break!" t)))
+             (add-hook 'org-pomodoro-short-break-finished-hook '(lambda () (I/growl-notification "Short Break" "🐝 Ready to Go?" t)))
+             (add-hook 'org-pomodoro-long-break-finished-hook '(lambda () (I/growl-notification "Long Break" " 💪 Ready to Go?" t))))))
 
 (defun growl-test ()
   (interactive)
@@ -623,14 +620,14 @@ With PREFIX, cd to project root."
 (defun github-browse-file--relative-url ()
   "Return \"username/repo\" for current repository.
 
-Error out if this isn't a GitHub repo."
+  Error out if this isn't a GitHub repo."
   (require 'vc-git)
   (let ((url (vc-git--run-command-string nil "config" "remote.origin.url")))
     (unless url (error "Not in a GitHub repo"))
     (when (and url (string-match "github.com:?/?\\(.*\\)" url))
       (replace-regexp-in-string "\\.git$" "" (match-string 1 url)))))
 
-(defun zilong/github-browse-commit ()
+(defun I/github-browse-commit ()
   "Show the GitHub page for the current commit."
   (interactive)
   (let* ((commit git-messenger:last-commit-id)

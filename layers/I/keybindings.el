@@ -47,7 +47,7 @@
   "ii" 'python-skeleton-import
   "ic" 'python-skeleton-class
   "of" 'flycheck-mode
-)
+  )
 
 ;; for emacs toggle latex
 (spacemacs/set-leader-keys
@@ -63,12 +63,12 @@
   "ojj" 'org-journal-new-entry
   "oja" 'org-journal-new-scheduled-entry
   "ojs" 'org-journal-search-forever
-)
+  )
 
 (spacemacs/set-leader-keys
   "ca" 'comment-dwim
   "cA" 'comment-kill
-)
+  )
 
 (define-key global-map (kbd "s-i") 'yas/insert-snippet)
 ;; (define-key evil-insert-state-map "M-i" 'yas/insert-snippet)
@@ -168,6 +168,7 @@
 (define-key evil-normal-state-map "zi" 'hs-toggle-hiding)
 (define-key evil-normal-state-map "zI" 'hs-hide-leaves)
 (define-key evil-normal-state-map "zS" 'hs-show-all)
+(define-key evil-insert-state-map "\C-e" 'end-of-line)
 
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt
@@ -197,15 +198,15 @@
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 
 (global-set-key (kbd "<f1>") 'I/helm-hotspots)
-(spacemacs/set-leader-keys "oo" 'I/helm-hotspots)
-
-(spacemacs/set-leader-keys "oc" 'my-auto-update-tags-when-save)
-;; (spacemacs/set-leader-keys "op" 'I/org-save-and-export)
-(spacemacs/set-leader-keys "fR" 'I/rename-file-and-buffer)
-
-;;Must set key to nil to prevent error: Key sequence b m s starts with non-prefix key b m
-(spacemacs/set-leader-keys "bm" nil)
-(spacemacs/set-leader-keys "bD" 'spacemacs/kill-other-buffers)
+(spacemacs/set-leader-keys
+  "o>" 'I/tab-region
+  "o<" 'I/untab-region
+  "oo" 'I/helm-hotspots
+  "oc" 'my-auto-update-tags-when-save
+  "op" 'I/org-save-and-export
+  "Fr" 'I/Rename-File-And-Buffer
+  "bm" nil
+  "bD" 'spacemacs/kill-other-buffers)
 (spacemacs/declare-prefix "bm" "Bookmark")
 (spacemacs/set-leader-keys "bms" 'bookmark-set)
 (spacemacs/set-leader-keys "bmr" 'bookmark-rename)
@@ -280,5 +281,4 @@
 
 (spacemacs/set-leader-keys-for-major-mode 'python-mode
   "hd" 'anaconda-mode-show-doc
-)
-
+  )

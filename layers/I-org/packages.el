@@ -1,4 +1,3 @@
-;;; packages.el --- zilong-ui layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2014-2016 I
 ;;
@@ -14,9 +13,7 @@
   '(
     (org :location built-in)
     ;; org-mac-link
-    ;; org-pomodoro
     deft
-    ;; sound-wav
     ;; (blog-admin :location (recipe
     ;;                        :fetcher github
     ;;                        :repo "codefalling/blog-admin"))
@@ -43,8 +40,8 @@
       (add-hook 'blog-admin-backend-after-new-post-hook 'find-file)
       )))
 
-;; (defun I-org/post-init-org-pomodoro ()
-;;   (I/pomodoro-notification))
+(defun I-org/post-init-org-pomodoro ()
+  (I/pomodoro-notification))
 
 ;;In order to export pdf to support Chinese, I should install Latex at here: https://www.tug.org/mactex/
 ;; http://freizl.github.io/posts/2012-04-06-export-orgmode-file-in-Chinese.html
@@ -384,8 +381,8 @@ unwanted space when exporting org-mode to html."
 
 
 
-      (add-hook 'org-after-todo-statistics-hook 'zilong/org-summary-todo)
-      ;; used by zilong/org-clock-sum-today-by-tags
+      (add-hook 'org-after-todo-statistics-hook 'I/org-summary-todo)
+      ;; used by I/org-clock-sum-today-by-tags
 
       (define-key org-mode-map (kbd "s-p") 'org-priority)
       (spacemacs/set-leader-keys-for-major-mode 'org-mode

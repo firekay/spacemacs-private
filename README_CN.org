@@ -14,16 +14,16 @@ brew install emacs-mac --with-spacemacs-icon --HEAD --with-gnutls
 
 注： =--with-gnutls= 是用来支持 ssl 的
 
-** Windows 平台推荐安装 Emacs方法
+** Windows 平台推荐安装 Emacs 方法
 1. 使用 https://sourceforge.net/projects/emacsbinw64/files/release/ 上面的 Emacs 版本，我目前使用的 Emacs 25.1
 
-2. 安装 pt, 这样 helm-ag 也可以使用 pt 来搜索 。pt 的下载地址： https://github.com/monochromegane/the_platinum_searcher
+2. 安装 pt, 这样 helm-ag 也可以使用 pt 来搜索 。pt 的下载地址：https://github.com/monochromegane/the_platinum_searcher
 
-3. 安装 ispell，用来做拼写检查。你需要下载 aspell 和 对应的 English 字典。 https://www.emacswiki.org/emacs/AspellWindows
+3. 安装 ispell，用来做拼写检查。你需要下载 aspell 和 对应的 English 字典。https://www.emacswiki.org/emacs/AspellWindows
 
-4. 安装 SharpKeys, 把左 window 键修改成 app 键 ，把大写键修改成 Ctrl 键 。 https://sharpkeys.codeplex.com/
+4. 安装 SharpKeys, 把左 window 键修改成 app 键 ，把大写键修改成 Ctrl 键 。https://sharpkeys.codeplex.com/
 
-5. 安装 ctags： http://ctags.sourceforge.net/
+5. 安装 ctags：http://ctags.sourceforge.net/
 
 ** 使用方法
 
@@ -31,7 +31,7 @@ brew install emacs-mac --with-spacemacs-icon --HEAD --with-gnutls
   #clone spacemacs repo and use develop branch
   git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d -b develop
 
-  #clone zilongshanren layer and checkout develop branch
+  #clone I layer and checkout develop branch
   git clone https://github.com/firekay/spacemacs-private.git ~/.spacemacs.d/
 #+END_SRC
 
@@ -42,11 +42,10 @@ brew install emacs-mac --with-spacemacs-icon --HEAD --with-gnutls
 
 ** 配置说明
 1. 我的配置主要分成 5 个 layer
-  - zilongshanren-ui: 定制 mode-line，font face 等配置。
-  - zilongshanren-programming：和编程相关的配置。
-  - zilongshanren-misc：一些杂项，不属于其它分类的都放在这里面。
-  - zilongshanren-org：和 org 相关的配置
-  - zilongshanren-better-defaults: 增强 Emacs 自带的 package 和功能
+   - I-programming：和编程相关的配置。
+   - I-misc：一些杂项，不属于其它分类的都放在这里面。
+   - I-org：和 org 相关的配置
+   - I-better-defaults: 增强 Emacs 自带的 package 和功能
 
 2. Spacemacs Rocks 系统视频演示：https://github.com/zilongshanren/Spacemacs-rocks/issues/5 , 让你从此爱上 Emacs :smile:
 

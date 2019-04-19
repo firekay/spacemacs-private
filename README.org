@@ -4,7 +4,7 @@ Hacking journey begins start from 2013.
 It was written for Emacs 25.1+ on MacOS 10.11+
 
 ** How to use
-Follow the install instruction here: https://github.com/zilongshanren/spacemacs#install ,
+Follow the install instruction here: https://github.com/syl20bnr/spacemacs ,
 
 git clone git@github.com:firekay/spacemacs-private.git ~/.spacemacs.d
 

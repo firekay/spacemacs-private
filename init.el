@@ -558,13 +558,7 @@ dump."
   (setq socks-server '("Default server" "127.0.0.1" 1080 5))
   (setq evil-shift-round nil)
   (setq byte-compile-warnings '(not obsolete))
-  (setq warning-minimum-level :error)
   (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
-  ;; hack for remove purpose mode
-  ;; (setq purpose-mode nil)
-  ;; (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
-  ;; (push '("ensime" . "melpa-stable") package-pinned-packages)
-
   )
 
 (defun dotspacemacs/user-config ()

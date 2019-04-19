@@ -143,16 +143,16 @@
     (org-reset-subtask-state-maybe)
     (org-update-statistics-cookies t)))
 
-(defun zilong/org-summary-todo (n-done n-not-done)
+(defun I/org-summary-todo (n-done n-not-done)
   "Switch entry to DONE when all subentries are done, to TODO otherwise."
   (let (org-log-done org-log-states)    ; turn off logging
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-(defun zilong/filter-by-tags ()
+(defun I/filter-by-tags ()
   (let ((head-tags (org-get-tags-at)))
     (member current-tag head-tags)))
 
-(defun zilong/org-clock-sum-today-by-tags (timerange &optional tstart tend noinsert)
+(defun I/org-clock-sum-today-by-tags (timerange &optional tstart tend noinsert)
   (interactive "P")
   (let* ((timerange-numeric-value (prefix-numeric-value timerange))
          (files (org-add-archive-files (org-agenda-files)))
@@ -174,7 +174,7 @@
                                 (error "No such file %s" file)))
       (with-current-buffer org-agenda-buffer
         (dolist (current-tag include-tags)
-          (org-clock-sum tstart tend 'zilong/filter-by-tags)
+          (org-clock-sum tstart tend 'I/filter-by-tags)
           (setcdr (assoc current-tag tags-time-alist)
                   (+ org-clock-file-total-minutes (cdr (assoc current-tag tags-time-alist)))))))
     (while (setq item (pop tags-time-alist))
