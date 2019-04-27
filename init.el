@@ -33,9 +33,10 @@ This function should only modify configuration layer settings."
    '(
      rust
      (rust :variables
+           rust-backend 'lsp
            rust-format-on-save t)
-     dap
      lsp
+     dap
 
      treemacs
      (treemacs :variables
@@ -47,10 +48,11 @@ This function should only modify configuration layer settings."
      bibtex
      go
      (go :variables
-         gofmt-command "goimports"
+         ;; gofmt-command "goimports"
          go-tab-width 2
          go-use-golangci-lint t
          go-format-before-save t
+         go-backend 'lsp
          godoc-at-point-function 'godoc-gogetdoc)
      sql
      csv
@@ -59,8 +61,7 @@ This function should only modify configuration layer settings."
      (org :variables
           org-want-todo-bindings t
           org-enable-github-support t
-          org-enable-org-journal-support t
-          go-use-golangci-lint t)
+          org-enable-org-journal-support t)
      spacemacs-org
      ;; java
      ;; scala
@@ -250,7 +251,7 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
 
    ;; If non-nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
@@ -465,7 +466,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-smartparens-strict-mode nil
 
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
-   ;; over any automatically added closing parenthesis, bracket, quote, etc…
+   ;; over any automatically added closing parenthesis, bracket, quote, etc …
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
    dotspacemacs-smart-closing-parenthesis nil
 
@@ -572,7 +573,7 @@ dump."
   (require 'org)
   (plist-put org-format-latex-options :scale 1.5)
 
-  ;;解决org表格里面中英文对齐的问题
+  ;;解决 org 表格里面中英文对齐的问题
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))

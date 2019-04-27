@@ -8,6 +8,38 @@
 ;;
 ;;; License: GPLv3
 
+(defun I/now-today (arg)
+  (interactive "P")
+  (insert (if arg
+              (format-time-string "%a %d-%m-%Y")
+            (format-time-string "%a %Y-%m-%d"))))
+
+(defun I/now (arg)
+  (interactive "P")
+  (insert (if arg
+              (format-time-string "%a %d-%m-%Y %H:%M")
+            (format-time-string "%a %Y-%m-%d %H:%M"))))
+
+
+(defun I/now-timestamp (arg)
+  (interactive "P")
+  (insert (if arg
+              (format-time-string "%a %d-%m-%Y %H:%M:%d")
+            (format-time-string "%a %Y-%m-%d %H:%M:%d"))))
+
+
+(defun I/now-time (arg)
+  (interactive "P")
+  (insert (if arg
+              (format-time-string "%H:%M:%d")
+            (format-time-string "%H:%M:%d"))))
+
+(defun I/now-hour-min (arg)
+  (interactive "P")
+  (insert (if arg
+              (format-time-string "%H:%M")
+            (format-time-string "%H:%M"))))
+
 ;; for hs-hide-leaves node
 (defun hs-hide-leaves-recursive (minp maxp)
   "Hide blocks below point that do not contain further blocks in

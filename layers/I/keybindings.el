@@ -8,6 +8,22 @@
 ;;
 ;;; License: GPLv3
 
+
+;; clean bingding key for rebingding
+(spacemacs/set-leader-keys
+  "bm" nil)
+;; declare prefix
+(spacemacs/declare-prefix "o" "self-define")
+(spacemacs/declare-prefix-for-mode 'org-mode "mo" "self-define(org-mode)")
+(spacemacs/declare-prefix-for-mode 'org-mode "mor" "org-ref")
+(spacemacs/declare-prefix-for-mode 'python-mode "mi" "skeleton(import)")
+(spacemacs/declare-prefix-for-mode 'python-mode "mo" "self_define")
+(spacemacs/declare-prefix "oj" "journal")
+(spacemacs/declare-prefix "ot" "Toggle")
+(spacemacs/declare-prefix "os" "Search")
+(spacemacs/declare-prefix "bm" "Bookmark")
+(spacemacs/declare-prefix "xy" "Youdao")
+
 ;; Auto add blank after comma
 (global-set-key (kbd ",")
                 #'(lambda ()
@@ -19,9 +35,101 @@
 
 (define-key evil-normal-state-map (kbd "go") 'evil-jump-backward)
 
-(spacemacs/declare-prefix-for-mode 'org-mode "mo" "self-define(org-mode)")
-(spacemacs/declare-prefix-for-mode 'org-mode "mor" "org-ref")
-(spacemacs/declare-prefix "o" "self-define")
+;;; For set leader keys
+(spacemacs/set-leader-keys "tI" 'highlight-indentation-mode)
+(spacemacs/set-leader-keys "tY" 'yapf-mode)
+
+(spacemacs/set-leader-keys
+  "ojj" 'org-journal-new-entry
+  "oja" 'org-journal-new-scheduled-entry
+  "ojs" 'org-journal-search-forever
+  )
+
+(spacemacs/set-leader-keys
+  "ca" 'comment-dwim
+  "cA" 'comment-kill
+  )
+
+(spacemacs/set-leader-keys "tt" 'tooltip-mode)
+
+(spacemacs/set-leader-keys "bms" 'bookmark-set)
+(spacemacs/set-leader-keys "bmr" 'bookmark-rename)
+(spacemacs/set-leader-keys "bmd" 'bookmark-delete)
+(spacemacs/set-leader-keys "bmj" 'counsel-bookmark)
+
+(spacemacs/set-leader-keys "od" 'occur-dwim)
+(spacemacs/set-leader-keys "ok" 'I-kill-other-persp-buffers)
+(spacemacs/set-leader-keys "ox" 'org-open-at-point-global)
+(spacemacs/set-leader-keys "or" 'I/browser-refresh--chrome-applescript)
+
+(spacemacs/set-leader-keys "rh" 'helm-resume)
+(spacemacs/set-leader-keys "sj" 'counsel-imenu)
+
+(spacemacs/set-leader-keys
+  "o>" 'I/tab-region
+  "o<" 'I/untab-region
+  "oo" 'I/helm-hotspots
+  ;; "oc" 'my-auto-update-tags-when-save
+  "op" 'I/org-save-and-export
+  "Fr" 'I/Rename-File-And-Buffer
+  "bD" 'spacemacs/kill-other-buffers
+
+  "en" 'flycheck-next-error
+  "ep" 'flycheck-previous-error
+  "o(" 'ielm
+
+  "gL" 'magit-log-buffer-file
+  "og" 'my-git-timemachine
+  "sj" 'I/counsel-imenu
+  "os" 'counsel-ag-thing-at-point
+
+  "fl" 'find-file-literally-at-point
+  "ri" 'ivy-resume
+  "fh" 'ffap-hexl-mode
+  "fd" 'projectile-find-file-dwim-other-window
+  "nl" 'spacemacs/evil-search-clear-highlight
+  "oll" 'I/load-my-layout
+  "ols" 'I/save-my-layout
+  "ob" 'popwin:display-last-buffer
+  "oy" 'youdao-dictionary-search-at-point+
+  "oY" 'youdao-dictionary-search-at-point
+
+  "bM" 'spacemacs/switch-to-messages-buffer
+  "sS" 'spacemacs/swiper-region-or-symbol
+
+  "o'" 'ansi-term
+
+  "a." 'server-start
+  )
+
+;; for fix waring
+(spacemacs/set-leader-keys "mwD" 'dired-do-chgrp)
+(spacemacs/set-leader-keys "mwN" 'org-agenda-next-line)
+(spacemacs/set-leader-keys "mwG" 'org-agenda-toggle-time-grid)
+(spacemacs/set-leader-keys "mw|" 'org-agenda-filter-remove-all)
+
+
+;; For didtionary
+(spacemacs/set-leader-keys
+  ;; youdao
+  "xyq" 'youdao-dictionary-search
+  "xyt" 'youdao-dictionary-search-at-point
+  "xyy" 'youdao-dictionary-search-at-point+
+
+  ;; for osx dictionary
+  "xyo" 'osx-dictionary-search-pointer
+  )
+
+
+;; for emacs toggle latex
+(spacemacs/set-leader-keys
+  "otl" 'org-toggle-latex-fragment
+  "oti" 'I/toggle-indent-guide-recursive
+  "otc" 'org-cdlatex-mode
+  "oi" 'google-translate-at-point
+  "od" 'osx-dictionary-search-pointer
+  )
+
 
 ;; For org-mode
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
@@ -35,49 +143,27 @@
   ;; For org-ref
   "ori" 'org-ref-insert-cite-link
   "orc" 'org-ref-helm-insert-cite-link
+
+  ;; for insert date time
+  "dn" 'I/now
+  "d." 'I/now-timestamp
+  "do" 'I/now-today
+  "di" 'I/now-time
+  "dm" 'I/now-hour-min
   )
 
-(spacemacs/set-leader-keys "tI" 'highlight-indentation-mode)
-(spacemacs/set-leader-keys "tY" 'yapf-mode)
 
-;; For python
-(spacemacs/declare-prefix-for-mode 'python-mode "mi" "skeleton(import)")
-(spacemacs/declare-prefix-for-mode 'python-mode "mo" "self_define")
+;; For python-mode
 (spacemacs/set-leader-keys-for-major-mode 'python-mode
   "ii" 'python-skeleton-import
   "ic" 'python-skeleton-class
   "of" 'flycheck-mode
   )
 
-;; for emacs toggle latex
-(spacemacs/set-leader-keys
-  "otl" 'org-toggle-latex-fragment
-  "oti" 'I/toggle-indent-guide-recursive
-  "otc" 'org-cdlatex-mode
-  "oi" 'google-translate-at-point
-  "od" 'osx-dictionary-search-pointer
-  )
-
-(spacemacs/declare-prefix "oj" "journal")
-(spacemacs/set-leader-keys
-  "ojj" 'org-journal-new-entry
-  "oja" 'org-journal-new-scheduled-entry
-  "ojs" 'org-journal-search-forever
-  )
-
-(spacemacs/set-leader-keys
-  "ca" 'comment-dwim
-  "cA" 'comment-kill
-  )
 
 (define-key global-map (kbd "s-i") 'yas/insert-snippet)
 ;; (define-key evil-insert-state-map "M-i" 'yas/insert-snippet)
 
-;; for fix waring
-(spacemacs/set-leader-keys "mwD" 'dired-do-chgrp)
-(spacemacs/set-leader-keys "mwN" 'org-agenda-next-line)
-(spacemacs/set-leader-keys "mwG" 'org-agenda-toggle-time-grid)
-(spacemacs/set-leader-keys "mw|" 'org-agenda-filter-remove-all)
 
 ;; A complementary binding to the apropos-command (C-h a)
 (define-key 'help-command "A" 'apropos)
@@ -168,7 +254,7 @@
 (define-key evil-normal-state-map "zi" 'hs-toggle-hiding)
 (define-key evil-normal-state-map "zI" 'hs-hide-leaves)
 (define-key evil-normal-state-map "zS" 'hs-show-all)
-(define-key evil-insert-state-map "\C-e" 'end-of-line)
+;; (define-key evil-insert-state-map "\C-e" 'end-of-line)
 
 (bb/define-key evil-normal-state-map
   "+" 'evil-numbers/inc-at-pt
@@ -191,36 +277,11 @@
     (bb/define-key company-active-map
       (kbd "s-w") 'company-show-location)))
 
-(spacemacs/declare-prefix "ot" "Toggle")
-(spacemacs/set-leader-keys "tt" 'tooltip-mode)
 
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 
 (global-set-key (kbd "<f1>") 'I/helm-hotspots)
-(spacemacs/set-leader-keys
-  "o>" 'I/tab-region
-  "o<" 'I/untab-region
-  "oo" 'I/helm-hotspots
-  "oc" 'my-auto-update-tags-when-save
-  "op" 'I/org-save-and-export
-  "Fr" 'I/Rename-File-And-Buffer
-  "bm" nil
-  "bD" 'spacemacs/kill-other-buffers)
-(spacemacs/declare-prefix "bm" "Bookmark")
-(spacemacs/set-leader-keys "bms" 'bookmark-set)
-(spacemacs/set-leader-keys "bmr" 'bookmark-rename)
-(spacemacs/set-leader-keys "bmd" 'bookmark-delete)
-(spacemacs/set-leader-keys "bmj" 'counsel-bookmark)
-
-(spacemacs/set-leader-keys "od" 'occur-dwim)
-(spacemacs/set-leader-keys "ok" 'I-kill-other-persp-buffers)
-(spacemacs/set-leader-keys "ox" 'org-open-at-point-global)
-(spacemacs/set-leader-keys "or" 'I/browser-refresh--chrome-applescript)
-
-(spacemacs/set-leader-keys "rh" 'helm-resume)
-(spacemacs/set-leader-keys "sj" 'counsel-imenu)
-
 ;; ivy specific keybindings
 (if (configuration-layer/layer-usedp 'ivy)
     (progn
@@ -229,31 +290,7 @@
       (spacemacs/set-leader-keys "hi" 'counsel-info-lookup-symbol)
       (spacemacs/set-leader-keys "pb" 'projectile-switch-to-buffer)))
 
-(spacemacs/set-leader-keys "en" 'flycheck-next-error)
-(spacemacs/set-leader-keys "ep" 'flycheck-previous-error)
-(spacemacs/set-leader-keys "o(" 'ielm)
-
-(spacemacs/set-leader-keys "gL" 'magit-log-buffer-file)
-(spacemacs/set-leader-keys "og" 'my-git-timemachine)
-
-(spacemacs/set-leader-keys "sj" 'I/counsel-imenu)
-;; deal with BOM
-(spacemacs/set-leader-keys "fl" 'find-file-literally-at-point)
-(spacemacs/set-leader-keys "ri" 'ivy-resume)
-(spacemacs/set-leader-keys "fh" 'ffap-hexl-mode)
-;; (spacemacs/set-leader-keys "fd" 'projectile-find-file-dwim-other-window)
-(spacemacs/set-leader-keys "nl" 'spacemacs/evil-search-clear-highlight)
-(spacemacs/set-leader-keys "oll" 'I/load-my-layout)
-(spacemacs/set-leader-keys "ols" 'I/save-my-layout)
-(spacemacs/set-leader-keys "ob" 'popwin:display-last-buffer)
-(spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
-(spacemacs/set-leader-keys "bM" 'spacemacs/switch-to-messages-buffer)
-(spacemacs/set-leader-keys "sS" 'spacemacs/swiper-region-or-symbol)
-
-
 (bind-key* "s-p" 'find-file-in-project)
-(spacemacs/set-leader-keys "os" 'counsel-ag-thing-at-point)
-
 (spacemacs/set-leader-keys "pa" 'projectile-find-other-file)
 (spacemacs/set-leader-keys "pA" 'projectile-find-other-file-other-window)
 (spacemacs/set-leader-keys ":" 'counsel-M-x)
@@ -261,23 +298,6 @@
 ;; highlight
 (spacemacs/set-leader-keys "hh" 'I/highlight-dwim)
 (spacemacs/set-leader-keys "hc" 'I/clearn-highlight)
-
-(when (spacemacs/system-is-mswindows)
-  (global-set-key (kbd "s-=") 'spacemacs/scale-up-font)
-  (spacemacs/set-leader-keys "bf" 'locate-current-file-in-explorer)
-  (global-set-key (kbd "s--") 'spacemacs/scale-down-font)
-  (global-set-key (kbd "s-0") 'spacemacs/reset-font-size)
-  (global-set-key (kbd "s-q") 'save-buffers-kill-terminal)
-  (global-set-key (kbd "s-v") 'yank)
-  (global-set-key (kbd "s-g") 'evil-avy-goto-char-2)
-  (global-set-key (kbd "s-c") 'evil-yank)
-  (global-set-key (kbd "s-a") 'mark-whole-buffer)
-  (global-set-key (kbd "s-x") 'kill-region)
-  (global-set-key (kbd "s-w") 'delete-window)
-  (global-set-key (kbd "s-W") 'delete-frame)
-  (global-set-key (kbd "s-n") 'make-frame)
-  (global-set-key (kbd "s-z") 'undo-tree-undo)
-  (global-set-key (kbd "s-Z") 'undo-tree-redo))
 
 (spacemacs/set-leader-keys-for-major-mode 'python-mode
   "hd" 'anaconda-mode-show-doc

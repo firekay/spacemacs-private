@@ -226,18 +226,6 @@ org-files and bookmarks"
     (candidate-number-limit)
     (action . (("Open" . (lambda (x) (funcall x)))))))
 
-;; insert date and time
-(defun I/now ()
-  "Insert string for the current time formatted like '2:34 PM'."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%D %-I:%M %p")))
-
-(defun I/today ()
-  "Insert string for today's date nicely formatted in American style,
-e.g. Sunday, September 17, 2000."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%A, %B %e, %Y")))
-
 ;; https://github.com/syohex/emacs-browser-refresh/blob/master/browser-refresh.el
 (defun I/browser-refresh--chrome-applescript ()
   (interactive)
