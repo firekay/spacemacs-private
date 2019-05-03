@@ -240,14 +240,6 @@
                     (interactive)
                     (insert ", ")))
 
-(with-eval-after-load 'company
-  (progn
-    (bb/define-key company-active-map
-      (kbd "C-w") 'evil-delete-backward-word)
-
-    (bb/define-key company-active-map
-      (kbd "s-w") 'company-show-location)))
-
 ;; ivy specific keybindings
 (if (configuration-layer/layer-usedp 'ivy)
     (progn
@@ -255,25 +247,6 @@
       (spacemacs/set-leader-keys "fL" 'counsel-locate)
       (spacemacs/set-leader-keys "hi" 'counsel-info-lookup-symbol)
       (spacemacs/set-leader-keys "pb" 'projectile-switch-to-buffer)))
-
-(bb/define-key evil-normal-state-map
-  "+" 'evil-numbers/inc-at-pt
-  "-" 'evil-numbers/dec-at-pt
-  "\\" 'evil-repeat-find-char-reverse
-  (kbd "DEL") 'evil-repeat-find-char-reverse
-  "[s" (lambda (n) (interactive "p") (dotimes (c n nil) (insert " ")))
-  "]s" (lambda (n) (interactive "p")
-         (forward-char) (dotimes (c n nil) (insert " ")) (backward-char (1+ n))))
-
-(bb/define-key ivy-occur-grep-mode-map
-  (kbd "C-d") 'evil-scroll-down
-  "d" 'ivy-occur-delete-candidate)
-
-;; Utility functions
-(defun bb/define-key (keymap &rest bindings)
-  (declare (indent 1))
-  (while bindings
-    (define-key keymap (pop bindings) (pop bindings))))
 
 ;; for quick open finder and shell
 (when (spacemacs/system-is-mac)
@@ -286,3 +259,31 @@
   :off (global-shadowsocks-proxy-mode -1)
   :documentation "Toggle shadowsocks proxy mode."
   :evil-leader "ots")
+
+;; Utility functions
+(defun bb/define-key (keymap &rest bindings)
+  (declare (indent 1))
+  (while bindings
+    (define-key keymap (pop bindings) (pop bindings))))
+
+
+(with-eval-after-load 'company
+  (progn
+    (bb/define-key company-active-map
+                   (kbd "C-w") 'evil-delete-backward-word)
+
+    (bb/define-key company-active-map
+                   (kbd "s-w") 'company-show-location)))
+
+(bb/define-key ivy-occur-grep-mode-map
+               (kbd "C-d") 'evil-scroll-down
+               "d" 'ivy-occur-delete-candidate)
+
+(bb/define-key evil-normal-state-map
+               "+" 'evil-numbers/inc-at-pt
+               "-" 'evil-numbers/dec-at-pt
+               "\\" 'evil-repeat-find-char-reverse
+               (kbd "DEL") 'evil-repeat-find-char-reverse
+               "[s" (lambda (n) (interactive "p") (dotimes (c n nil) (insert " ")))
+               "]s" (lambda (n) (interactive "p")
+                      (forward-char) (dotimes (c n nil) (insert " ")) (backward-char (1+ n))))
