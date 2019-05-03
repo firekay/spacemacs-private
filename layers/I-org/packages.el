@@ -290,48 +290,51 @@ unwanted space when exporting org-mode to html."
       ;;http://www.howardism.org/Technical/Emacs/journaling-org.html
       ;;add multi-file journal
       (setq org-capture-templates
-            '(("t" "Todo" entry (file+headline org-agenda-file-gtd "To Do")
-               "* TODO [#B] %?\n  %i\n %U"
+            '(("t" "Todo" entry (file+headline org-agenda-file-gtd "ToDo")
+               "* TODO [#B] %?\n  %i\n  %U"
                :empty-lines 1)
-              ("s" "Study" entry (file+headline org-agenda-file-gtd "Study To Do")
-               "* TODO [#B] %?\n  %i\n %a \n %U"
+              ("s" "Study" entry (file+headline org-agenda-file-gtd "StudyToDo")
+               "* TODO [#B] %?\n  %i\n %a \n  %U"
                :empty-lines 1)
-              ("l" "Link File" entry (file+headline org-agenda-file-gtd "Work To Do")
-               "* TODO [#A] %?\n  %i\n %a \n %U"
+              ("l" "Link File" entry (file+headline org-agenda-file-gtd "WorkToDo")
+               "* TODO [#A] %?\n  %i\n %a \n  %U"
                :empty-lines 1)
-              ("w" "Work" entry (file+headline org-agenda-file-gtd "Work To Do")
-               "* TODO [#A] %?\n  %i\n %U"
+              ("w" "Work" entry (file+headline org-agenda-file-gtd "WorkToDo")
+               "* TODO [#A] %?\n  %i\n  %U"
                :empty-lines 1)
               ("c" "Chrome" entry (file+headline org-agenda-file-note "Chrome")
                "* TODO [#C] %?\n %(I/retrieve-chrome-current-tab-url)\n %i\n %U"
                :empty-lines 1)
-              ("n" "Notes" entry (file+headline org-agenda-file-note "Quick notes")
-               "* %?\n  %i\n %U"
+              ("b" "Brave" entry (file+headline org-agenda-file-note "Chrome")
+               "* TODO [#C] %?\n %(I/retrieve-brave-current-tab-url)\n %i\n %U"
+               :empty-lines 1)
+              ("n" "Notes" entry (file+headline org-agenda-file-note "Notes")
+               "* %?\n  %i\n  %U"
                :empty-lines 1)
               ("p" "Code Snippet" entry
                (file org-agenda-file-code-snippet)
-               "* %?\t%^g\n#+BEGIN_SRC %^{language}\n\n#+END_SRC")
-              ("b" "Blog Ideas" entry (file+headline org-agenda-file-note "Blog Ideas")
-               "* TODO [#C] %?\n  %i\n %U"
+               "* %?\t%^g\n#+BEGIN_SRC %^{language}\n#+END_SRC")
+              ("i" "Ideas" entry (file+headline org-agenda-file-note "Ideas")
+               "* TODO [#C] %?\t%^g\n  %i\n  %U"
                :empty-lines 1)
               ("j" "Journal Entry"
                entry (file+datetree org-agenda-file-journal)
-               "* %?"
+               "* TODO %(format-time-string \"%H:%M\") %?"
                :empty-lines 1)))
 
       ;;An entry without a cookie is treated just like priority ' B '.
       ;;So when create new task, they are default 重要且紧急
       (setq org-agenda-custom-commands
             '(
-              ("w" . "任务安排")
-              ("wa" "重要且紧急的任务" tags-todo "+PRIORITY=\"A\"")
-              ("wb" "重要且不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
-              ("wc" "不重要且紧急的任务" tags-todo "+PRIORITY=\"C\"")
-              ("b" "Blog" tags-todo "BLOG")
-              ("S" "Study" tags-todo "S")
-              ("p" . "项目安排")
-              ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"TODOW\"")
-              ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"TODOL\"")
+              ("w" . "work")
+              ("wa" "important&emergency" tags-todo "+PRIORITY=\"A\"")
+              ("wb" "important&not-emergency" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+              ("wc" "not-important&not-emergency" tags-todo "+PRIORITY=\"C\"")
+              ("i" "Idea" tags-todo "IDEA")
+              ("S" "Study" tags-todo "STUDY")
+              ;; ("p" . "")
+              ;; ("pw" tags-todo "PROJECT+WORK+CATEGORY=\"TODOW\"")
+              ;; ("pl" tags-todo "PROJECT+DREAM+CATEGORY=\"TODOL\"")
               ("W" "Weekly Review"
                ((stuck "") ;; review stuck projects as designated by org-stuck-projects
                 (tags-todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
@@ -341,7 +344,7 @@ unwanted space when exporting org-mode to html."
         "<div class='nav'>
 <ul>
 <li><a href='http://I.com'>博客</a></li>
-<li><a href='/index.html'>Wiki目录</a></li>
+<li><a href='/index.html'>Wiki 目录</a></li>
 </ul>
 </div>")
       (defvar I-website-html-blog-head
@@ -366,7 +369,7 @@ unwanted space when exporting org-mode to html."
                :author "kay"
                :auto-sitemap t          ; Generate sitemap.org automagically...
                :sitemap-filename "index.org" ; ... call it sitemap.org (it's the default)...
-               :sitemap-title "我的wiki"     ; ... with title 'Sitemap'.
+               :sitemap-title "我的 wiki"     ; ... with title 'Sitemap'.
                :sitemap-sort-files anti-chronologically
                :sitemap-file-entry-format "%t" ; %d to output date, we don't need date here
                )
