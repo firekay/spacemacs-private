@@ -11,21 +11,21 @@
 (defun I/now-today (arg)
   (interactive "P")
   (insert (if arg
-              (format-time-string "%a %d-%m-%Y")
-            (format-time-string "%a %Y-%m-%d"))))
+              (format-time-string "%d-%m-%Y %a")
+            (format-time-string "%Y-%m-%d %a"))))
 
 (defun I/now (arg)
   (interactive "P")
   (insert (if arg
-              (format-time-string "%a %d-%m-%Y %H:%M")
-            (format-time-string "%a %Y-%m-%d %H:%M"))))
+              (format-time-string "%d-%m-%Y %H:%M %a")
+            (format-time-string "%Y-%m-%d %H:%M %a"))))
 
 
 (defun I/now-timestamp (arg)
   (interactive "P")
   (insert (if arg
-              (format-time-string "%a %d-%m-%Y %H:%M:%d")
-            (format-time-string "%a %Y-%m-%d %H:%M:%d"))))
+              (format-time-string "%d-%m-%Y %H:%M:%d %a")
+            (format-time-string "%Y-%m-%d %H:%M:%d %a"))))
 
 
 (defun I/now-time (arg)
