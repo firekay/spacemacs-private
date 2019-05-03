@@ -56,7 +56,7 @@ This function should only modify configuration layer settings."
          godoc-at-point-function 'godoc-gogetdoc)
      sql
      csv
-     ;; semantic
+     semantic
      org
      (org :variables
           org-want-todo-bindings t
@@ -117,10 +117,12 @@ This function should only modify configuration layer settings."
      ;; react
      python
      (python :variables
+             python-formatter 'black
              python-backend 'lsp
              python-pipenv-activate t
              python-test-runner '(nose pytest)
-             python-enable-yapf-format-on-save nil
+             ;; python-enable-yapf-format-on-save nil
+             python-format-on-save t
              python-sort-imports-on-save t
              python-fill-column 99)
      ;; (ruby :variables ruby-version-manager 'chruby)
@@ -287,11 +289,11 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-			                   monokai
-                         solarized-light
 			                   spacemacs-dark
+                         solarized-light
                          spacemacs-light
                          solarized-dark
+			                   monokai
 			                   leuven
 			                   sanityinc-solarized-light
 			                   sanityinc-solarized-dark
@@ -563,6 +565,9 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
+  ;; adds support for =evil-cleverparens=
+  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
+
   (add-to-list 'load-path "~/.spacemacs.d/tmp/lsp-python")
   (require 'lsp-mode)
   (require 'lsp-python)
@@ -573,7 +578,7 @@ dump."
   (require 'org)
   (plist-put org-format-latex-options :scale 1.5)
 
-  ;;解决 org 表格里面中英文对齐的问题
+  ;; org Alignment between Chinese and English in the form
   (when (configuration-layer/layer-usedp 'chinese)
     (when (and (spacemacs/system-is-mac) window-system)
       (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
