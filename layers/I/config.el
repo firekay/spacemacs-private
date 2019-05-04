@@ -44,6 +44,7 @@
 
 (add-hook 'rust-mode-hook #'flycheck-mode)
 (add-hook 'go-mode-hook #'flycheck-mode)
+(add-hook 'shell-mode-hook #'flycheck-mode)
 
 ;;load sensitive data
 ;; or (like spacemacs init.el)put the above variable into it ,then the own value separated from public config
