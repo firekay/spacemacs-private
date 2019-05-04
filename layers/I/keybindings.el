@@ -29,6 +29,9 @@
 (spacemacs/declare-prefix-for-mode 'python-mode "mo" "self_define")
 (spacemacs/declare-prefix-for-mode 'python-mode "mf" "formatter")
 
+;; for youdao dictionay mode
+(spacemacs/declare-prefix-for-mode 'youdao-dictionary-mode "g" "google-translate")
+
 
 (spacemacs/set-leader-keys
   "ojj" 'org-journal-new-entry
@@ -114,6 +117,7 @@
   ;; youdao
   "xyq" 'youdao-dictionary-search-from-input
   "xyt" 'youdao-dictionary-search-at-point
+  "xyd" 'youdao-dictionary-search-at-point-tooltip
   "xyy" 'youdao-dictionary-search-at-point+
   "xys" 'youdao-dictionary-play-voice-at-point
   "xyw" 'youdao-dictionary-play-voice-of-current-word
@@ -132,6 +136,92 @@
   "od" 'osx-dictionary-search-pointer
   )
 
+;; ;; Replace this in ~/.emacs.d/*/osx-dictionary-*/osx-dictionary.el
+;; (defvar osx-dictionary-mode-header-line
+;;   '(
+;;     (:propertize "o" face mode-line-buffer-id)
+;;     ": gg translate"
+;;     "    "
+;;     (:propertize "t" face mode-line-buffer-id)
+;;     ": yd search"
+;;     "    "
+;;     (:propertize "y" face mode-line-buffer-id)
+;;     ": yd search+"
+;;     "    "
+;;     (:propertize "d" face mode-line-buffer-id)
+;;     ": yd tooltip"
+;;     "    "
+
+;;     ;; default
+;;     (:propertize "s" face mode-line-buffer-id)
+;;     ": Search Word"
+;;     "    "
+;;     (:propertize "w" face mode-line-buffer-id)
+;;     ": Open in Dictionary.app"
+;;     "    "
+;;     (:propertize "r" face mode-line-buffer-id)
+;;     ": Read word"
+;;     "    "
+;;     (:propertize "q" face mode-line-buffer-id)
+;;     ": Quit")
+;;   "Header-line used on the `osx-dictionary-mode'.")
+;; ;; Replace this in ~/.emacs.d/*/osx-dictionary-*/osx-dictionary.el
+;; (defvar osx-dictionary-mode-map
+;;   (let ((map (make-sparse-keymap)))
+;;     ;; Dictionary commands
+;;     (define-key map "o" 'google-translate-at-point)
+;;     (define-key map "t" 'youdao-dictionary-search-at-point)
+;;     (define-key map "y" 'youdao-dictionary-search-at-point+)
+;;     (define-key map "d" 'youdao-dictionary-search-at-point-tooltip)
+
+;;     ;; default
+;;     (define-key map "q" 'osx-dictionary-quit)
+;;     (define-key map "s" 'osx-dictionary-search-input)
+;;     (define-key map "w" 'osx-dictionary-open-dictionary.app)
+;;     (define-key map "r" 'osx-dictionary-read-word)
+;;     ;; Misc
+;;     (define-key map "?" 'describe-mode)
+;;     map)
+;;   "Keymap for `osx-dictionary-mode'.")
+
+
+;; For  mode keybing
+(spacemacs/set-leader-keys-for-major-mode 'youdao-dictionary-mode
+  "q" 'youdao-dictionary-search-from-input
+  "t" 'youdao-dictionary-search-at-point
+  "y" 'youdao-dictionary-search-at-point+
+  "s" 'youdao-dictionary-play-voice-at-point
+  "w" 'youdao-dictionary-play-voice-of-current-word
+
+  ;; for osx dictionary
+  "o" 'osx-dictionary-search-pointer
+
+  ;; for google translate
+  "gl" 'spacemacs/set-google-translate-languages
+  "gQ" 'google-translate-query-translate-reverse
+  "gq" 'google-translate-query-translate
+  "gT" 'google-translate-at-point-reverse
+  "gt" 'google-translate-at-point
+  )
+
+;; For youdao mode keybing
+(spacemacs/set-leader-keys-for-major-mode 'youdao-dictionary-mode
+  "q" 'youdao-dictionary-search-from-input
+  "t" 'youdao-dictionary-search-at-point
+  "y" 'youdao-dictionary-search-at-point+
+  "s" 'youdao-dictionary-play-voice-at-point
+  "w" 'youdao-dictionary-play-voice-of-current-word
+
+  ;; for osx dictionary
+  "o" 'osx-dictionary-search-pointer
+
+  ;; for google translate
+  "gl" 'spacemacs/set-google-translate-languages
+  "gQ" 'google-translate-query-translate-reverse
+  "gq" 'google-translate-query-translate
+  "gT" 'google-translate-at-point-reverse
+  "gt" 'google-translate-at-point
+  )
 
 ;; For org-mode
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
