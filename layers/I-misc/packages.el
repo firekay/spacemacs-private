@@ -40,7 +40,7 @@
         ranger
         golden-ratio
         (highlight-global :location (recipe :fetcher github :repo "glen-dai/highlight-global"))
-        symbol-overlay
+        ;; symbol-overlay
         ;; browse-at-remote
         ))
 
@@ -94,39 +94,39 @@
           ('hi-pink . 0)
           ('hi-blue-b . 0))))))
 
-(defun I-misc/init-symbol-overlay ()
-  (use-package symbol-overlay
-    :init
-    (progn
-      (defun symbol-overlay-switch-first ()
-        (interactive)
-        (let* ((symbol (symbol-overlay-get-symbol))
-               (keyword (symbol-overlay-assoc symbol))
-               (a-symbol (car keyword))
-               (before (symbol-overlay-get-list a-symbol 'car))
-               (count (length before)))
-          (symbol-overlay-jump-call 'symbol-overlay-basic-jump (- count))))
-
-      (defun symbol-overlay-switch-last ()
-        (interactive)
-        (let* ((symbol (symbol-overlay-get-symbol))
-               (keyword (symbol-overlay-assoc symbol))
-               (a-symbol (car keyword))
-               (after (symbol-overlay-get-list a-symbol 'cdr))
-               (count (length after)))
-          (symbol-overlay-jump-call 'symbol-overlay-basic-jump (- count 1))))
+;; (defun I-misc/init-symbol-overlay ()
+;;  (use-package symbol-overlay
+;;    :init
+;;    (progn
+;;      (defun symbol-overlay-switch-first ()
+;;        (interactive)
+;;        (let* ((symbol (symbol-overlay-get-symbol))
+;;               (keyword (symbol-overlay-assoc symbol))
+;;               (a-symbol (car keyword))
+;;               (before (symbol-overlay-get-list a-symbol 'car))
+;;               (count (length before)))
+;;          (symbol-overlay-jump-call 'symbol-overlay-basic-jump (- count))))
+;;
+;;      (defun symbol-overlay-switch-last ()
+;;        (interactive)
+;;        (let* ((symbol (symbol-overlay-get-symbol))
+;;               (keyword (symbol-overlay-assoc symbol))
+;;               (a-symbol (car keyword))
+;;               (after (symbol-overlay-get-list a-symbol 'cdr))
+;;               (count (length after)))
+;;          (symbol-overlay-jump-call 'symbol-overlay-basic-jump (- count 1))))
 
 
 
       ;; (spacemacs/set-leader-keys "hh" 'symbol-overlay-put)
       ;; (spacemacs/set-leader-keys "hc" 'symbol-overlay-remove-all)
-      (global-set-key (kbd "M-h") 'symbol-overlay-put)
-      (global-set-key (kbd "M-n") 'symbol-overlay-switch-forward)
-      (global-set-key (kbd "M-p") 'symbol-overlay-switch-backward))
-    :config
-    (progn
-      (define-key symbol-overlay-map (kbd "<") 'symbol-overlay-switch-first)
-      (define-key symbol-overlay-map (kbd ">") 'symbol-overlay-switch-last))))
+;;      (global-set-key (kbd "M-h") 'symbol-overlay-put)
+;;      (global-set-key (kbd "M-n") 'symbol-overlay-switch-forward)
+;;      (global-set-key (kbd "M-p") 'symbol-overlay-switch-backward))
+;;    :config
+;;    (progn
+;;      (define-key symbol-overlay-map (kbd "<") 'symbol-overlay-switch-first)
+;;      (define-key symbol-overlay-map (kbd ">") 'symbol-overlay-switch-last))))
 
 (defun I-misc/post-init-golden-ratio ()
   (with-eval-after-load 'golden-ratio
@@ -764,7 +764,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (defadvice evil-search-previous (after advice-for-evil-search-previous activate)
       (evil-scroll-line-to-center (line-number-at-pos)))
 
-    (define-key evil-normal-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
+    ;; (define-key evil-normal-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
 
     (defun my-evil-yank ()
       (interactive)
@@ -808,7 +808,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key evil-ex-completion-map "\C-k" 'kill-line)
     (define-key minibuffer-local-map (kbd "C-w") 'evil-delete-backward-word)
 
-    (define-key evil-visual-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
+    ;; (define-key evil-visual-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
     ;; (define-key evil-visual-state-map (kbd "x") 'er/expand-region)
     ;; (define-key evil-visual-state-map (kbd "X") 'er/contract-region)
     (define-key evil-visual-state-map (kbd "C-r") 'I/evil-quick-replace)
