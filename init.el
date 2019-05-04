@@ -75,8 +75,8 @@ This function should only modify configuration layer settings."
      ;; (haskell :variables haskell-enable-hindent t
      ;;          haskell-completion-backend 'intero)
      syntax-checking
-     (syntax-checking :variables syntax-checking-enable-by-default nil
-                      syntax-checking-enable-tooltips nil)
+     ;; (syntax-checking :variables syntax-checking-enable-by-default nil
+     ;;                  syntax-checking-enable-tooltips nil)
      spell-checking
      (spell-checking :variables
                      spell-checking-enable-by-default nil
@@ -565,6 +565,8 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
+  (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode)
+
   ;; adds support for =evil-cleverparens=
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
