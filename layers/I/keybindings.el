@@ -18,10 +18,11 @@
 (spacemacs/declare-prefix "ot" "Toggle")
 (spacemacs/declare-prefix "os" "Search")
 (spacemacs/declare-prefix "bm" "Bookmark")
-(spacemacs/declare-prefix "xy" "Youdao")
+;; (spacemacs/declare-prefix "xy" "Youdao")
 
 ;; For org mode
 (spacemacs/declare-prefix-for-mode 'org-mode "mo" "self-define(org-mode)")
+(spacemacs/declare-prefix-for-mode 'org-mode "mh" "heading")
 (spacemacs/declare-prefix-for-mode 'org-mode "mor" "org-ref")
 
 ;; For python mode
@@ -56,7 +57,6 @@
 
   "oo" 'I/helm-hotspots
   "oc" 'org-capture
-  "oa" 'org-agenda
 
   "od" 'occur-dwim
   "ok" 'I-kill-other-persp-buffers
@@ -103,6 +103,9 @@
   "o'" 'ansi-term
 
   "a." 'server-start
+  "ac" 'org-capture
+  "aC" 'calc-dispatch
+  "aa" 'org-agenda
   )
 
 ;; for fix waring
@@ -112,19 +115,19 @@
 (spacemacs/set-leader-keys "mw|" 'org-agenda-filter-remove-all)
 
 
-;; For didtionary
-(spacemacs/set-leader-keys
-  ;; youdao
-  "xyq" 'youdao-dictionary-search-from-input
-  "xyt" 'youdao-dictionary-search-at-point
-  "xyd" 'youdao-dictionary-search-at-point-tooltip
-  "xyy" 'youdao-dictionary-search-at-point+
-  "xys" 'youdao-dictionary-play-voice-at-point
-  "xyw" 'youdao-dictionary-play-voice-of-current-word
+;; ;; For didtionary
+;; (spacemacs/set-leader-keys
+;;   ;; youdao
+;;   "xyq" 'youdao-dictionary-search-from-input
+;;   "xyt" 'youdao-dictionary-search-at-point
+;;   "xyd" 'youdao-dictionary-search-at-point-tooltip
+;;   "xyy" 'youdao-dictionary-search-at-point+
+;;   "xys" 'youdao-dictionary-play-voice-at-point
+;;   "xyw" 'youdao-dictionary-play-voice-of-current-word
 
-  ;; for osx dictionary
-  "xyo" 'osx-dictionary-search-pointer
-  )
+;;   ;; for osx dictionary
+;;   "xyo" 'osx-dictionary-search-pointer
+;;   )
 
 
 ;; for emacs toggle latex
@@ -134,6 +137,7 @@
   "otc" 'org-cdlatex-mode
   "oi" 'google-translate-at-point
   "od" 'osx-dictionary-search-pointer
+  "oq" 'youdao-dictionary-search-from-input
   )
 
 ;; ;; Replace this in ~/.emacs.d/*/osx-dictionary-*/osx-dictionary.el
@@ -214,6 +218,7 @@
 
   ;; for osx dictionary
   "o" 'osx-dictionary-search-pointer
+  "r" 'osx-dictionary-read-word
 
   ;; for google translate
   "gl" 'spacemacs/set-google-translate-languages
@@ -225,13 +230,26 @@
 
 ;; For org-mode
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
+  "hk" 'org-previous-visible-heading
+  "hj" 'org-next-visible-heading
+  "hh" 'outline-previous-heading
+  "hl" 'outline-next-heading
+
   "id" 'I/org-insert-src-block
   "ttc" 'org-cdlatex-mode
   "ttl" 'org-toggle-latex-fragment
   "iC" 'org-ref-helm-insert-cite-link
+  "ib" 'I/insert-brave-current-tab-url
+  "iB" 'org-insert-structure-template
   "ic" 'I/capture-screenshot
   "oc" 'dakra-capitalize-dwim
   "ol" 'org-toggle-latex-fragment
+
+  "oa" 'I/org-archive-tasks
+  ;; For encrypt and decrypt
+  "oe" 'org-encrypt-entrys
+  "od" 'org-decrypt-entry
+  "oD" 'org-decrypt-entrys
   ;; For org-ref
   "ori" 'org-ref-insert-cite-link
   "orc" 'org-ref-helm-insert-cite-link
@@ -308,8 +326,8 @@
 (bind-key* "C-s-;" 'I/delete-semicolon-at-the-end-of-this-line)
 (bind-key* "s-," 'I/insert-comma-at-the-end-of-this-line)
 ;; (bind-key* "C-s-," 'I/delete-comma-at-the-end-of-this-line)
-(bind-key* "C-c l" 'I/insert-chrome-current-tab-url)
-(bind-key* "C-c L" 'I/insert-brave-current-tab-url)
+(bind-key* "C-c L" 'I/insert-chrome-current-tab-url)
+(bind-key* "C-c l" 'I/insert-brave-current-tab-url)
 (bind-key* "C-=" 'er/expand-region)
 (bind-key* "M--" 'I/goto-match-paren)
 (bind-key* "C-c k" 'which-key-show-top-level)
@@ -321,8 +339,10 @@
 (bind-key* "M-c" 'dakra-capitalize-dwim)
 (bind-key* "s-p" 'find-file-in-project)
 ;; (bind-key* "C-l" 'recenter)
-(bind-key* ">" 'I/tab-region)
-(bind-key* "<" 'I/untab-region)
+;; (bind-key* ">" 'I/tab-region)
+;; (bind-key* "<" 'I/untab-region)
+(define-key evil-normal-state-map ">" 'I/tab-region)
+(define-key evil-normal-state-map "<" 'I/untab-region)
 
 ;; Auto add blank after comma
 (global-set-key (kbd ",")

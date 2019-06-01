@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: init_type
+# key: init_type->
+# group : definitions
+# --
+def __init__(self${1:, *args, **kwargs}) -> ${2:None}:
+    $0

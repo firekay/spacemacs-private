@@ -118,8 +118,8 @@ This function should only modify configuration layer settings."
      python
      (python :variables
              python-formatter 'black
-             python-backend 'lsp
-             python-pipenv-activate t
+             ;; python-backend 'lsp
+             ;; python-pipenv-activate t
              python-test-runner '(nose pytest)
              ;; python-enable-yapf-format-on-save nil
              python-format-on-save t
@@ -289,12 +289,12 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-			                   spacemacs-dark
                          solarized-light
+			                   leuven
+			                   spacemacs-dark
                          spacemacs-light
                          solarized-dark
 			                   monokai
-			                   leuven
 			                   sanityinc-solarized-light
 			                   sanityinc-solarized-dark
 			                   moe-light
@@ -561,12 +561,13 @@ dump."
   (setq socks-server '("Default server" "127.0.0.1" 1080 5))
   (setq evil-shift-round nil)
   (setq byte-compile-warnings '(not obsolete))
-  (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
   )
 
 (defun dotspacemacs/user-config ()
   (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode)
 
+  ;; (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
+  (setenv "WORKON_HOME" "/Users/kay/anaconda3/envs/")
   ;; adds support for =evil-cleverparens=
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
