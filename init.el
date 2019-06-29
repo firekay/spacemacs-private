@@ -112,6 +112,8 @@ This function should only modify configuration layer settings."
      latex
      deft
      markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
+     chrome
      themes-megapack
      yaml
      ;; react
@@ -567,7 +569,7 @@ dump."
   (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode)
 
   ;; (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
-  (setenv "WORKON_HOME" "/Users/kay/anaconda3/envs/")
+  (setenv "WORKON_HOME" "/anaconda3/envs/")
   ;; adds support for =evil-cleverparens=
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
