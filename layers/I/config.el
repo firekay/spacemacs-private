@@ -1,3 +1,9 @@
+;; ##################################
+;; For debug
+;; (setq google-translate-backend-debug t)
+;; (setq google-translate-backend-user-agent "Emacs")
+;; ##################################
+
 (defvar org-agenda-dir ""
   "gtd org files location")
 
@@ -16,6 +22,10 @@
    org-agenda-dir "~/Dropbox/Emacs/GTD"
    deft-dir "~/Dropbox/Emacs/Notes/"
    ))
+
+;; for google translate
+(setq google-translate-backend-method 'curl)
+
 
 (setq org-journal-dir "~/Dropbox/Emacs/Journal")
 ;; for ranger options
