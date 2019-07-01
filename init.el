@@ -107,7 +107,7 @@ This function should only modify configuration layer settings."
      shell-scripts
     (shell :variables
            shell-default-height 50
-           shell-default-shell 'ansi-term
+           shell-default-shell 'multi-term
            shell-default-term-shell "/bin/zsh"
            shell-default-position 'bottom
            )
