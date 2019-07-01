@@ -60,10 +60,13 @@
   "oo" 'I/helm-hotspots
   "oc" 'org-capture
 
+  "ow" 'eww
+
   "od" 'occur-dwim
   "ok" 'I-kill-other-persp-buffers
   "ox" 'org-open-at-point-global
-  "or" 'I/browser-refresh--chrome-applescript
+  ;; "or" 'I/browser-refresh--chrome-applescript
+  "or" 'youdao-dictionary-play-voice-at-point
   "op" 'I/org-save-and-export
   "Fr" 'I/Rename-File-And-Buffer
   "bD" 'spacemacs/kill-other-buffers
