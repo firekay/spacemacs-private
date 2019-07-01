@@ -52,6 +52,8 @@
   "bmd" 'bookmark-delete
   "bmj" 'counsel-bookmark
 
+  "bj" 'spacemacs/new-empty-buffer-below
+
   "ca" 'comment-dwim
   "cA" 'comment-kill
 
