@@ -28,6 +28,8 @@
 
 
 (setq org-journal-dir "~/Dropbox/Emacs/Journal")
+(setq blacken-line-length 99)
+(setq markdown-command "pandoc")
 ;; for ranger options
 (setq ranger-parent-depth 1)
 (setq ranger-ignored-extensions '("mkv" "iso" "mp4"))
