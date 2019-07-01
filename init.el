@@ -114,7 +114,8 @@ This function should only modify configuration layer settings."
      latex
      deft
      markdown
-     (markdown :variables markdown-live-preview-engine 'vmd)
+     (markdown :variables
+               markdown-live-preview-engine 'vmd)
      chrome
      themes-megapack
      yaml
@@ -125,9 +126,9 @@ This function should only modify configuration layer settings."
              ;; python-backend 'lsp
              ;; python-pipenv-activate t
              python-test-runner '(nose pytest)
-             ;; python-enable-yapf-format-on-save nil
-             python-format-on-save t
-             python-sort-imports-on-save t
+             python-enable-yapf-format-on-save nil
+             python-format-on-save nil
+             python-sort-imports-on-save nil
              python-fill-column 99)
      ;; (ruby :variables ruby-version-manager 'chruby)
      ;; ruby-on-rails
