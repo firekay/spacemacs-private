@@ -55,6 +55,8 @@ This function should only modify configuration layer settings."
          go-backend 'lsp
          godoc-at-point-function 'godoc-gogetdoc)
      sql
+     (sql :variables
+          sql-capitalize-keywords t)
      csv
      semantic
      org
