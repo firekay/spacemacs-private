@@ -335,7 +335,9 @@ unwanted space when exporting org-mode to html."
                             ("FLOW" . ?f)
                             ("ML" . ?m)
                             ("LINK" . ?l)
-                            ("CRYPT" . ?c)))
+                            ("CRYPT" . ?c)
+                            ("TITLE" . ?t)
+                            ))
       ;;An entry without a cookie is treated just like priority ' B '.
       ;;So when create new task, they are default
       (setq org-agenda-custom-commands '(
