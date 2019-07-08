@@ -60,6 +60,10 @@
   "oo" 'I/helm-hotspots
   "oc" 'org-capture
 
+  ;; insert
+  "ib" 'insert-buffer
+  "if" 'insert-file
+
   "ow" 'eww
 
   "od" 'occur-dwim
@@ -99,8 +103,8 @@
   "oll" 'I/load-my-layout
   "ols" 'I/save-my-layout
   "ob" 'popwin:display-last-buffer
-  "oy" 'youdao-dictionary-search-at-point+
-  "oY" 'youdao-dictionary-search-at-point
+  "oY" 'youdao-dictionary-search-at-point+
+  "oy" 'youdao-dictionary-search-at-point
 
   "bM" 'spacemacs/switch-to-messages-buffer
   "sS" 'spacemacs/swiper-region-or-symbol
@@ -235,10 +239,11 @@
 
 ;; For org-mode
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
+  "hu" 'outline-up-heading
+  "hh" 'org-backward-heading-same-level
   "hk" 'org-previous-visible-heading
   "hj" 'org-next-visible-heading
-  "hh" 'outline-previous-heading
-  "hl" 'outline-next-heading
+  "hl" 'org-forward-heading-same-level
 
   "id" 'I/org-insert-src-block
   "ttc" 'org-cdlatex-mode
