@@ -258,7 +258,7 @@ with options to run in the shell.")
 ;;     'utf-8))))))))
 
 ;; (add-hook 'python-mode-hook 'ssbb-pyenv-hook)
-(add-hook 'python-mode-hook 'yapf-mode)
+;; (add-hook 'python-mode-hook 'yapf-mode)
 ;; (add-hook 'python-mode-hook 'lsp-mode)
 ;; (add-hook 'python-mode-hook 'lsp-ui-mode)
 ;; (add-hook 'python-mode-hook 'dap-mode)
