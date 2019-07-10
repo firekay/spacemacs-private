@@ -59,6 +59,10 @@
 
   "oo" 'I/helm-hotspots
   "oc" 'org-capture
+  "ef" 'flycheck-mode
+  "ed" 'flycheck-disable-checker
+  "en" 'flycheck-next-error
+  "ep" 'flycheck-previous-error
 
   ;; insert
   "ib" 'insert-buffer
@@ -86,8 +90,6 @@
   "tI" 'highlight-indentation-mode
   "tY" 'yapf-mode
 
-  "en" 'flycheck-next-error
-  "ep" 'flycheck-previous-error
   "o(" 'ielm
 
   "gL" 'magit-log-buffer-file
@@ -277,12 +279,13 @@
 (spacemacs/set-leader-keys-for-major-mode 'python-mode
   "ii" 'python-skeleton-import
   "ic" 'python-skeleton-class
-  "of" 'flycheck-mode
+  "ri" 'I/py-optimize-imports
+  "rI" 'spacemacs/python-remove-unused-imports
+  "rs" 'py-isort-buffer
 
   "hd" 'anaconda-mode-show-doc
   "ff" 'blacken-buffer
   )
-
 
 (define-key global-map (kbd "s-i") 'yas/insert-snippet)
 ;; (define-key evil-insert-state-map "M-i" 'yas/insert-snippet)
