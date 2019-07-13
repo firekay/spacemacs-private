@@ -95,7 +95,7 @@
   "gL" 'magit-log-buffer-file
   "og" 'my-git-timemachine
   "sj" 'I/counsel-imenu
-  "os" 'counsel-ag-thing-at-point
+  "os" 'I/sql-connect-server
 
   "fl" 'find-file-literally-at-point
   "ri" 'ivy-resume
