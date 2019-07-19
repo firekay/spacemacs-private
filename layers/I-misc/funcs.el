@@ -362,7 +362,7 @@ org-files and bookmarks"
 
 (defun I/retrieve-chrome-current-tab-url ()
   "Get the URL of the active tab of the first window"
-  (interactive)
+  ;; (interactive)
   (let ((result (do-applescript (concat "set frontmostApplication to path to frontmost application\n"
                                         "tell application \"Google Chrome\"\n" "	set theUrl to get URL of active tab of first window\n"
                                         "	set theResult to (get theUrl) \n" "end tell\n"
@@ -380,7 +380,7 @@ org-files and bookmarks"
 
 (defun I/retrieve-brave-current-tab-url ()
   "Get the URL of the active tab of the first window"
-  (interactive)
+  ;; (interactive)
   (let ((result (do-applescript (concat "set frontmostApplication to path to frontmost application\n"
                                         "tell application \"Brave Browser\"\n" "	set theUrl to get URL of active tab of first window\n"
                                         "	set theResult to (get theUrl) \n" "end tell\n"
