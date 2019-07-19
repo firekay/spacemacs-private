@@ -16,7 +16,7 @@
 (spacemacs/declare-prefix "o" "self-define")
 (spacemacs/declare-prefix "oj" "journal")
 (spacemacs/declare-prefix "ot" "Toggle")
-(spacemacs/declare-prefix "os" "Search")
+;; (spacemacs/declare-prefix "os" "Search")
 (spacemacs/declare-prefix "bm" "Bookmark")
 ;; (spacemacs/declare-prefix "xy" "Youdao")
 

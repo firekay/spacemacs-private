@@ -8,6 +8,10 @@
 ;; 1. add a connection infomation in sql-connection-alist
 ;; 2. define a function call I/sql-connnect. e.g.: I/pg_local
 ;; 3. add a config in I/sql-servers-list
+
+(fset 'delete-empty-lines (kbd "M-x flush-lines RET ^\s-*$ RET"))
+
+
 (setq sql-connection-alist
       '((pg_local (sql-product 'postgres)
                  (sql-port 5432)

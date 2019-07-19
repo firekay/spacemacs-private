@@ -264,8 +264,10 @@ unwanted space when exporting org-mode to html."
 
       (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
       (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
+      (setq org-agenda-file-work (expand-file-name "work.org" org-agenda-dir))
       (setq org-agenda-file-journal (expand-file-name "journal.org" org-agenda-dir))
       (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" org-agenda-dir))
+      (setq org-agenda-file-primary (expand-file-name "primary.org" org-agenda-dir))
       (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
       (setq org-agenda-files (list org-agenda-dir))
       (with-eval-after-load 'org-agenda
@@ -287,20 +289,20 @@ unwanted space when exporting org-mode to html."
                                      :empty-lines 1)
                                     ("l" "Link File"
                                      entry
-                                     (file+headline org-agenda-file-gtd "WorkToDo")
-                                     "* TODO [#A] %?\n  %i\n %a \n  %U"
+                                     (file+headline org-agenda-file-work "Work To Do")
+                                     "* TODO [#A] %?  :@WORK:\n  %i\n %a \n  %U"
                                      :empty-lines 1)
                                     ("w" "Work"
                                      entry
-                                     (file+headline org-agenda-file-gtd "WorkToDo")
-                                     "* TODO [#A] %?\n  %i\n  %U"
+                                     (file+headline org-agenda-file-work "Work To Do")
+                                     "* TODO [#A] %? :@WORK:\n  %i\n  %U"
                                      :empty-lines 1)
                                     ("c" "Chrome"
                                      entry
                                      (file+headline org-agenda-file-note "Link")
                                      "* TODO [#C] %?\n %(I/retrieve-chrome-current-tab-url)\n %i\n %U"
                                      :empty-lines 1)
-                                    ("b" "Brave"
+                                    ("B" "Brave"
                                      entry
                                      (file+headline org-agenda-file-note "Link")
                                      "* TODO [#C] %?\n %(I/retrieve-brave-current-tab-url)\n %i\n %U"
@@ -310,7 +312,7 @@ unwanted space when exporting org-mode to html."
                                      (file+headline org-agenda-file-note "Notes")
                                      "* %?\n  %i\n  %U"
                                      :empty-lines 1)
-                                    ("p" "Code Snippet"
+                                    ("o" "Code Snippet"
                                      entry
                                      (file org-agenda-file-code-snippet)
                                      "* %?\t%^g\n#+BEGIN_SRC %^{language}\n#+END_SRC")
@@ -318,6 +320,16 @@ unwanted space when exporting org-mode to html."
                                      entry
                                      (file+headline org-agenda-file-note "Ideas")
                                      "* TODO [#C] %?\t%^g\n  %i\n  %U"
+                                     :empty-lines 1)
+                                    ("b" "Primary Brave"
+                                     entry
+                                     (file+headline org-agenda-file-primary "DO IT")
+                                     "* TODO [#A] %?    [/] \n %(I/retrieve-brave-current-tab-url)\n %i\n %U"
+                                     :empty-lines 1)
+                                    ("p" "Primary"
+                                     entry
+                                     (file+headline org-agenda-file-primary "DO IT")
+                                     "* TODO [#A] %?    [/] \n  %i\n %U"
                                      :empty-lines 1)
                                     ("j" "Journal Entry"
                                      entry
@@ -330,13 +342,14 @@ unwanted space when exporting org-mode to html."
                             ("@WORK" . ?w)
                             ("@IDEA" . ?i)
                             ("@STUDY" . ?s)
-                            ("@SNIPPET" . ?p)
+                            ("@SNIPPET" . ?o)
                             (:endgroup . nil)
-                            ("FLOW" . ?f)
+                            ("ONEDATA" . ?f)
                             ("ML" . ?m)
                             ("LINK" . ?l)
                             ("CRYPT" . ?c)
                             ("TITLE" . ?t)
+                            ("PRIMARY" . ?p)
                             ))
       ;;An entry without a cookie is treated just like priority ' B '.
       ;;So when create new task, they are default

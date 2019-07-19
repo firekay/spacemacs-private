@@ -126,7 +126,7 @@ This function should only modify configuration layer settings."
      python
      (python :variables
              python-formatter 'black
-             ;; python-backend 'lsp
+             ;; python-backend 'anaconda
              ;; python-pipenv-activate t
              python-test-runner '(nose pytest)
              python-enable-yapf-format-on-save nil
