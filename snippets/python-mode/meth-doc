@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: meth-doc
+# key: md->
+# group: object oriented
+# --
+def ${1:name}(self$2)${3: -> ${4:None}}:
+    """${5:FIXME! briefly describe function}
+
+    ${2:$(python-args-to-docstring-np)}
+    """
+    ${0:pass}

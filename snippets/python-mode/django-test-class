@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: django_test_class
+# name: django-test-class
 # key: tcs->
 # group: testing
 # --

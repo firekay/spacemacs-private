@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: arg_positional
+# name: arg-positional
 # key: arg->
 # group: argparser
 # --

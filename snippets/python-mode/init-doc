@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: init-doc
+# key: id->
+# group : definitions
+# --
+def __init__(self${1:, *args, **kwargs}):
+    """${2:FIXME! briefly describe function}
+
+    ${1:$(python-args-to-docstring-np)}
+    """
+    ${0:pass}

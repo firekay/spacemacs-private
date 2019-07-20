@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: meth-cls-doc
+# key: mcd->
+# group: object oriented
+# --
+@classmethod
+def ${1:name}(cls$2)${3: -> ${4:None}}:
+    """${5:FIXME! briefly describe function}
+
+    ${2:$(python-args-to-docstring-np)}
+    """
+    ${0:pass}

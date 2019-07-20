@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: logger_name
+# name: logger-name
 # key: ln->
 # --
 logger = logging.getLogger(${1:__name__})

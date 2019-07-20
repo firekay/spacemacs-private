@@ -277,6 +277,10 @@
 
 ;; For python-mode
 (spacemacs/set-leader-keys-for-major-mode 'python-mode
+  "fb" 'yapfify-buffer
+  "fr" 'yapfify-region
+  "ff" 'blacken-buffer
+
   "ii" 'python-skeleton-import
   "ic" 'python-skeleton-class
   "ri" 'I/py-optimize-imports
@@ -284,7 +288,6 @@
   "rs" 'py-isort-buffer
 
   "hd" 'anaconda-mode-show-doc
-  "ff" 'blacken-buffer
   )
 
 (define-key global-map (kbd "s-i") 'yas/insert-snippet)

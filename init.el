@@ -69,7 +69,9 @@ This function should only modify configuration layer settings."
      ;; scala
 
      (ivy :variables ivy-enable-advanced-buffer-information nil)
-     ranger
+     (ranger :variables
+             ranger-show-hidden nil
+             ranger-show-literal nil)
      colors
      prodigy
      search-engine
@@ -120,6 +122,7 @@ This function should only modify configuration layer settings."
      themes-megapack
      yaml
      ;; react
+     sphinx
      python
      (python :variables
              python-formatter 'black
@@ -574,9 +577,13 @@ dump."
   ;; (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
   (setenv "WORKON_HOME" "/anaconda3/envs/")
   ;; adds support for =evil-cleverparens=
-  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
+  ;; (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
-  (add-to-list 'load-path "~/.spacemacs.d/tmp/lsp-python")
+  (add-to-list 'load-path "~/.spacemacs.d/load/lsp-python")
+  (add-to-list 'load-path "~/.spacemacs.d/load/sphinx-doc")
+  (add-hook 'python-mode-hook (lambda ()
+                                (require 'sphinx-doc)
+                                (sphinx-doc-mode t)))
   (require 'lsp-mode)
   (require 'lsp-python)
   (require 'dap-python)
@@ -614,7 +621,7 @@ dump."
   ;; temp fix for ivy-switch-buffer
   ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
 
-  (global-hungry-delete-mode t)
+  (global-hungry-delete-mode nil)
   ;; (spacemacs|diminish helm-gtags-mode)
   ;; (spacemacs|diminish ggtags-mode)
   ;; (spacemacs|diminish which-key-mode)
@@ -685,8 +692,6 @@ dump."
     )
   (spacemacs/set-leader-keys-for-major-mode 'python-mode
     ;; debuging/running
-    "fb" 'yapfify-buffer
-    "fr" 'yapfify-region
     "ddd" 'dap-debug
     "ddl" 'dap-debug-last
     "ddr" 'dap-debug-recent
@@ -730,14 +735,14 @@ dump."
     "dws" 'dap-ui-sessions
     "dwb" 'dap-ui-breakpoints)
 
-  ;; (defun counsel-locate-cmd-es (input)
-  ;;   "Return a shell command based on INPUT."
-  ;;   (counsel-require-program "es.exe")
-  ;;   (encode-coding-string (format "es.exe -i -r -p %s"
-  ;;                                 (counsel-unquote-regex-parens
-  ;;                                  (ivy--regex input t)))
-  ;;                         'gbk))
-  ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
+  (defun counsel-locate-cmd-es (input)
+    "Return a shell command based on INPUT."
+    (counsel-require-program "es.exe")
+    (encode-coding-string (format "es.exe -i -r -p %s"
+                                  (counsel-unquote-regex-parens
+                                   (ivy--regex input t)))
+                          'gbk))
+  (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))

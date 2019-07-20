@@ -8,4 +8,4 @@ $1
 
 __all__ = [$2]
 
-__author__ = 'Ting Zhou <zhouting@umich.edu>'
+__author__ = 'Xu Zhenkai<>'

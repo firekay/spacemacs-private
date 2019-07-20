@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: parse_args
+# name: parse-args
 # key: pargs->
 # group: argparser
 # --

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: func-doc
+# key: fd->
+# group: definitions
+# --
+def ${1:name}($2)${3: -> ${4:None}}:
+    """${5:FIXME! briefly describe function}
+
+    ${2:$(python-args-to-docstring-np)}
+    """
+    ${0:pass}

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: not_impl
-# key: not_impl->
+# name: not-impl
+# key: not-impl->
 # --
 raise NotImplementedError

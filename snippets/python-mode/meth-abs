@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-# name: method_type_abs
-# key: mta->
+# name: meth_abs
+# key: ma->
 # group: object oriented
 # --
 @abstractmethod
-def ${1:method}(self${2:, $3}) -> ${4:None}:
+def ${1:name}(self$2)${3: -> ${4:None}}:
     ${0:pass}

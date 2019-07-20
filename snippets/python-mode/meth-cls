@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: meth-cls
+# key: mc->
+# group: object oriented
+# --
+@classmethod
+def ${1:name}(cls$2)${3: -> ${4:None}}:
+    ${0:pass}

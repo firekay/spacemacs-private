@@ -4,4 +4,4 @@
 # group : definitions
 # --
 def __init__(self${1:, *args, **kwargs}):
-    $0
+    ${0:pass}

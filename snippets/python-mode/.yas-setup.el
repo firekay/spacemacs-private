@@ -21,9 +21,29 @@
     (unless (string= formatted-args "")
       (mapconcat 'identity (list "Keyword Arguments:" formatted-args) indent))))
 
+(defun python-args-to-docstring-np ()
+  (interactive)
+  "return docstring numpy format for the python arguments in yas-text"
+  (let* ((indent (concat "\n" (make-string (current-column) 32)))
+         (args (python-split-args yas-text))
+         (format-arg (lambda(arg)
+                       (concat (nth 0 arg) " : " (if (nth 1 arg) ", optional"))))
+         (formatted-params (mapconcat format-arg args indent))
+         (formatted-ret (mapconcat format-arg (list (list "out")) indent))
+         (fmt-params (concat formatted-params "\n"))
+         (fmt-ret (concat formatted-ret "\n")))
+    (unless (string= formatted-params "")
+      (mapconcat 'identity
+                 (list "Parameters" "----------" fmt-params
+                       "Returns" "-------" fmt-ret)
+                 ;; (list "Parameters" "----------" formatted-params
+                 ;;       "Returns" "-------" formatted-ret)
+                 indent))))
+
 (defun python-args-to-docstring-numpy ()
   "return docstring format for the python arguments in yas-text"
-  (let* ((args (python-split-args yas-text))
+  (let* ((indent (concat "\n" (make-string (current-column) 32)))
+         (args (python-split-args yas-text))
          (format-arg (lambda(arg)
                        (concat (nth 0 arg) " : " (if (nth 1 arg) ", optional") "\n")))
          (formatted-params (mapconcat format-arg args "\n"))
@@ -31,7 +51,7 @@
     (unless (string= formatted-params "")
       (mapconcat 'identity
                  (list "\nParameters\n----------" formatted-params
-                       "\nReturns\n-------" formatted-ret)
+                       "\nReturns\n-------" formatted-ret indent)
                  "\n"))))
 
 
