@@ -678,10 +678,10 @@ dump."
                                (counsel-grep .2)
                                (t . 3)))
 
-  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "db" nil)
+  (spacemacs/set-leader-keys-for-major-mode 'python-mode "db" nil)
   (spacemacs/declare-prefix-for-mode 'python-mode "md" "debug")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdd" "debuging")
-  (spacemacs/declare-prefix-for-mode 'python-mode "mdp" "breakpoints")
+  (spacemacs/declare-prefix-for-mode 'python-mode "mdb" "breakpoints")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdw" "debug windows")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdS" "switch")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdI" "inspect")
@@ -720,13 +720,13 @@ dump."
     "dIr" 'dap-ui-inspect-region
     "dIt" 'dap-ui-inspect-thing-at-point
     ;; breakpoints
-    "dpb" 'dap-breakpoint-toggle
-    "dpc" 'dap-breakpoint-condition
-    "dpl" 'dap-breakpoint-log-message
-    "dph" 'dap-breakpoint-hit-condition
-    "dpa" 'dap-breakpoint-add
-    "dpd" 'dap-breakpoint-delete
-    "dpD"  'dap-breakpoint-delete-all
+    "dbb" 'dap-breakpoint-toggle
+    "dbc" 'dap-breakpoint-condition
+    "dbl" 'dap-breakpoint-log-message
+    "dbh" 'dap-breakpoint-hit-condition
+    "dba" 'dap-breakpoint-add
+    "dbd" 'dap-breakpoint-delete
+    "dbD"  'dap-breakpoint-delete-all
     ;; repl
     "d'"  'dap-ui-repl
     ;; windows
