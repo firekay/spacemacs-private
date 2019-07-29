@@ -25,7 +25,7 @@
 (defun I/capture-screenshot (basename)
   "Take a screenshot into a time stamped unique-named file in the
   same directory as the org-buffer/markdown-buffer and insert a link to this file."
-  (interactive "sScreenshot name: ")
+  (interactive "Screenshot name: ")
   (if (equal basename "")
       (setq basename (format-time-string "%Y%m%d_%H%M%S")))
   (setq fullpath (concat (file-name-directory (buffer-file-name))
