@@ -289,12 +289,12 @@ unwanted space when exporting org-mode to html."
                                      :empty-lines 1)
                                     ("l" "Link File"
                                      entry
-                                     (file+headline org-agenda-file-work "Work To Do")
+                                     (file+headline org-agenda-file-work "WorkToDo")
                                      "* TODO [#A] %?  :@WORK:\n  %i\n %a \n  %U"
                                      :empty-lines 1)
                                     ("w" "Work"
                                      entry
-                                     (file+headline org-agenda-file-work "Work To Do")
+                                     (file+headline org-agenda-file-work "WorkToDo")
                                      "* TODO [#A] %? :@WORK:\n  %i\n  %U"
                                      :empty-lines 1)
                                     ("c" "Chrome"
@@ -344,7 +344,7 @@ unwanted space when exporting org-mode to html."
                             ("@STUDY" . ?s)
                             ("@SNIPPET" . ?o)
                             (:endgroup . nil)
-                            ("ONEDATA" . ?f)
+                            ("ALGO" . ?a)
                             ("ML" . ?m)
                             ("LINK" . ?l)
                             ("CRYPT" . ?c)

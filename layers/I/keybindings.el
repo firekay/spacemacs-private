@@ -15,6 +15,7 @@
 ;; declare prefix
 (spacemacs/declare-prefix "o" "self-define")
 (spacemacs/declare-prefix "oj" "journal")
+(spacemacs/declare-prefix "oc" "clocks")
 (spacemacs/declare-prefix "ot" "Toggle")
 ;; (spacemacs/declare-prefix "os" "Search")
 (spacemacs/declare-prefix "bm" "Bookmark")
@@ -35,12 +36,25 @@
 
 
 (spacemacs/set-leader-keys
+  "sw" 'engine/search-google
+
   "ojj" 'org-journal-new-entry
   "oja" 'org-journal-new-scheduled-entry
   "ojs" 'org-journal-search-forever
+
+  "ocp" 'org-pomodoro
+  "occ" 'org-clock-cancel
+  "ocg" 'org-clock-goto
+  "oci" 'org-clock-in
+  "ocI" 'org-clock-in-last
+  "ocj" 'spacemacs/org-clock-jump-to-current-clock
+  "oco" 'org-clock-out
+  "ocr" 'org-resolve-clocks
+  "oce" 'org-pomodoro-extend-last-clock
   )
 
 (spacemacs/set-leader-keys
+  "om" 'org-pomodoro
   "pn" 'treemacs-projectile
 
   "pa" 'projectile-find-other-file
@@ -58,7 +72,6 @@
   "cA" 'comment-kill
 
   "oo" 'I/helm-hotspots
-  "oc" 'org-capture
   "ef" 'flycheck-mode
   "ed" 'flycheck-disable-checker
   "en" 'flycheck-next-error
@@ -75,7 +88,6 @@
   "ox" 'org-open-at-point-global
   ;; "or" 'I/browser-refresh--chrome-applescript
   "or" 'youdao-dictionary-play-voice-at-point
-  "op" 'I/org-save-and-export
   "Fr" 'I/Rename-File-And-Buffer
   "bD" 'spacemacs/kill-other-buffers
 

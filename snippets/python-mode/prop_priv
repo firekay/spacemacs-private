@@ -1,0 +1,18 @@
+# contributor: Mads D. Kristensen <madsdk@gmail.com>
+# name: proppriv
+# key: proppriv->
+# group: general
+# --
+@property
+def ${1:foo}(self):
+    return self.__$1
+
+@$1.setter
+def $1(self, value):
+    self.__$1 = value
+
+@$1.deleter
+def $1(self):
+    del self.__$1
+
+$0

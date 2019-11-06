@@ -31,6 +31,12 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     plantuml
+     (plantuml :variables
+               plantuml-default-exec-mode 'jar
+               plantuml-jar-path "~/Dropbox/Emacs/plantUml.jar"
+               org-plantuml-jar-path "~/Dropbox/Emacs/plantUml.jar")
+
      rust
      (rust :variables
            rust-backend 'lsp
@@ -63,10 +69,12 @@ This function should only modify configuration layer settings."
      (org :variables
           org-want-todo-bindings t
           org-enable-github-support t
-          org-enable-org-journal-support t)
+          org-enable-org-journal-support t
+          org-enable-hugo-support t
+          org-enable-sticky-header t)
      spacemacs-org
      ;; java
-     ;; scala
+     scala
 
      (ivy :variables ivy-enable-advanced-buffer-information nil)
      (ranger :variables
@@ -297,14 +305,14 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         solarized-light
-			                   leuven
-			                   spacemacs-dark
-                         spacemacs-light
-                         solarized-dark
-			                   monokai
 			                   sanityinc-solarized-light
 			                   sanityinc-solarized-dark
+                         spacemacs-light
+			                   leuven
+                         solarized-light
+			                   spacemacs-dark
+                         solarized-dark
+			                   monokai
 			                   moe-light
                          dracula
                          zenburn)
@@ -562,6 +570,11 @@ dump."
 (defun dotspacemacs/user-init ()
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
   ;; (setq tramp-mode nil)
+
+  ;; for ensime version(stable)
+  (add-to-list 'configuration-layer-elpa-archives '("melpa-stable" . "stable.melpa.org/packages/"))
+  (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
+
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 
@@ -572,10 +585,16 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
+
+  ;; Set to the name of the file where new notes will be stored
+  (setq org-mobile-inbox-for-pull "~/org/flagged.org")
+  ;; Set to <your Dropbox root directory>/MobileOrg.
+  (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+
   (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode)
 
   ;; (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
-  (setenv "WORKON_HOME" "/anaconda3/envs/")
+  (setenv "WORKON_HOME" "~/anaconda3/envs/")
   ;; adds support for =evil-cleverparens=
   ;; (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
@@ -587,7 +606,7 @@ dump."
   (require 'lsp-mode)
   (require 'lsp-python)
   (require 'dap-python)
-  (require 'dap-lldb)
+  ;; (require 'dap-lldb)
   (global-company-mode)
   ;; For latex preview larger.
   (require 'org)
@@ -682,6 +701,7 @@ dump."
   (spacemacs/declare-prefix-for-mode 'python-mode "md" "debug")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdd" "debuging")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdb" "breakpoints")
+  (spacemacs/declare-prefix-for-mode 'python-mode "mdf" "breakpoints")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdw" "debug windows")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdS" "switch")
   (spacemacs/declare-prefix-for-mode 'python-mode "mdI" "inspect")
@@ -692,6 +712,7 @@ dump."
     )
   (spacemacs/set-leader-keys-for-major-mode 'python-mode
     ;; debuging/running
+    "dx" 'dap-debug
     "ddd" 'dap-debug
     "ddl" 'dap-debug-last
     "ddr" 'dap-debug-recent
@@ -727,6 +748,15 @@ dump."
     "dba" 'dap-breakpoint-add
     "dbd" 'dap-breakpoint-delete
     "dbD"  'dap-breakpoint-delete-all
+
+    "dfb" 'dap-breakpoint-toggle
+    "dfc" 'dap-breakpoint-condition
+    "dfl" 'dap-breakpoint-log-message
+    "dfh" 'dap-breakpoint-hit-condition
+    "dfa" 'dap-breakpoint-add
+    "dfd" 'dap-breakpoint-delete
+    "dfD"  'dap-breakpoint-delete-all
+
     ;; repl
     "d'"  'dap-ui-repl
     ;; windows

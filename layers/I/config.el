@@ -25,8 +25,8 @@
      deft-dir "f:/org-notes"
      )
   (setq
-   org-agenda-dir "~/Dropbox/Emacs/GTD"
-   deft-dir "~/Dropbox/Emacs/Notes/"
+   org-agenda-dir "~/Dropbox/Beorg/GTD"
+   deft-directory "~/Dropbox/Emacs/Notes/"
    ))
 
 ;; for google translate
