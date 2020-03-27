@@ -41,7 +41,7 @@
             (format-time-string "%H:%M"))))
 
 ;; for hs-hide-leaves node
-(defun hs-hide-leaves-recursive (minp maxp)
+(defun I/hs-hide-leaves-recursive (minp maxp)
   "Hide blocks below point that do not contain further blocks in
     region (MINP MAXP)."
   (when (hs-find-block-beginning)
@@ -57,7 +57,7 @@
              (and (< (point) maxp)
                   (re-search-forward hs-block-start-regexp maxp t)))
       (setq pos (match-beginning hs-block-start-mdata-select))
-      (if (hs-hide-leaves-recursive minp maxp)
+      (if (I/hs-hide-leaves-recursive minp maxp)
           (save-excursion
             (goto-char pos)
             (hs-hide-block-at-point t)))
@@ -66,7 +66,7 @@
     leaf))
 
 ;; for fold leaf nodes
-(defun hs-hide-leaves ()
+(defun I/hs-hide-leaves ()
   "Hide all blocks in the buffer that do not contain subordinate
     blocks.  The hook `hs-hide-hook' is run; see `run-hooks'."
   (interactive)
@@ -75,7 +75,7 @@
      (message "Hiding blocks ...")
      (save-excursion
        (goto-char (point-min))
-       (hs-hide-leaves-recursive (point-min) (point-max)))
+       (I/hs-hide-leaves-recursive (point-min) (point-max)))
      (message "Hiding blocks ... done"))
    (run-hooks 'hs-hide-hook)))
 
@@ -127,7 +127,7 @@ Position the cursor at its beginning, according to the current mode."
   (interactive)
   (evil-yank (point) (point-at-eol)))
 
-(defun occur-dwim ()
+(defun I/occur-dwim ()
   "Call `occur' with a sane default."
   (interactive)
   (push (if (region-active-p)
@@ -141,12 +141,12 @@ Position the cursor at its beginning, according to the current mode."
   (deactivate-mark)
   (call-interactively 'occur))
 
-(defun occur-non-ascii ()
+(defun I/occur-non-ascii ()
   "Find any non-ascii characters in the current buffer."
   (interactive)
   (occur "[^[:ascii:]]"))
 
-(defun dired-get-size ()
+(defun I/dired-get-size ()
   (interactive)
   (let ((files (dired-get-marked-files)))
     (with-temp-buffer
@@ -157,7 +157,7 @@ Position the cursor at its beginning, according to the current mode."
          (re-search-backward "\\(^[ 0-9.,]+[A-Za-z]+\\).*total$")
          (match-string 1))))))
 
-(defun dired-start-process (cmd &optional file-list)
+(defun I/dired-start-process (cmd &optional file-list)
   (interactive
    (let ((files (dired-get-marked-files
                  t current-prefix-arg)))
@@ -178,7 +178,7 @@ Position the cursor at its beginning, according to the current mode."
         cmd)
       (mapconcat #'expand-file-name file-list "\" \"")))))
 
-(defun dired-open-term ()
+(defun I/dired-open-term ()
   "Open an `ansi-term' that corresponds to current directory."
   (interactive)
   (let* ((current-dir (dired-current-directory))
@@ -194,11 +194,11 @@ Position the cursor at its beginning, according to the current mode."
                    (aref v 1) (aref v 2)))
        (format "cd '%s'\n" current-dir)))))
 
-(defun dired-copy-file-here (file)
+(defun I/dired-copy-file-here (file)
   (interactive "fCopy file: ")
   (copy-file file default-directory))
 
-(defun my-dired-find-file ()
+(defun I/dired-find-file ()
   "Open buffer in another window"
   (interactive)
   (let ((filename (dired-get-filename nil t)))
@@ -227,8 +227,8 @@ open and unsaved."
   (save-excursion (insert " ")))
 
 
-(defmacro dakra-define-up/downcase-dwim (case)
-  (let ((func (intern (concat "dakra-" case "-dwim")))
+(defmacro I-define-up/downcase-dwim (case)
+  (let ((func (intern (concat "I/" case "-dwim")))
         (doc (format "Like `%s-dwim' but %s from beginning when no region is active." case case))
         (case-region (intern (concat case "-region")))
         (case-word (intern (concat case "-word"))))
@@ -241,6 +241,6 @@ open and unsaved."
            (beginning-of-thing 'symbol)
            (,case-word arg))))))
 
-(dakra-define-up/downcase-dwim "upcase")
-(dakra-define-up/downcase-dwim "downcase")
-(dakra-define-up/downcase-dwim "capitalize")
+(I-define-up/downcase-dwim "upcase")
+(I-define-up/downcase-dwim "downcase")
+(I-define-up/downcase-dwim "capitalize")

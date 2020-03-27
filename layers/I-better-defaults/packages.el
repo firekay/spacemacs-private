@@ -102,12 +102,12 @@
         "<RET>" 'dired-find-alternate-file
         "E" 'dired-toggle-read-only
         "C" 'dired-do-copy
-        "<mouse-2>" 'my-dired-find-file
-        "`" 'dired-open-term
+        "<mouse-2>" 'I/dired-find-file
+        "`" 'I/dired-open-term
         "p" 'peep-dired-prev-file
         "n" 'peep-dired-next-file
-        "z" 'dired-get-size
-        "c" 'dired-copy-file-here
+        "z" 'I/dired-get-size
+        "c" 'I/dired-copy-file-here
         "J" 'counsel-find-file
         "f" 'I/open-file-with-projectile-or-counsel-git
         ")" 'dired-omit-mode)
