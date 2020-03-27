@@ -15,7 +15,7 @@
 ;; declare prefix
 (spacemacs/declare-prefix "o" "self-define")
 (spacemacs/declare-prefix "oj" "journal")
-(spacemacs/declare-prefix "oc" "clocks")
+(spacemacs/declare-prefix "op" "clocks")
 (spacemacs/declare-prefix "ot" "Toggle")
 ;; (spacemacs/declare-prefix "os" "Search")
 (spacemacs/declare-prefix "bm" "Bookmark")
@@ -36,26 +36,30 @@
 
 
 (spacemacs/set-leader-keys
-  "sw" 'engine/search-google
+  "sW" 'engine/search-google
+  "sw" 'helm-google-suggest
 
   "ojj" 'org-journal-new-entry
   "oja" 'org-journal-new-scheduled-entry
   "ojs" 'org-journal-search-forever
 
-  "ocp" 'org-pomodoro
-  "occ" 'org-clock-cancel
-  "ocg" 'org-clock-goto
-  "oci" 'org-clock-in
-  "ocI" 'org-clock-in-last
-  "ocj" 'spacemacs/org-clock-jump-to-current-clock
-  "oco" 'org-clock-out
-  "ocr" 'org-resolve-clocks
-  "oce" 'org-pomodoro-extend-last-clock
+  "opp" 'org-pomodoro
+  "opc" 'org-clock-cancel
+  "opg" 'org-clock-goto
+  "opi" 'org-clock-in
+  "opI" 'org-clock-in-last
+  "opj" 'spacemacs/org-clock-jump-to-current-clock
+  "opo" 'org-clock-out
+  "opr" 'org-resolve-clocks
+  "ope" 'org-pomodoro-extend-last-clock
   )
 
 (spacemacs/set-leader-keys
+  "oc" 'org-capture
   "om" 'org-pomodoro
   "pn" 'treemacs-projectile
+
+  "fF" 'I/find-file-remote
 
   "pa" 'projectile-find-other-file
   "pA" 'projectile-find-other-file-other-window
@@ -83,7 +87,7 @@
 
   "ow" 'eww
 
-  "od" 'occur-dwim
+  "od" 'I/occur-dwim
   "ok" 'I-kill-other-persp-buffers
   "ox" 'org-open-at-point-global
   ;; "or" 'I/browser-refresh--chrome-applescript
@@ -116,7 +120,8 @@
   "nl" 'spacemacs/evil-search-clear-highlight
   "oll" 'I/load-my-layout
   "ols" 'I/save-my-layout
-  "ob" 'popwin:display-last-buffer
+  ;; "ob" 'popwin:display-last-buffer
+  "ob" 'xwidget-webkit-browse-url
   "oY" 'youdao-dictionary-search-at-point+
   "oy" 'youdao-dictionary-search-at-point
 
@@ -130,6 +135,10 @@
   "aC" 'calc-dispatch
   "aa" 'org-agenda
   )
+
+(spacemacs/set-leader-keys
+  "xC" 'I/capitalize-dwim
+)
 
 ;; for fix waring
 (spacemacs/set-leader-keys "mwD" 'dired-do-chgrp)
@@ -212,6 +221,10 @@
 ;;   "Keymap for `osx-dictionary-mode'.")
 
 
+(spacemacs/set-leader-keys-for-major-mode 'markdown-mode
+  "ta" 'markdown-insert-table
+  )
+
 ;; For  mode keybing
 (spacemacs/set-leader-keys-for-major-mode 'youdao-dictionary-mode
   "q" 'youdao-dictionary-search-from-input
@@ -259,6 +272,7 @@
   "hj" 'org-next-visible-heading
   "hl" 'org-forward-heading-same-level
 
+  "ig" 'org-insert-structure-template
   "id" 'I/org-insert-src-block
   "ttc" 'org-cdlatex-mode
   "ttl" 'org-toggle-latex-fragment
@@ -266,7 +280,7 @@
   "ib" 'I/insert-brave-current-tab-url
   "iB" 'org-insert-structure-template
   "ic" 'I/capture-screenshot
-  "oc" 'dakra-capitalize-dwim
+  "oc" 'I/capitalize-dwim
   "ol" 'org-toggle-latex-fragment
 
   "oa" 'I/org-archive-tasks
@@ -286,6 +300,22 @@
   "dm" 'I/now-hour-min
   )
 
+;; For xwidget webkit mode (browser)
+(spacemacs/set-leader-keys-for-major-mode 'xwidget-webkit-mode
+  "f" 'xwidget-webkit-forward
+  "b" 'xwidget-webkit-back
+  "c" 'xwidget-cleanup
+  "g" 'xwidget-webkit-browse-url
+  "i" 'xwidget-webkit-zoom-in
+  "o" 'xwidget-webkit-zoom-out
+  "h" 'xwidget-webkit-cx2
+  "v" 'xwidget-webkit-cx3
+  "r" 'xwidget-webkit-reload
+  "d" 'xwidget-webkit-scroll-up
+  "u" 'xwidget-webkit-scroll-down
+  "t" 'xwidget-webkit-scroll-top
+  "e" 'xwidget-webkit-scroll-bottom
+  )
 
 ;; For python-mode
 (spacemacs/set-leader-keys-for-major-mode 'python-mode
@@ -319,7 +349,7 @@
 (define-key global-map (kbd "C-c t") 'org-capture)
 (define-key global-map (kbd "<f8>") 'I/show-current-buffer-major-mode)
 (define-key evil-normal-state-map "zi" 'hs-toggle-hiding)
-(define-key evil-normal-state-map "zI" 'hs-hide-leaves)
+(define-key evil-normal-state-map "zI" 'I/hs-hide-leaves)
 (define-key evil-normal-state-map "zS" 'hs-show-all)
 (define-key evil-normal-state-map (kbd "go") 'evil-jump-backward)
 (define-key global-map (kbd "C-+") 'text-scale-increase)
@@ -348,13 +378,18 @@
 (global-set-key (kbd "<f5>") 'I/run-current-file)
 (global-set-key (kbd "s-s") 'save-buffer)
 
+;; set scroll using touchpad
+(global-set-key [wheel-right] 'scroll-left)
+(global-set-key [wheel-left] 'scroll-right)
+
+
 (bind-key* "s-r" 'mc/reverse-regions)
 (bind-key* "C-c /" 'company-files)
 (bind-key* "s-;" 'I/insert-semicolon-at-the-end-of-this-line)
 (bind-key* "C-s-;" 'I/delete-semicolon-at-the-end-of-this-line)
 (bind-key* "s-," 'I/insert-comma-at-the-end-of-this-line)
 ;; (bind-key* "C-s-," 'I/delete-comma-at-the-end-of-this-line)
-(bind-key* "C-c L" 'I/insert-chrome-current-tab-url)
+(bind-key* "C-c L" 'org-cliplink)
 (bind-key* "C-c l" 'I/insert-brave-current-tab-url)
 (bind-key* "C-=" 'er/expand-region)
 (bind-key* "M--" 'I/goto-match-paren)
@@ -362,9 +397,9 @@
 (bind-key* "s-y" 'aya-expand)
 (bind-key* "C-." 'I/insert-space-after-point)
 (bind-key* "M-i" 'string-inflection-java-style-cycle)
-(bind-key* "M-u" 'dakra-upcase-dwim)
-(bind-key* "M-l" 'dakra-downcase-dwim)
-(bind-key* "M-c" 'dakra-capitalize-dwim)
+(bind-key* "M-u" 'I/upcase-dwim)
+(bind-key* "M-l" 'I/downcase-dwim)
+(bind-key* "M-c" 'I/capitalize-dwim)
 (bind-key* "s-p" 'find-file-in-project)
 ;; (bind-key* "C-l" 'recenter)
 ;; (bind-key* ">" 'I/tab-region)
@@ -403,7 +438,6 @@
   (declare (indent 1))
   (while bindings
     (define-key keymap (pop bindings) (pop bindings))))
-
 
 (with-eval-after-load 'company
   (progn

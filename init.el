@@ -31,16 +31,17 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     groovy
      plantuml
      (plantuml :variables
                plantuml-default-exec-mode 'jar
                plantuml-jar-path "~/Dropbox/Emacs/plantUml.jar"
                org-plantuml-jar-path "~/Dropbox/Emacs/plantUml.jar")
 
-     rust
-     (rust :variables
-           rust-backend 'lsp
-           rust-format-on-save t)
+     ;; rust
+     ;; (rust :variables
+     ;;       rust-backend 'lsp
+     ;;       rust-format-on-save t)
      lsp
      dap
 
@@ -55,10 +56,10 @@ This function should only modify configuration layer settings."
      go
      (go :variables
          ;; gofmt-command "goimports"
-         go-tab-width 2
-         go-use-golangci-lint t
-         go-format-before-save t
-         go-backend 'lsp
+         ;; go-tab-width 2
+         ;; go-use-golangci-lint t
+         ;; go-format-before-save t
+         ;; go-backend 'lsp
          godoc-at-point-function 'godoc-gogetdoc)
      sql
      (sql :variables
@@ -74,12 +75,14 @@ This function should only modify configuration layer settings."
           org-enable-sticky-header t)
      spacemacs-org
      ;; java
-     scala
+     ;; scala
 
      (ivy :variables ivy-enable-advanced-buffer-information nil)
      (ranger :variables
              ranger-show-hidden nil
-             ranger-show-literal nil)
+             ranger-show-literal nil
+             ranger-cleanup-eagerly t
+             ranger-max-preview-size 0.5)
      colors
      prodigy
      search-engine
@@ -107,7 +110,8 @@ This function should only modify configuration layer settings."
      (auto-completion :variables auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup nil
                       auto-completion-enable-help-tooltip 'manual
-                      :disabled-for org markdown)
+                      )
+                      ;; :disabled-for org markdown)
      (osx :variables osx-dictionary-dictionary-choice "Simplified Chinese - English"
           osx-command-as 'super)
      restclient
@@ -125,7 +129,9 @@ This function should only modify configuration layer settings."
      deft
      markdown
      (markdown :variables
-               markdown-live-preview-engine 'vmd)
+               markdown-live-preview-engine 'vmd
+               markdown-mmm-auto-modes '("c" "c++" "python" "scala" "shell" ("elisp" "emacs-lisp"))
+               )
      chrome
      themes-megapack
      yaml
@@ -134,7 +140,7 @@ This function should only modify configuration layer settings."
      python
      (python :variables
              python-formatter 'black
-             ;; python-backend 'anaconda
+             python-backend 'anaconda
              ;; python-pipenv-activate t
              python-test-runner '(nose pytest)
              python-enable-yapf-format-on-save nil
@@ -169,9 +175,11 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
-				      sicp
-				      cdlatex
-				      auctex
+                                      polymode
+                                      poly-markdown
+				      ;; sicp
+				      ;; cdlatex
+				      ;; auctex
 				      )
 
    ;; A list of packages that cannot be updated.
@@ -389,7 +397,7 @@ It should only modify the values of Spacemacs settings."
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
    ;; (default 'cache)
-   dotspacemacs-auto-save-file-location 'cache
+   dotspacemacs-auto-save-file-location 'nil
 
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
@@ -572,8 +580,8 @@ dump."
   ;; (setq tramp-mode nil)
 
   ;; for ensime version(stable)
-  (add-to-list 'configuration-layer-elpa-archives '("melpa-stable" . "stable.melpa.org/packages/"))
-  (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
+  ;; (add-to-list 'configuration-layer-elpa-archives '("melpa-stable" . "stable.melpa.org/packages/"))
+  ;; (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
 
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
@@ -585,6 +593,8 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
+                                ;; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
+                                 
 
   ;; Set to the name of the file where new notes will be stored
   (setq org-mobile-inbox-for-pull "~/org/flagged.org")
@@ -594,17 +604,17 @@ dump."
   (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode)
 
   ;; (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
-  (setenv "WORKON_HOME" "~/anaconda3/envs/")
+  (setenv "WORKON_HOME" "~/opt/anaconda3/envs/")
   ;; adds support for =evil-cleverparens=
   ;; (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
 
-  (add-to-list 'load-path "~/.spacemacs.d/load/lsp-python")
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/lsp-python")
   (add-to-list 'load-path "~/.spacemacs.d/load/sphinx-doc")
   (add-hook 'python-mode-hook (lambda ()
                                 (require 'sphinx-doc)
                                 (sphinx-doc-mode t)))
   (require 'lsp-mode)
-  (require 'lsp-python)
+  ;; (require 'lsp-python)
   (require 'dap-python)
   ;; (require 'dap-lldb)
   (global-company-mode)

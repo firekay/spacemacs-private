@@ -32,7 +32,8 @@
 ;; for google translate
 (setq google-translate-backend-method 'curl)
 
-
+(setq org-use-sub-superscripts (quote {}))
+(setq org-export-with-sub-superscripts (quote {}))
 (setq org-journal-dir "~/Dropbox/Emacs/Journal")
 (setq blacken-line-length 99)
 (setq markdown-command "pandoc")
