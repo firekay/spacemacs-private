@@ -14,7 +14,14 @@
     (if (not (equal directory parent))
         parent)))
 
+(defun I/chomp (str)
+  "Trim leading and trailing whitespace from STR."
+  (replace-regexp-in-string "\\(\\`[[:space:]\n]*\\|[[:space:]\n]*\\'\\)" "" str))
 
+(defun I/find-file-remote (host)
+  (interactive "sHost:")
+  (dired (concat "/ssh:zhenkai.xu@" (I/chomp host) ":~/"))
+  )
 
 ;; Screenshot
 (defun I//insert-org-or-md-img-link (prefix imagename)

@@ -237,8 +237,6 @@ org-files and bookmarks"
   `((name . "Mail and News")
     (candidates . (("Calendar" . (lambda ()
                                    (browse-url "https://www.google.com/calendar/render")))
-                   ("RSS" . elfeed)
-                   ("Blog" . blog-admin-start)
                    ("Random Todo" . org-random-entry)
                    ("Github" . (lambda ()
                                  (helm-github-stars)))

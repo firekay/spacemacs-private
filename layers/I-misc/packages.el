@@ -973,26 +973,27 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 (defun I-misc/post-init-evil-escape ()
   (setq evil-escape-delay 0.2))
 
-(defun I-misc/post-init-projectile ()
-  (progn
-    (with-eval-after-load 'projectile
-      (progn
-        (setq projectile-completion-system 'ivy)
-        (add-to-list 'projectile-other-file-alist '("html" "js"))
-        (add-to-list 'projectile-other-file-alist '("js" "html"))))
+;; (defun I-misc/post-init-projectile ()
+;;   (progn
+;;     (with-eval-after-load 'projectile
+;;       (progn
+;;         (setq projectile-completion-system 'ivy)
+;;         (add-to-list 'projectile-other-file-alist '("html" "js"))
+;;         (add-to-list 'projectile-other-file-alist '("js" "html"))))
 
-    (defvar my-simple-todo-regex "\\<\\(FIXME\\|TODO\\|BUG\\):")
+;;     (defvar my-simple-todo-regex "\\<\\(FIXME\\|TODO\\|BUG\\):")
 
-    (defun my-simple-todo ()
-      "When in a project, create a `multi-occur' buffer matching the
-  regex in `my-simple-todo-regex' across all buffers in the
-  current project. Otherwise do `occur' in the current file."
-      (interactive)
-      (if (projectile-project-p)
-          (multi-occur (projectile-project-buffers) my-simple-todo-regex)
-        (occur my-simple-todo-regex)))
-    (spacemacs/set-leader-keys "pf" 'I/open-file-with-projectile-or-counsel-git)
-    (spacemacs/set-leader-keys "pt" 'my-simple-todo)))
+;;     (defun my-simple-todo ()
+;;       "When in a project, create a `multi-occur' buffer matching the
+;;   regex in `my-simple-todo-regex' across all buffers in the
+;;   current project. Otherwise do `occur' in the current file."
+;;       (interactive)
+;;       (if (projectile-project-p)
+;;           (multi-occur (projectile-project-buffers) my-simple-todo-regex)
+;;         (occur my-simple-todo-regex)))
+;;     (spacemacs/set-leader-keys "pf" 'I/open-file-with-projectile-or-counsel-git)
+;;     ;; (spacemacs/set-leader-keys "pt" 'my-simple-todo)
+;;     ))
 
 
 (defun I-misc/init-moz-controller ()
