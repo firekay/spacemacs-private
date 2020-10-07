@@ -55,11 +55,11 @@ This function should only modify configuration layer settings."
      bibtex
      go
      (go :variables
-         ;; gofmt-command "goimports"
-         ;; go-tab-width 2
-         ;; go-use-golangci-lint t
-         ;; go-format-before-save t
-         ;; go-backend 'lsp
+         gofmt-command "goimports"
+         go-tab-width 2
+         go-use-golangci-lint t
+         go-format-before-save t
+         go-backend 'go-mode
          godoc-at-point-function 'godoc-gogetdoc)
      sql
      (sql :variables
@@ -72,9 +72,13 @@ This function should only modify configuration layer settings."
           org-enable-github-support t
           org-enable-org-journal-support t
           org-enable-hugo-support t
-          org-enable-sticky-header t)
+          org-enable-sticky-header t
+
+          org-enable-jira-support t
+          jiralib-url "https://jira.shopee.io")
      spacemacs-org
-     ;; java
+     java
+     (java :variables java-backend 'meghanada)
      ;; scala
 
      (ivy :variables ivy-enable-advanced-buffer-information nil)
@@ -95,7 +99,8 @@ This function should only modify configuration layer settings."
      spell-checking
      (spell-checking :variables
                      spell-checking-enable-by-default nil
-                     enable-flyspell-auto-completion nil)
+                     enable-flyspell-auto-completion nil
+                     spell-checking-enable-auto-dictionary t)
      (spacemacs-layouts :variables layouts-enable-autosave nil
                         layouts-autosave-delay 300)
      (git :variables
@@ -176,6 +181,7 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
                                       polymode
+                                      leuven-theme
                                       poly-markdown
 				      ;; sicp
 				      ;; cdlatex
@@ -213,6 +219,11 @@ before layer configuration.
 It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
+  (setq exec-path-from-shell-variables '("PATH"
+                                         ;; Go path variables.
+                                         "GOPATH"
+                                         "GOROOT"
+                                         ))
   (setq-default
    ;; If non-nil then enable support for the portable dumper. You'll need
    ;; to compile Emacs 27 from source following the instructions in file
@@ -782,7 +793,7 @@ dump."
                                   (counsel-unquote-regex-parens
                                    (ivy--regex input t)))
                           'gbk))
-  (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
+  ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
   )
 
 (setq customer-file (expand-file-name "customer.el" "~/Dropbox/Emacs"))

@@ -12,6 +12,7 @@
 ;; clean bingding key for rebingding
 (spacemacs/set-leader-keys
   "bm" nil)
+(spacemacs/set-leader-keys-for-major-mode 'org-mode "d" nil)
 ;; declare prefix
 (spacemacs/declare-prefix "o" "self-define")
 (spacemacs/declare-prefix "oj" "journal")
@@ -25,10 +26,17 @@
 (spacemacs/declare-prefix-for-mode 'org-mode "mo" "self-define(org-mode)")
 (spacemacs/declare-prefix-for-mode 'org-mode "mh" "heading")
 (spacemacs/declare-prefix-for-mode 'org-mode "mor" "org-ref")
+(spacemacs/declare-prefix-for-mode 'org-mode "mj" "jira")
+(spacemacs/declare-prefix-for-mode 'org-mode "mjc" "comments")
+(spacemacs/declare-prefix-for-mode 'org-mode "mjp" "projects")
+(spacemacs/declare-prefix-for-mode 'org-mode "mji" "issues")
+(spacemacs/declare-prefix-for-mode 'org-mode "mjs" "subtasks")
+(spacemacs/declare-prefix-for-mode 'org-mode "mjt" "todos")
+(spacemacs/declare-prefix-for-mode 'org-mode "mjw" "worklogs")
+(spacemacs/declare-prefix-for-mode 'org-mode "d" "dates")
 
 ;; For python mode
 (spacemacs/declare-prefix-for-mode 'python-mode "mi" "skeleton(import)")
-(spacemacs/declare-prefix-for-mode 'python-mode "mo" "self_define")
 (spacemacs/declare-prefix-for-mode 'python-mode "mf" "formatter")
 
 ;; for youdao dictionay mode
@@ -264,6 +272,30 @@
   "gt" 'google-translate-at-point
   )
 
+;; For org-mode jira
+(spacemacs/set-leader-keys-for-major-mode 'org-mode
+  "jpg" 'org-jira-get-projects
+  "jib" 'org-jira-browse-issue
+  "jig" 'org-jira-get-issues
+  "jij" 'org-jira-get-issues-from-custom-jql
+  "jih" 'org-jira-get-issues-headonly
+  "jiu" 'org-jira-update-issue
+  "jiw" 'org-jira-progress-issue
+  "jin" 'org-jira-progress-issue-next
+  "jia" 'org-jira-assign-issue
+  "jir" 'org-jira-refresh-issue
+  "jiR" 'org-jira-refresh-issues-in-buffer
+  "jic" 'org-jira-create-issue
+  "jik" 'org-jira-copy-current-issue-key
+  "jsc" 'org-jira-create-subtask
+  "jsg" 'org-jira-get-subtasks
+  "jcc" 'org-jira-add-comment
+  "jcu" 'org-jira-update-comment
+  "jwu" 'org-jira-update-worklogs-from-org-clocks
+  "jtj" 'org-jira-todo-to-jira
+  "jif" 'org-jira-get-issues-by-fixversion
+  )
+
 ;; For org-mode
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
   "hu" 'outline-up-heading
@@ -360,6 +392,9 @@
 ;; http://emacs.stackexchange.com/questions/220/how-to-bind-c-i-as-different-from-tab
 ;; (define-key input-decode-map [?\C-i] [C-i])
 ;; (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-forward)
+
+;; drag and open from item - mac
+(global-set-key [s-drag-n-drop] 'ns-drag-n-drop-as-text)
 
 (global-set-key [(shift return)] 'I/smart-open-line)
 (global-set-key (kbd "s-/") 'hippie-expand)

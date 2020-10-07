@@ -266,6 +266,10 @@ with options to run in the shell.")
 (advice-add 'helm-ag--edit :before #'i-ag-edit)
 ;; (advice-add 'helm-ag--edit :after #'i-after-ag-edit)
 
+;; https://github.com/kiwanami/emacs-epc/issues/35
+(setq byte-compile-warnings '(cl-functions))
+
 (when (spacemacs/system-is-mswindows)
   ;; 使用 counsel-git 查找文件的时候，忽略指定后缀的文件
   (setq counsel-git-cmd "git ls-files --full-name -- \":!:*.js.meta\" \":!:*.meta\""))
+

@@ -18,9 +18,14 @@
   "Trim leading and trailing whitespace from STR."
   (replace-regexp-in-string "\\(\\`[[:space:]\n]*\\|[[:space:]\n]*\\'\\)" "" str))
 
-(defun I/find-file-remote (host)
-  (interactive "sHost:")
-  (dired (concat "/ssh:zhenkai.xu@" (I/chomp host) ":~/"))
+(defun I/find-file-remote (host &optional path)
+  (interactive "sHost: \nsPath(default ~/): ")
+  (find-file (concat "/ssh:zhenkai.xu@" (I/chomp host) ":" path))
+  )
+
+(defun I/find-file-remote-root (host &optional path)
+  (interactive "sHost: \nsPath(default /root): ")
+  (find-file (concat "/ssh:zhenkai.xu@" (I/chomp host) "|sudo:" host ":" path))
   )
 
 ;; Screenshot

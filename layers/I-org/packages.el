@@ -265,9 +265,11 @@ unwanted space when exporting org-mode to html."
       (setq org-agenda-file-note (expand-file-name "notes.org" org-agenda-dir))
       (setq org-agenda-file-gtd (expand-file-name "gtd.org" org-agenda-dir))
       (setq org-agenda-file-work (expand-file-name "work.org" org-agenda-dir))
+      (setq org-agenda-file-ftc (expand-file-name "fintech.org" org-agenda-dir))
       (setq org-agenda-file-journal (expand-file-name "journal.org" org-agenda-dir))
       (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" deft-directory))
       (setq org-agenda-file-primary (expand-file-name "primary.org" org-agenda-dir))
+      (setq org-agenda-file-pomodora (expand-file-name "pomodora.org" org-agenda-dir))
       (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
       (setq org-agenda-files (list org-agenda-dir))
       (with-eval-after-load 'org-agenda
@@ -296,6 +298,11 @@ unwanted space when exporting org-mode to html."
                                      entry
                                      (file+headline org-agenda-file-work "WorkToDo")
                                      "* TODO [#A] %? :@WORK:\n  %i\n  %U"
+                                     :empty-lines 1)
+                                    ("f" "Fintech"
+                                     entry
+                                     (file+headline org-agenda-file-ftc "FtcToDo")
+                                     "* TODO [#A] %? :@FTC:\n  %i\n  %U"
                                      :empty-lines 1)
                                     ("c" "Chrome"
                                      entry
@@ -331,6 +338,11 @@ unwanted space when exporting org-mode to html."
                                      (file+headline org-agenda-file-primary "DO IT")
                                      "* TODO [#A] %?    [/] \n  %i\n %U"
                                      :empty-lines 1)
+                                    ("P" "Pomodora"
+                                     entry
+                                     (file+headline org-agenda-file-pomodora "Pomodora")
+                                     "* %?    :POMO:\n  %i\n "
+                                     :empty-lines 1)
                                     ("j" "Journal Entry"
                                      entry
                                      (file+datetree org-agenda-file-journal)
@@ -340,6 +352,7 @@ unwanted space when exporting org-mode to html."
       (setq org-tag-alist '((:startgroup . nil)
                             ("@PROJECT" . ?j)
                             ("@WORK" . ?w)
+                            ("@FTC" . ?f)
                             ("@IDEA" . ?i)
                             ("@STUDY" . ?s)
                             ("@SNIPPET" . ?o)
@@ -351,8 +364,8 @@ unwanted space when exporting org-mode to html."
                             ("CS" . ?d)
                             ("LINK" . ?l)
                             ("CRYPT" . ?c)
-                            ("TITLE" . ?t)
                             ("PRIMARY" . ?p)
+                            ("POMO" . ?b)
                             ))
       ;;An entry without a cookie is treated just like priority ' B '.
       ;;So when create new task, they are default
@@ -365,6 +378,7 @@ unwanted space when exporting org-mode to html."
                                           "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
                                          ("gc" "not-important&not-emergency" tags-todo
                                           "+PRIORITY=\"C\"")
+                                         ("f" "Ftc" tags-todo "@FTC")
                                          ("i" "Idea" tags-todo "@IDEA")
                                          ("y" "Study" tags-todo "@STUDY")
                                          ("l" "Link" tags-todo "LINK")
