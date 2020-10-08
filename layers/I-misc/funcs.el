@@ -533,7 +533,7 @@ org-files and bookmarks"
 
 
 ;; "http://xuchunyang.me/Opening-iTerm-From-an-Emacs-Buffer/"
-(defun I/iterm-shell-command (command &optional prefix)
+(defun I/iterm-shell-cmd(command &optional prefix)
   "cd to `default-directory' then run COMMAND in iTerm.
 With PREFIX, cd to project root."
   (interactive (list (read-shell-command "iTerm Shell Command: ")
@@ -542,7 +542,7 @@ With PREFIX, cd to project root."
                   (I/git-project-root)
                 default-directory))
          ;; if COMMAND is empty, just change directory
-         (cmd (format "cd %s ;%s" dir command)))
+         (cmd (format "cd %s && %s" dir command)))
     (do-applescript (format "
   tell application \"iTerm2\"
        activate
@@ -550,6 +550,52 @@ With PREFIX, cd to project root."
        tell _session
             set command to get the clipboard
             write text \"%s\"
+       end tell
+  end tell
+  " cmd))))
+
+(defun I/iterm-shell-cmd-new-window (command &optional prefix)
+  "cd to `default-directory' then run COMMAND in iTerm.
+With PREFIX, cd to project root."
+  (interactive (list (read-shell-command "iTerm Shell Command: ")
+                     current-prefix-arg))
+  (let* ((dir (if prefix
+                  (I/git-project-root)
+                default-directory))
+         ;; if COMMAND is empty, just change directory
+         (cmd (format "cd %s && %s" dir command)))
+    (do-applescript (format "
+  tell application \"iTerm2\"
+       create window with default profile
+       activate
+       set _session to current session of current window
+       tell _session
+            set command to get the clipboard
+            write text \"%s\"
+       end tell
+  end tell
+  " cmd))))
+
+(defun I/iterm-shell-cmd-new-tab (command &optional prefix)
+  "cd to `default-directory' then run COMMAND in iTerm.
+With PREFIX, cd to project root."
+  (interactive (list (read-shell-command "iTerm Shell Command: ")
+                     current-prefix-arg))
+  (let* ((dir (if prefix
+                  (I/git-project-root)
+                default-directory))
+         ;; if COMMAND is empty, just change directory
+         (cmd (format "cd %s && %s" dir command)))
+    (do-applescript (format "
+  tell application \"iTerm2\"
+       tell current window
+         create tab with default profile
+         activate
+         set _session to current session of current tab
+         tell _session
+              set command to get the clipboard
+              write text \"%s\"
+         end tell
        end tell
   end tell
   " cmd))))

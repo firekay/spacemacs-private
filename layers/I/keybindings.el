@@ -16,6 +16,7 @@
 ;; declare prefix
 (spacemacs/declare-prefix "o" "self-define")
 (spacemacs/declare-prefix "oj" "journal")
+(spacemacs/declare-prefix "ol" "layout")
 (spacemacs/declare-prefix "op" "clocks")
 (spacemacs/declare-prefix "ot" "Toggle")
 ;; (spacemacs/declare-prefix "os" "Search")
@@ -459,7 +460,9 @@
 ;; for quick open finder and shell
 (when (spacemacs/system-is-mac)
   (spacemacs/set-leader-keys "of" 'reveal-in-osx-finder)
-  (spacemacs/set-leader-keys "o;" 'I/iterm-shell-command))
+  (spacemacs/set-leader-keys "o;" 'I/iterm-shell-cmd)
+  (spacemacs/set-leader-keys "o:" 'I/iterm-shell-cmd-new-tab)
+  )
 
 (spacemacs|add-toggle toggle-shadowsocks-proxy-mode
   :status shadowsocks-proxy-mode
