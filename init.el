@@ -126,7 +126,7 @@ This function should only modify configuration layer settings."
      shell-scripts
     (shell :variables
            shell-default-height 50
-           shell-default-shell 'multi-term
+           shell-default-shell 'vterm
            shell-default-term-shell "/bin/zsh"
            shell-default-position 'bottom
            )
@@ -324,11 +324,11 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         solarized-light
+			                   leuven
 			                   sanityinc-solarized-light
 			                   sanityinc-solarized-dark
                          spacemacs-light
-			                   leuven
-                         solarized-light
 			                   spacemacs-dark
                          solarized-dark
 			                   monokai

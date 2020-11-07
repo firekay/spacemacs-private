@@ -1,0 +1,3 @@
+[submodule "load/xwwp"]
+	path = load/xwwp
+	url = https://github.com/canatella/xwwp.git
