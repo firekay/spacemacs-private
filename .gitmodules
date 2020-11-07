@@ -1,3 +1,9 @@
 [submodule "load/xwwp"]
 	path = load/xwwp
 	url = https://github.com/canatella/xwwp.git
+[submodule "exec-path-from-shell"]
+	path = load/exec-path-from-shell
+	url = https://github.com/purcell/exec-path-from-shell.git
+[submodule "cheat-sh"]
+	path = load/cheat-sh.el
+	url = https://github.com/davep/cheat-sh.el.git

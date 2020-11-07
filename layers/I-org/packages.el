@@ -331,12 +331,12 @@ unwanted space when exporting org-mode to html."
                                     ("b" "Primary Brave"
                                      entry
                                      (file+headline org-agenda-file-primary "DO IT")
-                                     "* TODO [#A] %?    [/] \n %(I/retrieve-brave-current-tab-url)\n %i\n %U"
+                                     "* TODO [#A] %?     \n %(I/retrieve-brave-current-tab-url)\n %i\n %U"
                                      :empty-lines 1)
                                     ("p" "Primary"
                                      entry
                                      (file+headline org-agenda-file-primary "DO IT")
-                                     "* TODO [#A] %?    [/] \n  %i\n %U"
+                                     "* TODO [#A] %?     \n  %i\n %U"
                                      :empty-lines 1)
                                     ("P" "Pomodora"
                                      entry
@@ -357,8 +357,8 @@ unwanted space when exporting org-mode to html."
                             ("@STUDY" . ?s)
                             ("@SNIPPET" . ?o)
                             (:endgroup . nil)
+                            ("TOC" . ?t)
                             ("ALGO" . ?a)
-                            ("AIRFLOW" . ?f)
                             ("ML" . ?m)
                             ("KG" . ?k)
                             ("CS" . ?d)

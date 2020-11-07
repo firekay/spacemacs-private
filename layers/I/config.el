@@ -6,6 +6,43 @@
 
 (fset 'delete-empty-lines (kbd "M-x flush-lines RET ^\s-*$ RET"))
 ;; ########################## for sql connnect
+;; ########################## for sql connnect
+;; 1. add a connection infomation in sql-connection-alist
+;; 2. define a function call I/sql-connnect. e.g.: I/pg_local
+;; 3. add a config in I/sql-servers-list
+(setq sql-connection-alist
+      '((mysql-14 (sql-product 'mysql)
+              (sql-port 3305)
+              (sql-server "127.0.0.1")
+              (sql-user "admin")
+              (sql-password "shopee123")
+              (sql-database ""))))
+
+(defvar I/sql-servers-list
+  '(("mysql-14" I/mysql-14))
+  "Alist of server name and the function to connect")
+
+(defun I/mysql-14 ()
+     (interactive)
+     (I/sql-connect 'postgres 'mysql-14))
+
+;; do not need modifu
+(defun I/sql-connect-server (func)
+     "Connect to the input server using my-sql-servers-list"
+     (interactive
+          (helm-comp-read "Select server: " I/sql-servers-list))
+     (funcall func))
+
+(defun I/sql-connect (product connection)
+     ;; remember to set the sql-product, otherwise, it will fail for the first time
+     ;; you call the function
+     (setq sql-product product)
+     (if current-prefix-arg
+                (sql-connect connection connection)
+              (sql-connect connection))
+     (sql-connect connection))
+
+
 ;; move to dropbox
 ;; ########################## sql connnect end
 

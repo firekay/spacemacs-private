@@ -43,7 +43,6 @@
 ;; for youdao dictionay mode
 (spacemacs/declare-prefix-for-mode 'youdao-dictionary-mode "g" "google-translate")
 
-
 (spacemacs/set-leader-keys
   "sW" 'engine/search-google
   "sw" 'helm-google-suggest
@@ -130,7 +129,8 @@
   "oll" 'I/load-my-layout
   "ols" 'I/save-my-layout
   ;; "ob" 'popwin:display-last-buffer
-  "ob" 'xwidget-webkit-browse-url
+  ;; "ob" 'xwidget-webkit-browse-url
+  "ob" 'xwwp
   "oY" 'youdao-dictionary-search-at-point+
   "oy" 'youdao-dictionary-search-at-point
 
@@ -229,6 +229,10 @@
 ;;     map)
 ;;   "Keymap for `osx-dictionary-mode'.")
 
+(spacemacs/set-leader-keys-for-major-mode 'xwidget-webkit-mode
+  "." 'xwidget-hydra
+  "s" 'xwwp-follow-link
+  )
 
 (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
   "ta" 'markdown-insert-table
@@ -299,6 +303,7 @@
 
 ;; For org-mode
 (spacemacs/set-leader-keys-for-major-mode 'org-mode
+  "tte" 'org-table-toggle-column-width
   "hu" 'outline-up-heading
   "hh" 'org-backward-heading-same-level
   "hk" 'org-previous-visible-heading

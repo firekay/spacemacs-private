@@ -603,6 +603,7 @@ dump."
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 
+  (setq global-hungry-delete-mode nil)
   ;; ss proxy. But it will cause anacond-mode failed.
   (setq socks-server '("Default server" "127.0.0.1" 1080 5))
   (setq evil-shift-round nil)
@@ -611,7 +612,6 @@ dump."
 
 (defun dotspacemacs/user-config ()
                                 ;; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
-                                 
 
   ;; Set to the name of the file where new notes will be stored
   (setq org-mobile-inbox-for-pull "~/org/flagged.org")
@@ -627,9 +627,29 @@ dump."
 
   ;; (add-to-list 'load-path "~/.spacemacs.d/load/lsp-python")
   (add-to-list 'load-path "~/.spacemacs.d/load/sphinx-doc")
+
+  ;; add exec path from shell
+  ;; reference: https://github.com/purcell/exec-path-from-shell
+  (add-to-list 'load-path "~/.spacemacs.d/load/exec-path-from-shell")
+  (require 'exec-path-from-shell)
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+
+  (add-to-list 'load-path "~/.spacemacs.d/load/xwwp")
+  (require 'xwwp)
+  (add-hook 'xwidget-webkit-mode-hook (lambda ()
+                                        (require 'xwwp-follow-link)
+                                        (require 'xwidget-hydra)
+                                        ))
   (add-hook 'python-mode-hook (lambda ()
                                 (require 'sphinx-doc)
                                 (sphinx-doc-mode t)))
+
+  ;; https://github.com/davep/cheat-sh.el
+  ;; provides a simple Emacs interface for looking things up on cheat.sh
+  (add-to-list 'load-path "~/.spacemacs.d/load/cheat-sh.el")
+  (require 'cheat-sh)
+
   (require 'lsp-mode)
   ;; (require 'lsp-python)
   (require 'dap-python)
@@ -667,7 +687,6 @@ dump."
   ;; temp fix for ivy-switch-buffer
   ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
 
-  (global-hungry-delete-mode nil)
   ;; (spacemacs|diminish helm-gtags-mode)
   ;; (spacemacs|diminish ggtags-mode)
   ;; (spacemacs|diminish which-key-mode)
