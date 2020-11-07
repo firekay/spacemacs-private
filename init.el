@@ -78,8 +78,14 @@ This function should only modify configuration layer settings."
           jiralib-url "https://jira.shopee.io")
      spacemacs-org
      java
-     (java :variables java-backend 'meghanada)
-     ;; scala
+     ;; (java :variables java-backend 'meghanada)
+     scala
+     (scala :variables
+            scala-backend 'scala-metals
+            scala-enable-eldoc t
+            scala-auto-insert-asterisk-in-comments t
+            scala-enable-gtags t
+            scala-auto-start-backend t)
 
      (ivy :variables ivy-enable-advanced-buffer-information nil)
      (ranger :variables
