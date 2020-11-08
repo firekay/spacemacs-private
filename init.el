@@ -650,6 +650,22 @@ dump."
   (add-to-list 'load-path "~/.spacemacs.d/load/cheat-sh.el")
   (require 'cheat-sh)
 
+  (add-to-list 'load-path "~/.spacemacs.d/load/emacs-request")
+  (require 'request)
+
+  (add-to-list 'load-path "~/.spacemacs.d/load/alert")
+  (require 'alert)
+
+  ;; ;; https://github.com/myuhe/org-gcal.el
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/org-gcal.el")
+  ;; (setq package-check-signature nil)
+  ;; (use-package org-gcal
+  ;;   :ensure t
+  ;;   :config
+  ;;   (setq org-gcal-client-id "929895558924-3oaaopitmmlclpflb8hblok0rv44pe0u.apps.googleusercontent.com"
+  ;;       org-gcal-client-secret "kA_SWof7qN3MPkNnVLPImP3T"
+  ;;       org-gcal-file-alist '(("zhenkai.xu@gmail.com" .  "~/Dropbox/Beorg/GTD/gmail.org"))))
+
   (require 'lsp-mode)
   ;; (require 'lsp-python)
   (require 'dap-python)

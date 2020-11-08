@@ -345,7 +345,8 @@ unwanted space when exporting org-mode to html."
                                      :empty-lines 1)
                                     ("j" "Journal Entry"
                                      entry
-                                     (file+datetree org-agenda-file-journal)
+                                     ;; (file+datetree org-agenda-file-journal)
+                                     (file+olp+datetree org-agenda-file-journal)
                                      ;; "* TODO %(format-time-string \"%H:%M\") %?"
                                      "* TODO %?"
                                      :empty-lines 1)))

@@ -7,3 +7,12 @@
 [submodule "cheat-sh"]
 	path = load/cheat-sh.el
 	url = https://github.com/davep/cheat-sh.el.git
+[submodule "org-gcal"]
+	path = load/org-gcal.el
+	url = https://github.com/kidd/org-gcal.el.git
+[submodule "emacs-request"]
+	path = load/emacs-request
+	url = https://github.com/tkf/emacs-request.git
+[submodule "alert"]
+	path = load/alert
+	url = https://github.com/jwiegley/alert.git
