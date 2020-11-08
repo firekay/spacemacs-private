@@ -14,6 +14,7 @@
   "bm" nil)
 (spacemacs/set-leader-keys-for-major-mode 'org-mode "d" nil)
 ;; declare prefix
+(spacemacs/declare-prefix "." "cheat.sh")
 (spacemacs/declare-prefix "o" "self-define")
 (spacemacs/declare-prefix "oj" "journal")
 (spacemacs/declare-prefix "ol" "layout")
@@ -42,6 +43,16 @@
 
 ;; for youdao dictionay mode
 (spacemacs/declare-prefix-for-mode 'youdao-dictionary-mode "g" "google-translate")
+
+;; for cheat.sh  https://github.com/chubin/cheat.sh
+(spacemacs/set-leader-keys
+  ".f" 'cheat-sh-search-topic
+  ".r" 'cheat-sh-maybe-region
+  ".s" 'cheat-sh
+  ".c" 'cheat-sh-search
+  ".h" 'cheat-sh-help
+  ".l" 'cheat-sh-list
+  )
 
 (spacemacs/set-leader-keys
   "sW" 'engine/search-google
