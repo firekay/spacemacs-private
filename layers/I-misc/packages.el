@@ -11,7 +11,7 @@
         helm-github-stars
         helm
         helm-ag
-        projectile
+        ;; projectile
         ;; prodigy
         ;; find-file-in-project
         multiple-cursors
