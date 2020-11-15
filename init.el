@@ -55,11 +55,11 @@ This function should only modify configuration layer settings."
      bibtex
      go
      (go :variables
-         gofmt-command "goimports"
+         ;; gofmt-command "goimports"
          go-tab-width 2
          go-use-golangci-lint t
-         go-format-before-save t
-         go-backend 'go-mode
+         go-format-before-save nil
+         go-backend 'lsp
          godoc-at-point-function 'godoc-gogetdoc)
      sql
      (sql :variables
@@ -669,6 +669,7 @@ dump."
   (require 'lsp-mode)
   ;; (require 'lsp-python)
   (require 'dap-python)
+  (require 'dap-go)
   ;; (require 'dap-lldb)
   (global-company-mode)
   ;; For latex preview larger.
