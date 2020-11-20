@@ -66,6 +66,7 @@ This function should only modify configuration layer settings."
           sql-capitalize-keywords t)
      csv
      semantic
+     spotify
      org
      (org :variables
           org-want-todo-bindings t

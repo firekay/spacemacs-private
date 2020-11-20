@@ -88,12 +88,12 @@
 (display-time)
 (setq display-time-day-and-date t)
 
-(add-hook 'python-mode-hook 'highlight-indentation-mode)
-(add-hook 'java-mode-hook 'highlight-indentation-mode)
-(add-hook 'go-mode-hook 'highlight-indentation-mode)
-(add-hook 'scala-mode-hook 'highlight-indentation-mode)
-(add-hook 'emacs-lisp-mode-hook 'highlight-indentation-mode)
-(add-hook 'sh-mode-hook 'highlight-indentation-mode)
+;; (add-hook 'python-mode-hook 'highlight-indentation-mode)
+;; (add-hook 'java-mode-hook 'highlight-indentation-mode)
+;; (add-hook 'go-mode-hook 'highlight-indentation-mode)
+;; (add-hook 'scala-mode-hook 'highlight-indentation-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'highlight-indentation-mode)
+;; (add-hook 'sh-mode-hook 'highlight-indentation-mode)
 
 (add-hook 'python-mode-hook 'tooltip-mode)
 (add-hook 'go-mode-hook 'tooltip-mode)
