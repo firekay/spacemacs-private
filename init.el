@@ -74,7 +74,9 @@ This function should only modify configuration layer settings."
           org-enable-org-journal-support t
           org-enable-hugo-support t
           org-enable-sticky-header t
-
+          org-enable-verb-support t
+          org-enable-roam-support t
+          spaceline-org-clock-p t
           org-enable-jira-support t
           jiralib-url "https://jira.shopee.io")
      spacemacs-org
@@ -191,10 +193,22 @@ This function should only modify configuration layer settings."
                                       polymode
                                       leuven-theme
                                       poly-markdown
-				      ;; sicp
-				      ;; cdlatex
-				      ;; auctex
-				      )
+                                      (org-roam-server :variables
+                                                       org-roam-server-host "127.0.0.1"
+                                                       org-roam-server-port 8080
+                                                       org-roam-server-authenticate nil
+                                                       org-roam-server-export-inline-images t
+                                                       org-roam-server-serve-files nil
+                                                       org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+                                                       org-roam-server-network-poll t
+                                                       org-roam-server-network-arrows nil
+                                                       org-roam-server-network-label-truncate t
+                                                       org-roam-server-network-label-truncate-length 60
+                                                       org-roam-server-network-label-wrap-length 20)
+                                      ;; sicp
+                                      ;; cdlatex
+                                      ;; auctex
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -333,13 +347,13 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          solarized-light
+                         solarized-dark
 			                   leuven
+			                   monokai
 			                   sanityinc-solarized-light
 			                   sanityinc-solarized-dark
                          spacemacs-light
 			                   spacemacs-dark
-                         solarized-dark
-			                   monokai
 			                   moe-light
                          dracula
                          zenburn)
