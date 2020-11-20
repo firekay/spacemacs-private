@@ -627,7 +627,8 @@ dump."
   )
 
 (defun dotspacemacs/user-config ()
-                                ;; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
+  ;; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
+  (setq org-superstar-bullet-list '("◉" "○" "▶" "▷"))
 
   ;; Set to the name of the file where new notes will be stored
   (setq org-mobile-inbox-for-pull "~/org/flagged.org")
