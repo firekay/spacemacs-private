@@ -645,12 +645,13 @@ dump."
   ;; (add-to-list 'load-path "~/.spacemacs.d/load/lsp-python")
   (add-to-list 'load-path "~/.spacemacs.d/load/sphinx-doc")
 
-  ;; add exec path from shell
-  ;; reference: https://github.com/purcell/exec-path-from-shell
-  (add-to-list 'load-path "~/.spacemacs.d/load/exec-path-from-shell")
-  (require 'exec-path-from-shell)
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize))
+  ;; ;; add exec path from shell
+  ;; ;; reference: https://github.com/purcell/exec-path-from-shell
+  ;; ;; this is include by aweshell: https://github.com/manateelazycat/aweshell
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/exec-path-from-shell")
+  ;; (require 'exec-path-from-shell)
+  ;; (when (memq window-system '(mac ns x))
+  ;;   (exec-path-from-shell-initialize))
 
   (add-to-list 'load-path "~/.spacemacs.d/load/xwwp")
   (require 'xwwp)
@@ -672,6 +673,16 @@ dump."
 
   (add-to-list 'load-path "~/.spacemacs.d/load/alert")
   (require 'alert)
+
+  (add-to-list 'load-path "~/.spacemacs.d/load/aweshell")
+  (require 'aweshell)
+
+  ;; add elasticsearch: https://github.com/firekay/es-mode
+  (add-to-list 'load-path "~/.spacemacs.d/load/es-mode")
+  (autoload 'es-mode "es-mode.el"
+    "Major mode for editing Elasticsearch queries" t)
+  (require 'es-copyas)
+  (add-to-list 'auto-mode-alist '("\\.es$" . es-mode))
 
   ;; ;; https://github.com/myuhe/org-gcal.el
   ;; (add-to-list 'load-path "~/.spacemacs.d/load/org-gcal.el")

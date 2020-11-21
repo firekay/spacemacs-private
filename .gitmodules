@@ -16,3 +16,12 @@
 [submodule "alert"]
 	path = load/alert
 	url = https://github.com/jwiegley/alert.git
+[submodule "load/org-roam"]
+	path = load/org-roam
+	url = git@github.com:firekay/org-roam.git
+[submodule "es-mode"]
+	path = load/es-mode
+	url = git@github.com:firekay/es-mode.git
+[submodule "aweshell"]
+	path = load/aweshell
+	url = git@github.com:firekay/aweshell.git

@@ -381,6 +381,18 @@
   "hd" 'anaconda-mode-show-doc
   )
 
+;; For elasticsearch es-mode
+(spacemacs/set-leader-keys-for-major-mode 'es-mode
+  "x" 'es-execute-request-dwim
+  "p" 'es-goto-previous-request
+  "n" 'es-goto-next-request
+  "c" 'es-copy-as
+  "e" 'es-set-endpoint-url
+  "m" 'es-set-request-method
+  "i" 'yas/insert-snippet
+  )
+
+
 (define-key global-map (kbd "s-i") 'yas/insert-snippet)
 ;; (define-key evil-insert-state-map "M-i" 'yas/insert-snippet)
 
@@ -513,3 +525,6 @@
                "[s" (lambda (n) (interactive "p") (dotimes (c n nil) (insert " ")))
                "]s" (lambda (n) (interactive "p")
                       (forward-char) (dotimes (c n nil) (insert " ")) (backward-char (1+ n))))
+
+;; unbinding keys
+(global-unset-key (kbd "C-SPC"))
