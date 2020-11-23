@@ -41,7 +41,7 @@
   (if (equal basename "")
       (setq basename (format-time-string "%Y%m%d_%H%M%S")))
   (setq fullpath (concat (file-name-directory (buffer-file-name))
-                         "../img/"
+                         "../figures/"
                          (file-name-base (buffer-file-name))
                          "_"
                          basename))
@@ -50,6 +50,17 @@
                              basename
                              ".png"))
   (cond
+   ((file-directory-p "./img")
+    (progn
+      (call-process "screencapture"
+                    nil
+                    nil
+                    nil
+                    "-s"
+                    (concat "img/"
+                            (concat basename ".png")))
+      (I//insert-org-or-md-img-link "./img/"
+                                    (concat basename ".png"))))
    ((file-exists-p (file-name-directory fullpath))
     (progn
       (setq final-image-full-path (concat fullpath ".png"))
@@ -60,18 +71,7 @@
             (setq resize-command-str (format "convert %s -resize 800x600 %s" final-image-full-path
                                              final-image-full-path))
             (shell-command-to-string resize-command-str)))
-      (I//insert-org-or-md-img-link "../img/" relativepath)))
-   ((file-directory-p "./figures")
-    (progn
-      (call-process "screencapture"
-                    nil
-                    nil
-                    nil
-                    "-s"
-                    (concat "figures/"
-                            (concat basename ".png")))
-      (I//insert-org-or-md-img-link "./figures/"
-                                    (concat basename ".png"))))
+      (I//insert-org-or-md-img-link "../figures/" relativepath)))
    (t (progn
         (call-process "screencapture"
                       nil
