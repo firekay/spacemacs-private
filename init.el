@@ -30,7 +30,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(javascript
      groovy
      plantuml
      (plantuml :variables
@@ -63,7 +63,10 @@ This function should only modify configuration layer settings."
          godoc-at-point-function 'godoc-gogetdoc)
      sql
      (sql :variables
-          sql-capitalize-keywords t)
+          sql-capitalize-keywords t
+          sql-capitalize-keywords-blacklist '()
+          sql-auto-indent t
+          sql-backend 'lsp)
      csv
      semantic
      spotify
@@ -75,7 +78,7 @@ This function should only modify configuration layer settings."
           org-enable-hugo-support t
           org-enable-sticky-header t
           org-enable-verb-support t
-          org-enable-roam-support t
+          ;; org-enable-roam-support t
           spaceline-org-clock-p t
           org-enable-jira-support t
           jiralib-url "https://jira.shopee.io")
@@ -193,18 +196,7 @@ This function should only modify configuration layer settings."
                                       polymode
                                       leuven-theme
                                       poly-markdown
-                                      (org-roam-server :variables
-                                                       org-roam-server-host "127.0.0.1"
-                                                       org-roam-server-port 8080
-                                                       org-roam-server-authenticate nil
-                                                       org-roam-server-export-inline-images t
-                                                       org-roam-server-serve-files nil
-                                                       org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-                                                       org-roam-server-network-poll t
-                                                       org-roam-server-network-arrows nil
-                                                       org-roam-server-network-label-truncate t
-                                                       org-roam-server-network-label-truncate-length 60
-                                                       org-roam-server-network-label-wrap-length 20)
+                                      emacsql-sqlite3
                                       ;; sicp
                                       ;; cdlatex
                                       ;; auctex
@@ -347,6 +339,7 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          solarized-light
+                         zenburn
                          solarized-dark
 			                   leuven
 			                   monokai
@@ -356,7 +349,7 @@ It should only modify the values of Spacemacs settings."
 			                   spacemacs-dark
 			                   moe-light
                          dracula
-                         zenburn)
+                         )
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -677,6 +670,9 @@ dump."
   (add-to-list 'load-path "~/.spacemacs.d/load/aweshell")
   (require 'aweshell)
 
+  (add-to-list 'load-path "~/.spacemacs.d/load/org-roam")
+  (require 'org-roam)
+
   ;; add elasticsearch: https://github.com/firekay/es-mode
   (add-to-list 'load-path "~/.spacemacs.d/load/es-mode")
   (autoload 'es-mode "es-mode.el"
@@ -866,8 +862,23 @@ dump."
   ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
   )
 
-(setq customer-file (expand-file-name "customer.el" "~/Dropbox/Emacs"))
-(load customer-file 'no-error 'no-message)
+;; (use-package org-roam-server
+;;   :ensure t
+;;   :config
+;;   (setq org-roam-server-host "127.0.0.1"
+;;         org-roam-server-port 8080
+;;         org-roam-server-authenticate nil
+;;         org-roam-server-export-inline-images t
+;;         org-roam-server-serve-files nil
+;;         org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+;;         org-roam-server-network-poll t
+;;         org-roam-server-network-arrows nil
+;;         org-roam-server-network-label-truncate t
+;;         org-roam-server-network-label-truncate-length 60
+;;         org-roam-server-network-label-wrap-length 20))
+
+;; (setq customer-file (expand-file-name "customer.el" "~/Dropbox/Emacs"))
+;; (load customer-file 'no-error 'no-message)
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
 (load custom-file 'no-error 'no-message)
 (defun dotspacemacs/emacs-custom-settings ()
