@@ -270,7 +270,7 @@ unwanted space when exporting org-mode to html."
       (setq org-agenda-file-code-snippet (expand-file-name "snippet.org" deft-directory))
       (setq org-agenda-file-primary (expand-file-name "primary.org" org-agenda-dir))
       (setq org-agenda-file-pomodora (expand-file-name "pomodora.org" org-agenda-dir))
-      (setq org-default-notes-file (expand-file-name "gtd.org" org-agenda-dir))
+      (setq org-agenda-file-gmail (expand-file-name "gmail.org" org-agenda-dir))
       (setq org-agenda-files (list org-agenda-dir))
       (with-eval-after-load 'org-agenda
         (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro)
@@ -342,6 +342,11 @@ unwanted space when exporting org-mode to html."
                                      entry
                                      (file+headline org-agenda-file-pomodora "Pomodora")
                                      "* %?    :POMO:\n  %i\n "
+                                     :empty-lines 1)
+                                    ("e" "event"
+                                     entry
+                                     (file+headline org-agenda-file-gmail "Gmail Work Event")
+                                     "* %?    :GMAIL:\n  %i\n "
                                      :empty-lines 1)
                                     ("j" "Journal Entry"
                                      entry

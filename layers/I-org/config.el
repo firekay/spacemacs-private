@@ -16,4 +16,8 @@
   (add-to-list 'ispell-skip-region-alist '("=" "="))
   (add-to-list 'ispell-skip-region-alist '("^#\\+BEGIN_SRC" . "^#\\+END_SRC")))
 
+;; (require 'org-gcal)
+;; (setq org-gcal-client-id "383904030804-r1kmpl5vn2lh13f00qcqcn0059cclfj5.apps.googleusercontent.com"
+;;       org-gcal-fetch-file-alist '(("zhenkai.xu@shopee.com" .  "~/Dropbox/Beorg/GTD/gmail.org")))
+
 (add-hook 'org-mode-hook #'I/org-ispell)

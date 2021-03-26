@@ -2,11 +2,76 @@
 ;;
 ;; Copyright (c) 2015-2016 I 
 ;;
-;; URL: https://github.com/I/spacemacs-private
+;; URL: https://github.com/firekay/spacemacs-private
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
+
+
+;; for login remote server using vterm(using list servers)
+(defun I/ssh-server (host)
+  (interactive
+   (helm-comp-read "Select server: " I/ssh-remote-servers))
+  (I/ssh-vterm host))
+
+;; for login remote server using vterm
+(defun I/ssh-vterm (host)
+  (interactive "sHost: (default kg-dev)")
+  (let* ((host (if (equal host "") "kg-dev" host))
+         (default-directory (concat"/ssh:zhenkai.xu@" host ":~")))
+    (vterm-toggle-cd)))
+
+;; for login remote server
+(defun I/ssh-remote (host)
+  "Connect to a remote host by SSH."
+  (interactive "sHost: (default kg-dev)")
+  (let* ((host (if (equal host "") "kg-dev" host))
+         (switches (list host "-l" "zhenkai.xu" "-p" "22")))
+    (set-buffer (apply 'make-term host "ssh" nil switches))
+    (term-mode)
+    (term-char-mode)
+    (switch-to-buffer (concat "*" host "*"))))
+
+
+;; ;; for login remote server
+;; (defun I/remote-ssh (user host port)
+;;   "Connect to a remote host by SSH."
+;;   (interactive "sUser: (default zhenkai.xu) \nsHost: \nsPort (default 22): ")
+;;   (let* ((port (if (equal port "") "22" port))
+;;          (user (if (equal user "") "zhenkai.xu" user))
+;;          (switches (list host "-l" user "-p" port)))
+;;     (set-buffer (apply 'make-term host "ssh" nil switches))
+;;     (term-mode)
+;;     (term-char-mode)
+;;     (switch-to-buffer (concat "*" host "*"))))
+
+;; for open emacs vterm
+(defun I/vterm-graphx()
+  (interactive)
+  (find-file "~/src/shopee/knowledge-graph/kg-graphx/.graphx.term")
+  )
+
+(I/vterm-graphx)
+
+(defun I/directory-parent (directory)
+  (let ((parent (file-name-directory (directory-file-name directory))))
+    (if (not (equal directory parent))
+        parent)))
+
+(defun I/chomp (str)
+  "Trim leading and trailing whitespace from STR."
+  (replace-regexp-in-string "\\(\\`[[:space:]\n]*\\|[[:space:]\n]*\\'\\)" "" str))
+
+(defun I/find-file-remote (host &optional path)
+  (interactive "sHost: \nsPath(default ~/): ")
+  (find-file (concat "/ssh:zhenkai.xu@" (I/chomp host) ":" path))
+  )
+
+(defun I/find-file-remote-root (host &optional path)
+  (interactive "sHost: \nsPath(default /root): ")
+  (find-file (concat "/ssh:zhenkai.xu@" (I/chomp host) "|sudo:" host ":" path))
+  )
 
 (defun I/now-today (arg)
   (interactive "P")

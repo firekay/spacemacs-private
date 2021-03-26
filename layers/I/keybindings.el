@@ -10,8 +10,8 @@
 
 
 ;; clean bingding key for rebingding
-(spacemacs/set-leader-keys
-  "bm" nil)
+;; (spacemacs/set-leader-keys
+;;   "bm" nil)
 (spacemacs/set-leader-keys-for-major-mode 'org-mode "d" nil)
 ;; declare prefix
 (spacemacs/declare-prefix "." "cheat.sh")
@@ -21,7 +21,7 @@
 (spacemacs/declare-prefix "op" "clocks")
 (spacemacs/declare-prefix "ot" "Toggle")
 ;; (spacemacs/declare-prefix "os" "Search")
-(spacemacs/declare-prefix "bm" "Bookmark")
+;; (spacemacs/declare-prefix "bm" "Bookmark")
 ;; (spacemacs/declare-prefix "xy" "Youdao")
 
 ;; For org mode
@@ -74,6 +74,7 @@
   )
 
 (spacemacs/set-leader-keys
+  "oJ" 'json-pretty-print-buffer
   "oc" 'org-capture
   "om" 'org-pomodoro
   "pn" 'treemacs-projectile
@@ -84,10 +85,10 @@
   "pA" 'projectile-find-other-file-other-window
   ":" 'counsel-M-x
 
-  "bms" 'bookmark-set
-  "bmr" 'bookmark-rename
-  "bmd" 'bookmark-delete
-  "bmj" 'counsel-bookmark
+  ;; "bms" 'bookmark-set
+  ;; "bmr" 'bookmark-rename
+  ;; "bmd" 'bookmark-delete
+  ;; "bmj" 'counsel-bookmark
 
   "bj" 'spacemacs/new-empty-buffer-below
 
@@ -130,7 +131,7 @@
   "gL" 'magit-log-buffer-file
   "og" 'my-git-timemachine
   "sj" 'I/counsel-imenu
-  "os" 'I/sql-connect-server
+  "oS" 'I/sql-connect-server
 
   "fl" 'find-file-literally-at-point
   "ri" 'ivy-resume
@@ -148,12 +149,16 @@
   "bM" 'spacemacs/switch-to-messages-buffer
   "sS" 'spacemacs/swiper-region-or-symbol
 
-  "o'" 'ansi-term
+  "o'" 'vterm
+  "on" 'I/ssh-remote
+  "os" 'I/ssh-server
+  "ov" 'I/ssh-vterm
 
   "a." 'server-start
   "ac" 'org-capture
   "aC" 'calc-dispatch
   "aa" 'org-agenda
+  "an" 'spacemacs/deft
   )
 
 (spacemacs/set-leader-keys
@@ -394,6 +399,8 @@
 
 
 (define-key global-map (kbd "s-i") 'yas/insert-snippet)
+(define-key global-map (kbd "s-r") 'query-replace)
+(define-key global-map (kbd "s-R") 'query-replace-regexp)
 ;; (define-key evil-insert-state-map "M-i" 'yas/insert-snippet)
 
 ;; A complementary binding to the apropos-command (C-h a)
@@ -416,7 +423,8 @@
 (define-key global-map (kbd "C-+") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 (define-key global-map (kbd "C-c c") 'I/capture-screenshot)
-;; (define-key evil-insert-state-map "\C-e" 'end-of-line)
+(define-key evil-insert-state-map "\C-e" 'end-of-line)
+(define-key evil-normal-state-map "\C-e" 'end-of-line)
 ;; (define-key 'ivy-occur-grep-mode-map (kbd "C-d") 'evil-scroll-down)
 ;; http://emacs.stackexchange.com/questions/220/how-to-bind-c-i-as-different-from-tab
 ;; (define-key input-decode-map [?\C-i] [C-i])

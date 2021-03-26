@@ -230,9 +230,9 @@
 org-files and bookmarks"
   (interactive)
   (helm :buffer "*helm: utities*"
-        :sources `(,(I//hotspots-sources))))
+        :sources `(,(I/hotspots-sources))))
 
-(defun I//hotspots-sources ()
+(defun I/hotspots-sources ()
   "Construct the helm sources for my hotspots"
   `((name . "Mail and News")
     (candidates . (("Calendar" . (lambda ()

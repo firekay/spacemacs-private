@@ -4,7 +4,8 @@
 ;; (setq google-translate-backend-user-agent "Emacs")
 ;; ##################################
 
-(fset 'delete-empty-lines (kbd "M-x flush-lines RET ^\s-*$ RET"))
+
+(fset 'I/delete-empty-lines (kbd "M-x flush-lines RET ^\s-*$ RET"))
 ;; ########################## for sql connnect
 ;; ########################## for sql connnect
 ;; 1. add a connection infomation in sql-connection-alist
@@ -12,21 +13,33 @@
 ;; 3. add a config in I/sql-servers-list
 (setq sql-connection-alist
       '((mysql-14 (sql-product 'mysql)
-              (sql-port 3305)
-              (sql-server "127.0.0.1")
-              (sql-user "admin")
-              (sql-password "shopee123")
-              (sql-database ""))))
+                  (sql-port 3305)
+                  (sql-server "127.0.0.1")
+                  (sql-user "admin")
+                  (sql-password "shopee123")
+                  (sql-database ""))
+        (mysql-nb (sql-product 'mysql)
+                  (sql-port 3307)
+                  (sql-server "127.0.0.1")
+                  (sql-user "root")
+                  (sql-password "root")
+                  (sql-database ""))
+        ))
 
-(defvar I/sql-servers-list
-  '(("mysql-14" I/mysql-14))
-  "Alist of server name and the function to connect")
+(setq I/sql-servers-list
+  '(("mysql-14" I/mysql-14)
+    ("mysql-nb" I/mysql-nb))
+  )
 
 (defun I/mysql-14 ()
      (interactive)
      (I/sql-connect 'postgres 'mysql-14))
 
-;; do not need modifu
+(defun I/mysql-nb ()
+  (interactive)
+  (I/sql-connect 'postgres 'mysql-nb))
+
+;; do not need modify
 (defun I/sql-connect-server (func)
      "Connect to the input server using my-sql-servers-list"
      (interactive

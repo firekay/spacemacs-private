@@ -9,27 +9,55 @@
 ;;; License: GPLv3
 (require 'cl)
 
-(defun I/directory-parent (directory)
-  (let ((parent (file-name-directory (directory-file-name directory))))
-    (if (not (equal directory parent))
-        parent)))
 
-(defun I/chomp (str)
-  "Trim leading and trailing whitespace from STR."
-  (replace-regexp-in-string "\\(\\`[[:space:]\n]*\\|[[:space:]\n]*\\'\\)" "" str))
+;; es-mode with socks
+(defun org-babel-expand-body:es (body params)
+  "This command is used by org-tangle to create a file with the
+source code of the elasticsearch block. If :tangle specifies a
+file with the .sh extension a curl-request is created instead of
+just a normal .es file that contains the body of the block.."
+  (let ((ext (file-name-extension
+              (cdr (assoc :tangle params))))
+        (body (s-format body 'es-org-aget
+                        (mapcar (lambda (x)
+                                  (when (eq (car x) :var)
+                                    (cdr x)))
+                                params))))
+    (if (not (equal "sh" ext))
+        body
+      (let ((method (cdr (assoc :method params)))
+            (url (cdr (assoc :url params))))
+        (format "curl --socks5 localhost:9876 -X%s %s -d %S\n"
+                (upcase method)
+                url
+                body)))))
 
-(defun I/find-file-remote (host &optional path)
-  (interactive "sHost: \nsPath(default ~/): ")
-  (find-file (concat "/ssh:zhenkai.xu@" (I/chomp host) ":" path))
-  )
+;; es-mode without socks
+(defun org-babel-expand-body:es (body params)
+  "This command is used by org-tangle to create a file with the
+source code of the elasticsearch block. If :tangle specifies a
+file with the .sh extension a curl-request is created instead of
+just a normal .es file that contains the body of the block.."
+  (let ((ext (file-name-extension
+              (cdr (assoc :tangle params))))
+        (body (s-format body 'es-org-aget
+                        (mapcar (lambda (x)
+                                  (when (eq (car x) :var)
+                                    (cdr x)))
+                                params))))
+    (if (not (equal "sh" ext))
+        body
+      (let ((method (cdr (assoc :method params)))
+            (url (cdr (assoc :url params))))
+        (format "curl -X%s %s -d %S\n"
+                (upcase method)
+                url
+                body)))))
 
-(defun I/find-file-remote-root (host &optional path)
-  (interactive "sHost: \nsPath(default /root): ")
-  (find-file (concat "/ssh:zhenkai.xu@" (I/chomp host) "|sudo:" host ":" path))
-  )
+
 
 ;; Screenshot
-(defun I//insert-org-or-md-img-link (prefix imagename)
+(defun I/insert-org-or-md-img-link (prefix imagename)
   (if (equal (file-name-extension (buffer-file-name)) "org")
       (insert (format "[[%s%s]]" prefix imagename))
     (insert (format "![%s](%s%s)" imagename prefix imagename))))
@@ -40,47 +68,19 @@
   (interactive "sScreenshot name: ")
   (if (equal basename "")
       (setq basename (format-time-string "%Y%m%d_%H%M%S")))
-  (setq fullpath (concat (file-name-directory (buffer-file-name))
-                         "../figures/"
-                         (file-name-base (buffer-file-name))
-                         "_"
-                         basename))
-  (setq relativepath (concat (file-name-base (buffer-file-name))
-                             "_"
-                             basename
-                             ".png"))
-  (cond
-   ((file-directory-p "./img")
-    (progn
-      (call-process "screencapture"
-                    nil
-                    nil
-                    nil
-                    "-s"
-                    (concat "img/"
-                            (concat basename ".png")))
-      (I//insert-org-or-md-img-link "./img/"
-                                    (concat basename ".png"))))
-   ((file-exists-p (file-name-directory fullpath))
-    (progn
-      (setq final-image-full-path (concat fullpath ".png"))
-      (call-process "screencapture" nil nil nil
-                    "-s" final-image-full-path)
-      (if (executable-find "convert")
-          (progn
-            (setq resize-command-str (format "convert %s -resize 800x600 %s" final-image-full-path
-                                             final-image-full-path))
-            (shell-command-to-string resize-command-str)))
-      (I//insert-org-or-md-img-link "../figures/" relativepath)))
-   (t (progn
-        (call-process "screencapture"
-                      nil
-                      nil
-                      nil
-                      "-s"
-                      (concat basename ".png"))
-        (I//insert-org-or-md-img-link "./"
-                                      (concat basename ".png")))))
+  (setq filename (file-name-base (buffer-file-name)))
+  (setq path-with-name (concat filename "." basename ".png"))
+  (setq img-directory "img")
+  (unless (file-directory-p "./img")
+    (make-directory img-directory t))
+  (call-process "screencapture"
+                nil
+                nil
+                nil
+                "-s"
+                (concat "img/" path-with-name))
+  (I/insert-org-or-md-img-link "./img/"
+                                (concat path-with-name))
   (insert "\n"))
 
 (defun I/org-archive-tasks ()

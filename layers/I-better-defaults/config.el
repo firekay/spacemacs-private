@@ -8,11 +8,58 @@
 ;;
 ;;; License: GPLv3
 
+
+;; ssh host config
+(setq I/ssh-remote-servers
+      '(("kg-dev" "kg-dev")
+        ("kg-exp-10-128-143-244" "kg-exp-10-128-143-244")
+        ("kg-exp-10-128-148-106" "kg-exp-10-128-148-106")
+        ("kg-exp-10-128-148-107" "kg-exp-10-128-148-107")
+        ("kg-exp-10-128-149-44" "kg-exp-10-128-149-44")
+        ("kg-exp-10-128-149-45" "kg-exp-10-128-149-45")
+        ("kg-exp-10-128-149-48" "kg-exp-10-128-149-48")
+        ("kg-exp-10-128-152-78" "kg-exp-10-128-149-78")
+
+        ("kg-db-10-128-144-36" "kg-db-10-128-144-36")
+        ("kg-db-10-128-144-37" "kg-db-10-128-144-37")
+        ("kg-db-10-128-144-38" "kg-db-10-128-144-38")
+        ("kg-db-10-128-144-39" "kg-db-10-128-144-39")
+        ("kg-db-10-128-144-40" "kg-db-10-128-144-40")
+        ("kg-db-10-128-144-41" "kg-db-10-128-144-41")
+        ("kg-db-10-128-143-171" "kg-db-10-128-143-171")
+        ("kg-db-10-128-143-172" "kg-db-10-128-143-172")
+        ("kg-db-10-128-143-173" "kg-db-10-128-143-173")
+        ("kg-db-10-128-143-174" "kg-db-10-128-143-174")
+        ("kg-db-10-128-143-175" "kg-db-10-128-143-175")
+        ("kg-db-10-128-143-176" "kg-db-10-128-143-176")
+
+        ("kg-db-10-130-68-143" "kg-db-10-130-68-143")
+        ("kg-db-10-130-68-144" "kg-db-10-130-68-144")
+        ("kg-db-10-130-68-145" "kg-db-10-130-68-145")
+        ("kg-db-10-130-68-146" "kg-db-10-130-68-146")
+
+        ("kg-db-10-130-21-14" "kg-db-10-130-21-14")
+        ("kg-db-10-130-21-15" "kg-db-10-130-21-15")
+        )
+      )
+
 (setq auto-coding-regexp-alist
       (delete (rassoc 'utf-16be-with-signature auto-coding-regexp-alist)
               (delete (rassoc 'utf-16le-with-signature auto-coding-regexp-alist)
                       (delete (rassoc 'utf-8-with-signature auto-coding-regexp-alist)
                               auto-coding-regexp-alist))))
+
+;; add .term using vterm-mode
+(add-to-list 'auto-mode-alist '("\\.term\\'" . vterm-mode))
+
+(setq org-superstar-headline-bullets-list '("✪" "♨" "✈" "▶"))
+(setq org-superstar-item-bullet-alist
+      '((?* . ?●)
+        (?+ . ?➤)
+        (?- . ?✔)))
+(setenv "WORKON_HOME" "~/anaconda3/envs/")
+;; (setq org-superstar-headline-bullets-list '("◉" "○" "▶" "▷"))
+
 
 (defun ffap-hexl-mode ()
   (interactive)
@@ -69,8 +116,8 @@
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 ;; https://stackoverflow.com/questions/5748814/how-does-one-disable-vc-git-in-emacs
 ;; this settings will cause command `vc-annotate` failed.
-;; 如果把 vc-handled-backends去掉，那么 vc-follow-symlinks 这个选项就会失效
-;; 进而，如果你访问一个在版本控制里面的alias的话，它不会自动去访问原文件，这个是非常不爽的
+;; 如果把 vc-handled-backends 去掉，那么 vc-follow-symlinks 这个选项就会失效
+;; 进而，如果你访问一个在版本控制里面的 alias 的话，它不会自动去访问原文件，这个是非常不爽的
 ;; (setq vc-handled-backends ())
 
 

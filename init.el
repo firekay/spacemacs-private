@@ -31,6 +31,8 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(javascript
+     twitter
+     helpful
      groovy
      plantuml
      (plantuml :variables
@@ -44,6 +46,7 @@ This function should only modify configuration layer settings."
      ;;       rust-format-on-save t)
      lsp
      dap
+     tmux
 
      treemacs
      (treemacs :variables
@@ -77,8 +80,7 @@ This function should only modify configuration layer settings."
           org-enable-org-journal-support t
           org-enable-hugo-support t
           org-enable-sticky-header t
-          org-enable-verb-support t
-          ;; org-enable-roam-support t
+          org-enable-roam-support t
           spaceline-org-clock-p t
           org-enable-jira-support t
           jiralib-url "https://jira.shopee.io")
@@ -105,6 +107,9 @@ This function should only modify configuration layer settings."
      ;; graphviz
      ;; (haskell :variables haskell-enable-hindent t
      ;;          haskell-completion-backend 'intero)
+     (languagetool :variables
+                   languagetool-show-error-on-jump t
+                   langtool-java-classpath "/usr/local/Cellar/languagetool/5.1.3_2/libexec:/usr/local/Cellar/languagetool/5.1.3_2/libexec/*")
      syntax-checking
      ;; (syntax-checking :variables syntax-checking-enable-by-default nil
      ;;                  syntax-checking-enable-tooltips nil)
@@ -193,6 +198,14 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
+                                      all-the-icons-ivy
+                                      cheat-sh
+                                      xwwp
+                                      ;; es-mode
+                                      request
+                                      ;; org-gcal
+                                      ;; aweshell
+
                                       polymode
                                       leuven-theme
                                       poly-markdown
@@ -338,8 +351,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         solarized-light
                          zenburn
+                         solarized-light
                          solarized-dark
 			                   leuven
 			                   monokai
@@ -363,11 +376,16 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Fira Code Retina"
                                :size 14
                                :weight normal
                                :width normal
-			       :powerline-scale 1.1)
+			                         :powerline-scale 1.1)
+   ;; dotspacemacs-default-font '("Source Code Pro"
+   ;;                             :size 14
+   ;;                             :weight normal
+   ;;                             :width normal
+	 ;;  	       :powerline-scale 1.1)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -605,9 +623,7 @@ dump."
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
   ;; (setq tramp-mode nil)
 
-  ;; for ensime version(stable)
-  ;; (add-to-list 'configuration-layer-elpa-archives '("melpa-stable" . "stable.melpa.org/packages/"))
-  ;; (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
+  ;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
@@ -615,63 +631,48 @@ dump."
   (setq global-hungry-delete-mode nil)
   ;; ss proxy. But it will cause anacond-mode failed.
   (setq socks-server '("Default server" "127.0.0.1" 1080 5))
-  (setq evil-shift-round nil)
+  ;; (setq evil-shift-round nil)
   (setq byte-compile-warnings '(not obsolete))
   )
 
 (defun dotspacemacs/user-config ()
+  (all-the-icons-ivy-setup)
+
   ;; (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode)))
-  (setq org-superstar-bullet-list '("◉" "○" "▶" "▷"))
 
   ;; Set to the name of the file where new notes will be stored
-  (setq org-mobile-inbox-for-pull "~/org/flagged.org")
+  ;; (setq org-mobile-inbox-for-pull "~/org/flagged.org")
   ;; Set to <your Dropbox root directory>/MobileOrg.
-  (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+  ;; (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
 
-  (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode)
+  ;; (remove-hook 'emacs-lisp-mode-hook 'auto-compile-mode)
 
-  ;; (setenv "WORKON_HOME" "/Users/kay/.local/share/virtualenvs/")
-  (setenv "WORKON_HOME" "~/opt/anaconda3/envs/")
-  ;; adds support for =evil-cleverparens=
-  ;; (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hooks)
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/xwwp")
+  ;; (require 'xwwp)
+  ;; (add-hook 'xwidget-webkit-mode-hook (lambda ()
+  ;;                                       (require 'xwwp-follow-link)
+  ;;                                       (require 'xwidget-hydra)
+  ;;                                       ))
+  ;; (add-hook 'python-mode-hook (lambda ()
+  ;;                               (require 'sphinx-doc)
+  ;;                               (sphinx-doc-mode t)))
 
-  ;; (add-to-list 'load-path "~/.spacemacs.d/load/lsp-python")
-  (add-to-list 'load-path "~/.spacemacs.d/load/sphinx-doc")
+  ;; ;; https://github.com/davep/cheat-sh.el
+  ;; ;; provides a simple Emacs interface for looking things up on cheat.sh
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/cheat-sh.el")
+  ;; (require 'cheat-sh)
 
-  ;; ;; add exec path from shell
-  ;; ;; reference: https://github.com/purcell/exec-path-from-shell
-  ;; ;; this is include by aweshell: https://github.com/manateelazycat/aweshell
-  ;; (add-to-list 'load-path "~/.spacemacs.d/load/exec-path-from-shell")
-  ;; (require 'exec-path-from-shell)
-  ;; (when (memq window-system '(mac ns x))
-  ;;   (exec-path-from-shell-initialize))
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/emacs-request")
+  ;; (require 'request)
 
-  (add-to-list 'load-path "~/.spacemacs.d/load/xwwp")
-  (require 'xwwp)
-  (add-hook 'xwidget-webkit-mode-hook (lambda ()
-                                        (require 'xwwp-follow-link)
-                                        (require 'xwidget-hydra)
-                                        ))
-  (add-hook 'python-mode-hook (lambda ()
-                                (require 'sphinx-doc)
-                                (sphinx-doc-mode t)))
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/alert")
+  ;; (require 'alert)
 
-  ;; https://github.com/davep/cheat-sh.el
-  ;; provides a simple Emacs interface for looking things up on cheat.sh
-  (add-to-list 'load-path "~/.spacemacs.d/load/cheat-sh.el")
-  (require 'cheat-sh)
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/aweshell")
+  ;; (require 'aweshell)
 
-  (add-to-list 'load-path "~/.spacemacs.d/load/emacs-request")
-  (require 'request)
-
-  (add-to-list 'load-path "~/.spacemacs.d/load/alert")
-  (require 'alert)
-
-  (add-to-list 'load-path "~/.spacemacs.d/load/aweshell")
-  (require 'aweshell)
-
-  (add-to-list 'load-path "~/.spacemacs.d/load/org-roam")
-  (require 'org-roam)
+  ;; (add-to-list 'load-path "~/.spacemacs.d/load/org-roam")
+  ;; (require 'org-roam)
 
   ;; add elasticsearch: https://github.com/firekay/es-mode
   (add-to-list 'load-path "~/.spacemacs.d/load/es-mode")
@@ -680,186 +681,88 @@ dump."
   (require 'es-copyas)
   (add-to-list 'auto-mode-alist '("\\.es$" . es-mode))
 
-  ;; ;; https://github.com/myuhe/org-gcal.el
-  ;; (add-to-list 'load-path "~/.spacemacs.d/load/org-gcal.el")
-  ;; (setq package-check-signature nil)
-  ;; (use-package org-gcal
-  ;;   :ensure t
-  ;;   :config
-  ;;   (setq org-gcal-client-id "929895558924-3oaaopitmmlclpflb8hblok0rv44pe0u.apps.googleusercontent.com"
-  ;;       org-gcal-client-secret "kA_SWof7qN3MPkNnVLPImP3T"
-  ;;       org-gcal-file-alist '(("zhenkai.xu@gmail.com" .  "~/Dropbox/Beorg/GTD/gmail.org"))))
-
-  (require 'lsp-mode)
-  ;; (require 'lsp-python)
-  (require 'dap-python)
-  (require 'dap-go)
-  ;; (require 'dap-lldb)
-  (global-company-mode)
+  ;; (global-company-mode)
   ;; For latex preview larger.
-  (require 'org)
-  (plist-put org-format-latex-options :scale 1.5)
+  ;; (require 'org)
+  ;; (plist-put org-format-latex-options :scale 1.5)
 
   ;; org Alignment between Chinese and English in the form
-  (when (configuration-layer/layer-usedp 'chinese)
-    (when (and (spacemacs/system-is-mac) window-system)
-      (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
-
-  ;; Setting Chinese Font
-  (when (and (spacemacs/system-is-mswindows) window-system)
-    (setq ispell-program-name "aspell")
-    (setq w32-pass-alt-to-system nil)
-    (setq w32-apps-modifier 'super)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font)
-                        charset
-                        (font-spec :family "Microsoft Yahei" :size 14))))
-
-  ;; (fset 'evil-visual-update-x-selection 'ignore)
+  ;; (when (configuration-layer/layer-usedp 'chinese)
+  ;;   (when (and (spacemacs/system-is-mac) window-system)
+  ;;     (spacemacs//set-monospaced-font "Source Code Pro" "Hiragino Sans GB" 14 16)))
 
   ;; force horizontal split window
   ;; (setq split-width-threshold 120)
   ;; (linum-relative-on)
 
-;;  (spacemacs|add-company-backends :modes text-mode)
+  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode "db" nil)
+  ;; (spacemacs/declare-prefix-for-mode 'python-mode "md" "debug")
+  ;; (spacemacs/declare-prefix-for-mode 'python-mode "mdd" "debuging")
+  ;; (spacemacs/declare-prefix-for-mode 'python-mode "mdb" "breakpoints")
+  ;; (spacemacs/declare-prefix-for-mode 'python-mode "mdf" "breakpoints")
+  ;; (spacemacs/declare-prefix-for-mode 'python-mode "mdw" "debug windows")
+  ;; (spacemacs/declare-prefix-for-mode 'python-mode "mdS" "switch")
+  ;; (spacemacs/declare-prefix-for-mode 'python-mode "mdI" "inspect")
+  ;; (spacemacs/declare-prefix-for-mode 'python-mode "mde" "eval")
+  ;; (spacemacs/set-leader-keys-for-minor-mode 'lsp-mode
+  ;;   ;;format
+  ;;   "gg" 'lsp-ui-peek-find-definitions
+  ;;   )
+  ;; (spacemacs/set-leader-keys-for-major-mode 'python-mode
+  ;;   ;; debuging/running
+  ;;   "dx" 'dap-debug
+  ;;   "ddd" 'dap-debug
+  ;;   "ddl" 'dap-debug-last
+  ;;   "ddr" 'dap-debug-recent
+  ;;   ;; stepping
+  ;;   "dc" 'dap-continue
+  ;;   "di" 'dap-step-in
+  ;;   "do" 'dap-step-out
+  ;;   "ds" 'dap-next
+  ;;   "dv" 'dap-ui-inspect-thing-at-point
+  ;;   "dr" 'dap-restart-frame
+  ;;   ;; transient state
+  ;;   "d." 'dap-hydra
+  ;;   ;; abandon
+  ;;   "da" 'dap-disconnect
+  ;;   "dA" 'dap-delete-all-sessions
+  ;;   ;; eval
+  ;;   "dee" 'dap-eval
+  ;;   "der" 'dap-eval-region
+  ;;   "det" 'dap-eval-thing-at-point
+  ;;   ;; switching
+  ;;   "dSs" 'dap-switch-session
+  ;;   "dSt" 'dap-switch-thread
+  ;;   "dSf" 'dap-switch-frame
+  ;;   ;; inspect
+  ;;   "dIi" 'dap-ui-inspect
+  ;;   "dIr" 'dap-ui-inspect-region
+  ;;   "dIt" 'dap-ui-inspect-thing-at-point
+  ;;   ;; breakpoints
+  ;;   "dbb" 'dap-breakpoint-toggle
+  ;;   "dbc" 'dap-breakpoint-condition
+  ;;   "dbl" 'dap-breakpoint-log-message
+  ;;   "dbh" 'dap-breakpoint-hit-condition
+  ;;   "dba" 'dap-breakpoint-add
+  ;;   "dbd" 'dap-breakpoint-delete
+  ;;   "dbD"  'dap-breakpoint-delete-all
 
-  ;; (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  ;;   "dfb" 'dap-breakpoint-toggle
+  ;;   "dfc" 'dap-breakpoint-condition
+  ;;   "dfl" 'dap-breakpoint-log-message
+  ;;   "dfh" 'dap-breakpoint-hit-condition
+  ;;   "dfa" 'dap-breakpoint-add
+  ;;   "dfd" 'dap-breakpoint-delete
+  ;;   "dfD"  'dap-breakpoint-delete-all
 
-  ;; temp fix for ivy-switch-buffer
-  ;; (spacemacs/set-leader-keys "bb" 'helm-mini)
+  ;;   ;; repl
+  ;;   "d'"  'dap-ui-repl
+  ;;   ;; windows
+  ;;   "dwo" 'dap-go-to-output-buffer
+  ;;   "dwl" 'dap-ui-locals
+  ;;   "dws" 'dap-ui-sessions
+  ;;   "dwb" 'dap-ui-breakpoints)
 
-  ;; (spacemacs|diminish helm-gtags-mode)
-  ;; (spacemacs|diminish ggtags-mode)
-  ;; (spacemacs|diminish which-key-mode)
-  ;; (spacemacs|diminish spacemacs-whitespace-cleanup-mode)
-  ;; (spacemacs|diminish counsel-mode)
-
-  ;; (evilified-state-evilify-map special-mode-map :mode special-mode)
-
-  (add-to-list 'auto-mode-alist
-               '("Capstanfile\\'" . yaml-mode))
-
-  (defun js-indent-line ()
-    "Indent the current line as JavaScript."
-    (interactive)
-    (let* ((parse-status
-            (save-excursion (syntax-ppss (point-at-bol))))
-           (offset (- (point) (save-excursion (back-to-indentation) (point)))))
-      (if (nth 3 parse-status)
-          'noindent
-        (indent-line-to (js--proper-indentation parse-status))
-        (when (> offset 0) (forward-char offset)))))
-
-  (global-set-key (kbd "<backtab>") 'un-indent-by-removing-4-spaces)
-  (defun un-indent-by-removing-4-spaces ()
-    "remove 4 spaces from beginning of of line"
-    (interactive)
-    (save-excursion
-      (save-match-data
-        (beginning-of-line)
-        ;; get rid of tabs at beginning of line
-        (when (looking-at "^\\s-+")
-          (untabify (match-beginning 0) (match-end 0)))
-        (when (looking-at (concat "^" (make-string tab-width ?\ )))
-          (replace-match "")))))
-
-  (defun I/toggle-major-mode ()
-    (interactive)
-    (if (eq major-mode 'fundamental-mode)
-        (set-auto-mode)
-      (fundamental-mode)))
-  (spacemacs/set-leader-keys "otm" 'I/toggle-major-mode)
-
-  (setq inhibit-compacting-font-caches t)
-  (global-display-line-numbers-mode -1)
-
-  (defun moon-override-yank-pop (&optional arg)
-    "Delete the region before inserting poped string."
-    (when (and evil-mode (eq 'visual evil-state))
-      (kill-region (region-beginning) (region-end))))
-
-  ;; (advice-add 'counsel-yank-pop :before #'moon-override-yank-pop)
-
-  (setq ivy-more-chars-alist '((counsel-ag . 2)
-                               (counsel-grep .2)
-                               (t . 3)))
-
-  (spacemacs/set-leader-keys-for-major-mode 'python-mode "db" nil)
-  (spacemacs/declare-prefix-for-mode 'python-mode "md" "debug")
-  (spacemacs/declare-prefix-for-mode 'python-mode "mdd" "debuging")
-  (spacemacs/declare-prefix-for-mode 'python-mode "mdb" "breakpoints")
-  (spacemacs/declare-prefix-for-mode 'python-mode "mdf" "breakpoints")
-  (spacemacs/declare-prefix-for-mode 'python-mode "mdw" "debug windows")
-  (spacemacs/declare-prefix-for-mode 'python-mode "mdS" "switch")
-  (spacemacs/declare-prefix-for-mode 'python-mode "mdI" "inspect")
-  (spacemacs/declare-prefix-for-mode 'python-mode "mde" "eval")
-  (spacemacs/set-leader-keys-for-minor-mode 'lsp-mode
-    ;;format
-    "gg" 'lsp-ui-peek-find-definitions
-    )
-  (spacemacs/set-leader-keys-for-major-mode 'python-mode
-    ;; debuging/running
-    "dx" 'dap-debug
-    "ddd" 'dap-debug
-    "ddl" 'dap-debug-last
-    "ddr" 'dap-debug-recent
-    ;; stepping
-    "dc" 'dap-continue
-    "di" 'dap-step-in
-    "do" 'dap-step-out
-    "ds" 'dap-next
-    "dv" 'dap-ui-inspect-thing-at-point
-    "dr" 'dap-restart-frame
-    ;; transient state
-    "d." 'dap-hydra
-    ;; abandon
-    "da" 'dap-disconnect
-    "dA" 'dap-delete-all-sessions
-    ;; eval
-    "dee" 'dap-eval
-    "der" 'dap-eval-region
-    "det" 'dap-eval-thing-at-point
-    ;; switching
-    "dSs" 'dap-switch-session
-    "dSt" 'dap-switch-thread
-    "dSf" 'dap-switch-frame
-    ;; inspect
-    "dIi" 'dap-ui-inspect
-    "dIr" 'dap-ui-inspect-region
-    "dIt" 'dap-ui-inspect-thing-at-point
-    ;; breakpoints
-    "dbb" 'dap-breakpoint-toggle
-    "dbc" 'dap-breakpoint-condition
-    "dbl" 'dap-breakpoint-log-message
-    "dbh" 'dap-breakpoint-hit-condition
-    "dba" 'dap-breakpoint-add
-    "dbd" 'dap-breakpoint-delete
-    "dbD"  'dap-breakpoint-delete-all
-
-    "dfb" 'dap-breakpoint-toggle
-    "dfc" 'dap-breakpoint-condition
-    "dfl" 'dap-breakpoint-log-message
-    "dfh" 'dap-breakpoint-hit-condition
-    "dfa" 'dap-breakpoint-add
-    "dfd" 'dap-breakpoint-delete
-    "dfD"  'dap-breakpoint-delete-all
-
-    ;; repl
-    "d'"  'dap-ui-repl
-    ;; windows
-    "dwo" 'dap-go-to-output-buffer
-    "dwl" 'dap-ui-locals
-    "dws" 'dap-ui-sessions
-    "dwb" 'dap-ui-breakpoints)
-
-  (defun counsel-locate-cmd-es (input)
-    "Return a shell command based on INPUT."
-    (counsel-require-program "es.exe")
-    (encode-coding-string (format "es.exe -i -r -p %s"
-                                  (counsel-unquote-regex-parens
-                                   (ivy--regex input t)))
-                          'gbk))
-  ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
   )
 
 ;; (use-package org-roam-server

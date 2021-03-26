@@ -25,3 +25,6 @@
 [submodule "aweshell"]
 	path = load/aweshell
 	url = git@github.com:firekay/aweshell.git
+[submodule "vterm-toggle"]
+	path = load/vterm-toggle
+	url = https://github.com/jixiuf/vterm-toggle.git
